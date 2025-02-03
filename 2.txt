@@ -1,0 +1,8 @@
+2차 프로젝트
+(MariaDB 정보: Host -> 1.220.247.78	Port -> 3308)
+
+4조: 이호연, 전유범, 김진혁, 구민우 	팀장: 이호연
+(DB -> semi2410_3	Username -> semi_2410_team4	Password: 1234)
+
+스네이크
+
