@@ -332,4 +332,67 @@
 
 			});
 
+			// login
+                var $login = $('#login'),
+                    $loginInner;
+
+                $login.wrapInner('<div class="inner"></div>');
+                $loginInner = $login.children('.inner');
+                $login._locked = false;
+
+                $login._lock = function() {
+                    if ($login._locked)
+                        return false;
+
+                    $login._locked = true;
+
+                    window.setTimeout(function() {
+                        $login._locked = false;
+                    }, 350);
+
+                    return true;
+                };
+
+                $loginInner.on('click', function(event) {
+                    event.stopPropagation(); // 내부 클릭 시 이벤트 차단
+                });
+
+                $login._show = function() {
+                    if ($login._lock())
+                        $body.addClass('is-login-visible'); //  로그인 창 열기
+                };
+
+                $login._hide = function() {
+                    if ($login._lock())
+                        $body.removeClass('is-login-visible'); //  로그인 창 닫기
+                };
+
+                $login._toggle = function() {
+                    if ($login._lock())
+                        $body.toggleClass('is-login-visible'); //  로그인 창 토글
+                };
+
+                $body.on('click', 'a[href="#login"]', function(event) {
+                    event.stopPropagation(); // ✅ 이벤트가 부모 요소까지 전달되지 않도록 차단
+                    event.preventDefault();
+
+                    $login._toggle(); // ✅ 로그인 창 토글
+                });
+
+
+                $login
+                    .appendTo($body)
+                    .on('click', function(event) {
+                        event.stopPropagation();
+                        event.preventDefault();
+
+                        $body.removeClass('is-login-visible'); //  로그인 창 닫힘
+                    });
+
+                $body.on('keydown', function(event) {
+                    if (event.keyCode == 27) // ESC 키 감지
+                        $login._hide(); //  ESC 키 입력 시 로그인 창 닫기
+                });
+
+
 })(jQuery);
