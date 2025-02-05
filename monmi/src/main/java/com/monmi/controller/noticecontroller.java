@@ -14,6 +14,10 @@ public class noticecontroller {
 
     @Autowired
     private noticeservice noticeService;
+	
+	@GetMapping("/notice")
+    public void notice() {
+    }
 
     @GetMapping("/notices/{title}")
     public String getNoticeByTitle(@PathVariable String title, Model model) {
