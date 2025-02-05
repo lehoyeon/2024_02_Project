@@ -1,0 +1,75 @@
+/* pen_box 이미지를 박스 크기에 맞추고 원본 비율 유지 */
+.header .left-box img {
+  width: 100%;  /* left-box 안에서 가로 100% 맞춤 */
+  height: 108px; /* 고정 높이 */
+  margin: 2px;
+  object-fit: cover; /* 이미지를 박스에 맞추되 잘리지 않도록 설정 */
+}
+
+/* right-box 테두리 제거 */
+.header .right-box p {
+  border: none;
+}
+
+/* left-box와 right-box를 옆으로 정렬 */
+.header {
+  display: flex;
+  justify-content: space-between; /* 박스 사이에 간격을 설정 */
+  align-items: flex-start; /* 상단 정렬 */
+  gap: 20px; /* 박스 간격 */
+}
+
+/* left-box와 right-box의 크기 조정 */
+.header .left-box, .header .right-box {
+  width: 48%; /* left-box와 right-box의 너비를 동일하게 설정 */
+}
+
+/* 나머지 기존 CSS는 그대로 유지 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.box-wrapper {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #000; /* 글자색을 검은색으로 설정 */
+}
+.notice-board {
+  border: 1px solid #000;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+  background-color: #fff;
+  color: #000; /* 글자색을 검은색으로 설정 */
+}
+.notice-board .triangle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #000;
+}
+.notice-board .reverse-triangle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #000;
+}
+.notice-board ul {
+  list-style-type: none;
+  padding: 0;
+}
+.right-box p{
+    margin-top: 46px;
+    margin-bottom: 86px;
+}
