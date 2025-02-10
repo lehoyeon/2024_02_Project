@@ -28,6 +28,16 @@ public class NoticeController {
 
         return "Notice/notice";
     }
+    @GetMapping("/test")
+    public String getAllNotices1(Model model) {
+        List<Notice> importantNotices = noticeService.getImportantNotices();
+        List<Notice> regularNotices = noticeService.getNoticesSortedByDate();
+
+        model.addAttribute("importantNotices", importantNotices);
+        model.addAttribute("regularNotices", regularNotices);
+
+        return "Notice/test";
+    }
 
     @GetMapping("/notice/{id}")
     public String getNoticeDetails(@PathVariable Long id, Model model) {
