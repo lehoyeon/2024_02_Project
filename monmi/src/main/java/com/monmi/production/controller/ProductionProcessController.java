@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/production")
-public class production_process_controller {
+public class ProductionProcessController {
 
     @GetMapping("/production_process")
     public void production_process() {
