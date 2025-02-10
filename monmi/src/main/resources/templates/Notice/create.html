@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 작성 페이지</title>
+    <link rel="stylesheet" href="/assets/css/notice_important.css" />
+    <style>
+        /* 체크박스 오버라이드: 기본 체크박스 외형 복원 */
+        .notice-form input[type="checkbox"] {
+          -webkit-appearance: checkbox !important;
+          -moz-appearance: checkbox !important;
+          appearance: checkbox !important;
+          width: 20px !important;
+          height: 20px !important;
+          margin: 0;
+          vertical-align: middle;
+          border: 2px solid #888 !important;
+          background-color: transparent !important;
+        }
+
+        /* 체크된 상태 스타일 */
+        .notice-form input[type="checkbox"]:checked {
+          background-color: #007bff !important;
+          border-color: #007bff !important;
+        }
+    </style>
+</head>
+<body>
+<section class="notice-form-section">
+    <div class="inner">
+        <section class="form-container">
+            <form method="post" action="/notice/create" class="notice-form">
+                <div class="fields">
+                    <div class="field half">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" required />
+                    </div>
+
+                    <div class="field half">
+                        <label for="content">내용</label>
+                        <textarea id="content" name="content" required></textarea>
+                    </div>
+
+                    <div class="field half">
+                        <label for="author">부서</label>
+                        <input type="text" id="author" name="author" required />
+                    </div>
+
+                    <div class="field half">
+                        <label for="name">이름</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+
+                    <div class="field half">
+                        <label for="position">직급</label>
+                        <input type="text" id="position" name="position" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="important">중요공지 여부</label>
+                        <input type="checkbox" id="important" name="important" />
+                    </div>
+                </div>
+
+                <ul class="actions">
+                    <li><input type="submit" value="작성완료" class="primary" /></li>
+                    <li><input type="button" value="돌아가기" class="primary" onclick="javascript:history.back()" /></li>
+                </ul>
+            </form>
+        </section>
+    </div>
+</section>
+</body>
+</html>

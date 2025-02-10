@@ -1,75 +1,223 @@
-/* pen_box 이미지를 박스 크기에 맞추고 원본 비율 유지 */
-.header .left-box img {
-  width: 100%;  /* left-box 안에서 가로 100% 맞춤 */
-  height: 108px; /* 고정 높이 */
-  margin: 2px;
-  object-fit: cover; /* 이미지를 박스에 맞추되 잘리지 않도록 설정 */
-}
-
-/* right-box 테두리 제거 */
-.header .right-box p {
-  border: none;
-}
-
-/* left-box와 right-box를 옆으로 정렬 */
-.header {
-  display: flex;
-  justify-content: space-between; /* 박스 사이에 간격을 설정 */
-  align-items: flex-start; /* 상단 정렬 */
-  gap: 20px; /* 박스 간격 */
-}
-
-/* left-box와 right-box의 크기 조정 */
-.header .left-box, .header .right-box {
-  width: 48%; /* left-box와 right-box의 너비를 동일하게 설정 */
-}
-
-/* 나머지 기존 CSS는 그대로 유지 */
+/* 전체 컨테이너의 너비를 100%로 설정하여 레이아웃 최적화 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
-.box-wrapper {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  color: #000; /* 글자색을 검은색으로 설정 */
+
+/* header 클래스를 수정하여 왼쪽, 오른쪽 여백을 최소화 */
+.header {
+  display: flex;
+  align-items: center;
+  width: 94%; /* 전체 너비 설정 */
 }
+
+/* left-box 크기 최적화 */
+.header .left-box {
+  display: flex;
+  justify-content: space-between; /* 아이템 간 간격 */
+  width: 100%; /* header 크기에 맞게 100%로 설정 */
+  height: 390px;
+  gap: 2px; /* 각 아이템 간 간격 설정 */
+}
+
+/* pen_box 크기 동일하게 맞추고 이미지의 비율 유지 */
+.header .left-box .pen_box {
+  width: 33%; /* 3등분 크기로 설정 */
+  height: 200px; /* 세로 크기 200px로 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; /* 둥근 모서리 */
+}
+
+.header .left-box img {
+  width: 100%; /* 이미지를 가로로 꽉 채우되 비율 유지 */
+  height: 70%; /* 세로로도 꽉 채움 */
+  object-fit: contain; /* 이미지 비율 유지 */
+  border-radius: 10px;
+}
+
+
+/* 스크롤바 스타일링 */
+.notice-board::-webkit-scrollbar {
+  width: 12px; /* 스크롤바의 너비를 두껍게 */
+  height: 12px; /* 수평 스크롤바의 높이 */
+}
+
+/* 스크롤바 트랙 (배경) */
+.notice-board::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* 스크롤바 핸들 (슬라이더) */
+.notice-board::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+/* 스크롤바 핸들 (슬라이더) 호버시 색상 */
+.notice-board::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  border-color: transparent;
+}
+
+/* notice-board 스타일 */
 .notice-board {
-  border: 1px solid #000;
-  padding: 20px;
-  margin-top: 20px;
+  width: 93%;
+  height: 600px;
+  padding: 21px;
+  margin-top: 16px;
   position: relative;
-  background-color: #fff;
-  color: #000; /* 글자색을 검은색으로 설정 */
+  background-color: #242943;
+  color: #000;
+  overflow-y: scroll;
+  z-index: 1;
 }
+
+/* 상단 삼각형 */
 .notice-board .triangle {
-  position: absolute;
-  right: 10px;
+  position: sticky;
+  left: 950px;
   top: 10px;
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 20px solid #000;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 25px solid #000;
+  cursor: pointer;
+  z-index: 9999;
 }
+
+/* 하단 역삼각형 */
 .notice-board .reverse-triangle {
-  position: absolute;
-  right: 10px;
+  position: sticky;
+  left: 950px;
   bottom: 10px;
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid #000;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 25px solid #000;
+  cursor: pointer;
+  z-index: 99999;
 }
-.notice-board ul {
-  list-style-type: none;
-  padding: 0;
+
+/* 공지사항 항목 레이아웃 */
+.notice-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 943px;
+  height: 103px;
+  position: relative;
 }
-.right-box p{
-    margin-top: 46px;
-    margin-bottom: 86px;
+
+/* 제목과 작성자 정보 */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.author-info {
+  font-size: 0.9em;
+  color: #555;
+  display: flex;
+  gap: 5px;
+}
+
+/* 날짜와 수정/삭제 버튼 */
+.date-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: #888;
+}
+
+.notice-actions {
+   position: absolute;
+   bottom: 0px;
+   right: 10px; /* 오른쪽에서 10px 간격 */
+   display: flex;
+   gap: 10px;
+
+ }
+
+.notice-actions .edit-btn, .notice-actions .delete-btn {
+  font-size: 0.8em;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.notice-actions .edit-btn:hover, .notice-actions .delete-btn:hover {
+  text-decoration: underline;
+}
+
+/* 새 공지사항 생성 버튼 */
+.create-btn {
+  display: inline-block;
+  margin-left: 895px;
+  margin-bottom: -5px;
+  font-size: 0.8em;
+  padding: 5px 8px;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #0056b3;
+}
+a {
+  text-decoration: none !important; /* 기본 밑줄 제거 */
+  outline: none !important; /* 포커스 시 나타나는 외곽선 제거 */
+  border-bottom: none !important; /* 링크 아래의 경계선 제거 */
+}
+
+/* 2. 링크에 대한 스타일 재지정 (원하는 스타일로 설정) */
+a:hover {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+.missing-one {
+    color: green;
+    font-size: 18px;
+    font-style: italic;
+    position: absolute;
+    left: 344px;
+    top: 70px; /* 첫 번째 텍스트 위치 */
+}
+
+.missing-two {
+    color: green;
+    font-size: 30px;
+    font-style: italic;
+    position: absolute;
+    left: 360px;
+    top: 110px; /* 두 번째 텍스트 위치 */
+}
+
+.missing-none {
+    color: green;
+    font-size: 30px;
+    font-style: italic;
+    position: absolute;
+    left: 312px;
+    top: 300px; /* 세 번째 텍스트 위치 */
 }
