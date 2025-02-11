@@ -19,9 +19,9 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<a href="main.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+						<a href="/main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
 						<nav>
-							<a href="#login">login</a>
+							<a id="login-button" href="#login">login</a>
 							<a href="#menu">Menu</a>
 						</nav>
 					</header>
@@ -29,26 +29,103 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
-							<li><a href="main.html">Home</a></li>
+							<li><a href="/main">Home</a></li>
 							<li><a href="landing.html">Landing</a></li>
 							<li><a href="generic.html">Generic</a></li>
 							<li><a href="elements.html">Elements</a></li>
 						</ul>
 						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">Get Started</a></li>
-
+							<li><a href="/accession" class="button primary join">accession</a></li>
 						</ul>
 					</nav>
-				<!-- login -->
 
-				<nav id="login">
-					<ul class="links">
-						<li>ID<input type="text"></li>
-						<li>PassWord<input type="text"></li>
-						<br>
-						<li><button>Login</button></li>
-					</ul>
-				</nav>
+				<!-- login -->
+					<nav id="login">
+						<ul class="links">
+							<form action="/login" method="post"><!-- 서버로 post 요청 -->
+								<h4 class="login_logo"><strong>Forty by HTML5 UP</strong></h4>
+								<br>
+								<li>ID<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+								<li>PassWord<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+								<!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+								<br>
+								<li><button >Login</button></li>
+								<br>
+							</form>
+						</ul>
+					</nav>
+				<!--accession -->
+
+
+
+				<!-- login -->
+		<script>
+		window.onload = function () {
+        handleUrlParams(); 	// URL 파라미터 처리
+        checkLoginStatus(); // 로그인 상태 확인
+    	};
+
+    	// URL 파라미터 처리
+    	function handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 로그인 실패 처리
+        if (urlParams.has("error")) {
+        	alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+            // URL에서 error 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
+        }
+        else if (urlParams.has("success")) { // 로그인 성공 처리
+            alert("어서오세요! 로그인에 성공하셨습니다.");
+            // URL에서 success 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
+			}
+    	}
+
+    	// 로그인 상태 확인
+    	function checkLoginStatus() {
+        const loginButton = document.getElementById('login-button');
+
+        // 로그인 상태 확인 API 호출
+        fetch('/check', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                if (isLoggedIn) {
+                    loginButton.textContent = 'Logout';
+                    loginButton.removeAttribute('href'); // href 제거
+                    loginButton.onclick = function () {
+                        handleLogout(); //  로그아웃 처리 호출
+                    };
+                } else {
+                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+            });
+    	}
+
+    	// 로그아웃 처리
+    	function handleLogout() {
+        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+            .then(() => {
+                alert('로그아웃되었습니다.');
+                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+            })
+            .catch(error => console.error('Error:', error));
+    	}
+
+    	// 로그인 버튼 상태로 업데이트
+    	function updateToLoginButton(loginButton) {
+        loginButton.textContent = 'Login';
+        loginButton.setAttribute('href', '#login');
+        loginButton.onclick = null;
+    	}
+
+		</script>
+
 
 				<!-- Banner -->
 					<section id="banner" class="major">
@@ -125,75 +202,38 @@
 										<p>Feugiat amet tempus</p>
 									</header>
 								</article>
-							</section>ㄴ
-
-						<!-- Two -->
-							<section id="two">
-								<div class="inner">
-									<header class="major">
-										<h2>Massa libero</h2>
-									</header>
-									<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
-									<ul class="actions">
-										<li><a href="landing.html" class="button next">Get Started</a></li>
-									</ul>
+							</section>
+					</div>
+				<!-- Contact -->
+				<section id="contact">
+					<div class="inner">
+						<section class="split">
+							<section>
+								<div class="contact-method">
+									<span class="icon solid alt fa-envelope"></span>
+									<h3>Email</h3>
+									<a href="#">information@untitled.tld</a>
 								</div>
 							</section>
-
-					</div>
-
-				<!-- Contact -->
-					<section id="contact">
-						<div class="inner">
 							<section>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="6"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Clear" /></li>
-									</ul>
-								</form>
+								<div class="contact-method">
+									<span class="icon solid alt fa-phone"></span>
+									<h3>Phone</h3>
+									<span>(000) 000-0000 x12387</span>
+								</div>
 							</section>
-							<section class="split">
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-envelope"></span>
-										<h3>Email</h3>
-										<a href="#">information@untitled.tld</a>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-phone"></span>
-										<h3>Phone</h3>
-										<span>(000) 000-0000 x12387</span>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-home"></span>
-										<h3>Address</h3>
-										<span>1234 Somewhere Road #5432<br />
+							<section>
+								<div class="contact-method">
+									<span class="icon solid alt fa-home"></span>
+									<h3>Address</h3>
+									<span>1234 Somewhere Road #5432<br />
 										Nashville, TN 00000<br />
 										United States of America</span>
-									</div>
-								</section>
+								</div>
 							</section>
-						</div>
-					</section>
+						</section>
+					</div>
+				</section>
 
 				<!-- Footer -->
 					<footer id="footer">

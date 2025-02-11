@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Forty by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/accession.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <a href="/main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+        <nav>
+            <a id="login-button" href="#login">login</a>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="/main">Home</a></li>
+            <li><a href="landing.html">Landing</a></li>
+            <li><a href="generic.html">Generic</a></li>
+            <li><a href="elements.html">Elements</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="/accession" class="button primary join">accession</a></li>
+        </ul>
+    </nav>
+
+    <!-- login -->
+    <nav id="login">
+        <ul class="links">
+            <form action="/login" method="post"><!-- 서버로 post 요청 -->
+                <h4 class="login_logo"><strong>Forty by HTML5 UP</strong></h4>
+                <br>
+                <li>ID<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+                <li>PassWord<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+                <br>
+                <li><button >Login</button></li>
+                <br>
+            </form>
+        </ul>
+    </nav>
+    <!--accession -->
+
+
+
+    <!-- login -->
+    <script>
+        window.onload = function () {
+        handleUrlParams(); 	// URL 파라미터 처리
+        checkLoginStatus(); // 로그인 상태 확인
+        };
+
+        // URL 파라미터 처리
+        function handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 로그인 실패 처리
+        if (urlParams.has("error")) {
+            alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+            // URL에서 error 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
+        }
+        else if (urlParams.has("success")) { // 로그인 성공 처리
+            alert("어서오세요! 로그인에 성공하셨습니다.");
+            // URL에서 success 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
+            }
+        }
+
+        // 로그인 상태 확인
+        function checkLoginStatus() {
+        const loginButton = document.getElementById('login-button');
+
+        // 로그인 상태 확인 API 호출
+        fetch('/check', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                if (isLoggedIn) {
+                    loginButton.textContent = 'Logout';
+                    loginButton.removeAttribute('href'); // href 제거
+                    loginButton.onclick = function () {
+                        handleLogout(); //  로그아웃 처리 호출
+                    };
+                } else {
+                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+            });
+        }
+
+        // 로그아웃 처리
+        function handleLogout() {
+        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+            .then(() => {
+                alert('로그아웃되었습니다.');
+                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // 로그인 버튼 상태로 업데이트
+        function updateToLoginButton(loginButton) {
+        loginButton.textContent = 'Login';
+        loginButton.setAttribute('href', '#login');
+        loginButton.onclick = null;
+        }
+
+    </script>
+
+    <section id="banner" class="major">
+        <div class="inner">
+            <header class="major">
+                <h1>Welcome to Monmi</h1>
+            </header>
+            <div class="content">
+                <p>ID와 Password 이름을 작성하고 부서의 옵션을 선택해주세요.<br>
+                나머지 필요한말은 메세지창에 적어주세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="inner">
+            <section>
+                <form method="post" action="/submitForm">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="monami_id">ID</label>
+                            <input type="text" name="monami_id" id="monami_id" />
+                        </div>
+                        <div class="field half">
+                            <label for="monami_password">Password</label>
+                            <input type="text" name="monami_password" id="monami_password" />
+                        </div>
+                        <div class="field half">
+                            <label for="monami_name">name</label>
+                            <input type="text"  name="monami_name" id="monami_name" />
+                        </div>
+
+
+                        <div class="field half">
+                            <label for="deft_select">부서 선택</label>
+                            <select id="deft_select" name="deft_select">
+
+                            </select>
+
+
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" class="primary" /></li>
+                        <li><input type="reset" value="Clear" /></li>
+                    </ul>
+                </form>
+            </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM 로드됨");
+
+            // 서버에서 부서 데이터를 가져오기
+            fetch('/accession/data') // JSON 데이터를 반환하는 URL로 요청
+                .then(response => {
+                    console.log("응답 상태 코드:", response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP 에러 상태: ${response.status}`);
+                    }
+                    return response.json(); // JSON 데이터로 파싱
+                })
+                .then(data => {
+                    console.log("서버에서 받은 데이터:", data);
+
+                    // 드롭다운 요소 가져오기
+                    const select = document.getElementById("deft_select");
+
+                    // 드롭다운에 옵션 추가
+                    data.forEach(department => {
+                        const option = document.createElement("option");
+                        option.value = department.departmentId;         // 부서 ID
+                        option.textContent = department.departmentName; // 부서 이름
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("에러 발생:", error);
+                });
+        });
+
+    </script>
+
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-envelope"></span>
+                        <h3>Email</h3>
+                        <span>information@untitled.tld</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-phone"></span>
+                        <h3>Phone</h3>
+                        <span>(000) 000-0000 x12387</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>Address</h3>
+                        <span>1234 Somewhere Road #5432<br />
+										Nashville, TN 00000<br />
+										United States of America</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
