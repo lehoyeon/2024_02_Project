@@ -1905,7 +1905,7 @@ input, select, textarea {
 	input[type="tel"],
 	input[type="search"],
 	input[type="url"],
-	input[type="number"]:focus,
+	input[type="number"],
 	select,
 	textarea {
 		-moz-appearance: none;

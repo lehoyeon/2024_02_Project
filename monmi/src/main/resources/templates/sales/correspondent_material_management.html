@@ -591,7 +591,7 @@
             let input_material_list = [[${correspondentMaterialListDTO.dtoList}]];
             input_material_list.forEach(material => {
                 let option = document.createElement("option");
-                option.setAttribute("value", material.materialId);
+                option.setAttribute("value", material.materialName);
                 option.textContent = material.materialName;
                 materialInput.appendChild(option);
             });
@@ -783,7 +783,7 @@
         let input_material_list = [[${correspondentMaterialListDTO.dtoList}]];
         input_material_list.forEach(material => {
             let option = document.createElement("option");
-            option.setAttribute("value", material.materialId);
+            option.setAttribute("value", material.materialName);
             option.textContent = material.materialName;
             register_input_material.appendChild(option);
         });
