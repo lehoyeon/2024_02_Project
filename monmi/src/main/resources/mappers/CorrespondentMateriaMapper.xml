@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monmi.sales.mapper.CorrespondentMaterialMapper">
+    <insert id="correspondent_material_insert">
+        insert into
+            correspondent_material (company_name, material, price, company_address, company_tel)
+        values
+            (#{companyName}, #{material}, #{price}, #{companyAddress}, #{companyTel})
+    </insert>
+
+    <delete id="correspondent_material_delete">
+        delete from correspondent_material where company_name = #{companyName}
+    </delete>
+
+    <update id="correspondent_material_modify">
+        update correspondent_material set material = #{material}, price = #{price}, company_address = #{companyAddress}, company_tel = #{companyTel} where company_name = #{companyName}
+    </update>
+</mapper>
