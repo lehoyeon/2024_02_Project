@@ -56,9 +56,20 @@
 					</nav>
 				<!--accession -->
 
+		<!--회원가입 로그인시 signincontroller에서 회원가입 환영메세지 보내기. -->
+		<script th:inline="javascript">
+			var message = [[${#strings.defaultString(message, 'null')}]];
+			if (message !== "null") {
+				alert(message);
+			}
+		</script>
 
 
-				<!-- login -->
+
+		<!-- login -->
+
+
+
 		<script>
 		window.onload = function () {
         handleUrlParams(); 	// URL 파라미터 처리
