@@ -33,6 +33,7 @@
 							<li><a href="/production/production_process">제품 생산 공정</a></li>
 							<li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
 							<li><a href="/notice">공지사항</a></li>
+							<li><a href="/sales_management">재무?</a></li>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="/accession" class="button primary join">회원가입</a></li>
@@ -96,7 +97,7 @@
                             .then(data => {
                                 const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
                                 if (isLoggedIn) {
-                                    loginButton.textContent = 'Logout';
+                                    loginButton.textContent = '로그아웃';
                                     loginButton.removeAttribute('href'); // href 제거
                                     loginButton.onclick = function () {
                                         handleLogout();
@@ -123,7 +124,7 @@
 
                     // 🔹 로그인 버튼 상태로 업데이트
                     function updateToLoginButton(loginButton) {
-                        loginButton.textContent = 'Login';
+                        loginButton.textContent = '로그인';
                         loginButton.setAttribute('href', '#login');
                         loginButton.onclick = null;
                     }
