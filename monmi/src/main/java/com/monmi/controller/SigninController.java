@@ -24,7 +24,7 @@ public class SigninController {
         this.signinService = signinService;
     }
     // ✅ 회원가입 페이지 이동
-    @GetMapping
+    @GetMapping("/")
     public String showPage() {
         return "accession"; // accession.jsp 반환
     }
@@ -45,31 +45,4 @@ public class SigninController {
         }
         return "redirect:/accession"; // 실패 시 다시 회원가입 페이지로 리디렉션
     }
-
-
-
-
-
-
-//    @PostMapping("/register")
-//    public String registerUser(@ModelAttribute @Valid SigninDTO signinDTO, BindingResult result, RedirectAttributes redirectAttributes) {
-//        if (result.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("message", result.getFieldError().getDefaultMessage());
-//            return "redirect:/accession";
-//        }
-//        try {
-//            signinService.registerUser(signinDTO);
-//            redirectAttributes.addFlashAttribute("message", "회원가입이 완료되었습니다!");
-//            return "redirect:/main";
-//        } catch (IllegalArgumentException e) {
-//            redirectAttributes.addFlashAttribute("message", e.getMessage()); // "ID를 입력해야 합니다."
-//        } catch (IllegalStateException e) {
-//            redirectAttributes.addFlashAttribute("message", e.getMessage()); // "이미 사용 중인 ID입니다."
-//        }
-//
-//        return "redirect:/accession"; // 실패해도 같은 페이지로 리디렉션
-//    }
-
-
-
 }
