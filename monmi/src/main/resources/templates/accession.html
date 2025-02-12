@@ -21,7 +21,6 @@
     <header id="header" class="alt">
         <a href="/main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
         <nav>
-            <a id="login-button" href="#login">login</a>
             <a href="#menu">Menu</a>
         </nav>
     </header>
@@ -58,73 +57,6 @@
 
 
 
-    <!-- login -->
-    <script>
-        window.onload = function () {
-        handleUrlParams(); 	// URL 파라미터 처리
-        checkLoginStatus(); // 로그인 상태 확인
-        };
-
-        // URL 파라미터 처리
-        function handleUrlParams() {
-        const urlParams = new URLSearchParams(window.location.search);
-
-        // 로그인 실패 처리
-        if (urlParams.has("error")) {
-            alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
-            // URL에서 error 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
-        }
-        else if (urlParams.has("success")) { // 로그인 성공 처리
-            alert("어서오세요! 로그인에 성공하셨습니다.");
-            // URL에서 success 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
-            }
-        }
-
-        // 로그인 상태 확인
-        function checkLoginStatus() {
-        const loginButton = document.getElementById('login-button');
-
-        // 로그인 상태 확인 API 호출
-        fetch('/check', { credentials: 'include' })
-            .then(response => response.json())
-            .then(data => {
-                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
-                if (isLoggedIn) {
-                    loginButton.textContent = 'Logout';
-                    loginButton.removeAttribute('href'); // href 제거
-                    loginButton.onclick = function () {
-                        handleLogout(); //  로그아웃 처리 호출
-                    };
-                } else {
-                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
-            });
-        }
-
-        // 로그아웃 처리
-        function handleLogout() {
-        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
-            .then(() => {
-                alert('로그아웃되었습니다.');
-                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
-            })
-            .catch(error => console.error('Error:', error));
-        }
-
-        // 로그인 버튼 상태로 업데이트
-        function updateToLoginButton(loginButton) {
-        loginButton.textContent = 'Login';
-        loginButton.setAttribute('href', '#login');
-        loginButton.onclick = null;
-        }
-
-    </script>
 
     <section id="banner" class="major">
         <div class="inner">
@@ -142,29 +74,27 @@
     <section id="contact">
         <div class="inner">
             <section>
-                <form method="post" action="/submitForm">
+                <form method="post" id="registerForm"action="/accession/register">
                     <div class="fields">
                         <div class="field half">
-                            <label for="monami_id">ID</label>
-                            <input type="text" name="monami_id" id="monami_id" />
+                            <label for="signin_id">ID</label>
+                            <input type="text" name="signin_id" id="signin_id" />
                         </div>
                         <div class="field half">
-                            <label for="monami_password">Password</label>
-                            <input type="text" name="monami_password" id="monami_password" />
+                            <label for="signin_password">Password</label>
+                            <input type="password" name="signin_password" id="signin_password" />
                         </div>
                         <div class="field half">
-                            <label for="monami_name">name</label>
-                            <input type="text"  name="monami_name" id="monami_name" />
+                            <label for="signin_name">name</label>
+                            <input type="text"  name="signin_name" id="signin_name" />
                         </div>
 
 
                         <div class="field half">
-                            <label for="deft_select">부서 선택</label>
-                            <select id="deft_select" name="deft_select">
+                            <label for="signin_deft_id">부서 선택</label>
+                            <select id="signin_deft_id" name="signin_deft_id">
 
                             </select>
-
-
                         </div>
                         <div class="field">
                             <label for="message">Message</label>
@@ -175,9 +105,22 @@
                         <li><input type="submit" value="Send Message" class="primary" /></li>
                         <li><input type="reset" value="Clear" /></li>
                     </ul>
+                    <div>
+                        <button type="submit">회원가입</button> <!-- 버튼 클릭 시 폼 제출 -->
+                    </div>
                 </form>
             </section>
-    <script>
+            <script th:inline="javascript">
+                var message = [[${#strings.defaultString(message, 'null')}]];
+                if (message !== "null") {
+                    alert(message);
+                }
+            </script>
+
+
+
+
+            <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log("DOM 로드됨");
 
@@ -194,7 +137,7 @@
                     console.log("서버에서 받은 데이터:", data);
 
                     // 드롭다운 요소 가져오기
-                    const select = document.getElementById("deft_select");
+                    const select = document.getElementById("signin_deft_id");
 
                     // 드롭다운에 옵션 추가
                     data.forEach(department => {
