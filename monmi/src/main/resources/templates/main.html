@@ -66,76 +66,69 @@
 
 
 
-		<!-- login -->
+			<!-- login -->
+				<script>
 
+					document.addEventListener("DOMContentLoaded", function () {
+                        handleUrlParams(); 	// URL 파라미터 처리 (로그인 성공/실패 메시지)
+                        checkLoginStatus(); // 로그인 상태 확인
+                    });
 
+                    function handleUrlParams() {
+						const urlParams = new URLSearchParams(window.location.search);
 
-		<script>
-		window.onload = function () {
-        handleUrlParams(); 	// URL 파라미터 처리
-        checkLoginStatus(); // 로그인 상태 확인
-    	};
+						if (urlParams.has("error")) {
+							alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+							history.replaceState({}, null, window.location.pathname);
+						}
+						else if (urlParams.has("success")) {
+							alert("어서오세요! 로그인에 성공하셨습니다.");
+							history.replaceState({}, null, window.location.pathname);
+						}
+					}
 
-    	// URL 파라미터 처리
-    	function handleUrlParams() {
-        const urlParams = new URLSearchParams(window.location.search);
+                    // 🔹 로그인 상태 확인 및 버튼 변경
+                    function checkLoginStatus() {
+                        const loginButton = document.getElementById('login-button');
 
-        // 로그인 실패 처리
-        if (urlParams.has("error")) {
-        	alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
-            // URL에서 error 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
-        }
-        else if (urlParams.has("success")) { // 로그인 성공 처리
-            alert("어서오세요! 로그인에 성공하셨습니다.");
-            // URL에서 success 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
-			}
-    	}
+                        fetch('/check', { credentials: 'include' }) // 서버에서 로그인 상태 확인 요청
+                            .then(response => response.json())
+                            .then(data => {
+                                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                                if (isLoggedIn) {
+                                    loginButton.textContent = 'Logout';
+                                    loginButton.removeAttribute('href'); // href 제거
+                                    loginButton.onclick = function () {
+                                        handleLogout();
+                                    };
+                                } else {
+                                    updateToLoginButton(loginButton);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                updateToLoginButton(loginButton);
+                            });
+                    }
 
-    	// 로그인 상태 확인
-    	function checkLoginStatus() {
-        const loginButton = document.getElementById('login-button');
+                    // 🔹 로그아웃 처리
+                    function handleLogout() {
+                        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+                            .then(() => {
+                                alert('로그아웃되었습니다.');
+                                window.location.reload(); // 로그아웃 후 페이지 새로고침하여 반영
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
 
-        // 로그인 상태 확인 API 호출
-        fetch('/check', { credentials: 'include' })
-            .then(response => response.json())
-            .then(data => {
-                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
-                if (isLoggedIn) {
-                    loginButton.textContent = '로그아웃';
-                    loginButton.removeAttribute('href'); // href 제거
-                    loginButton.onclick = function () {
-                        handleLogout(); //  로그아웃 처리 호출
-                    };
-                } else {
-                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
-            });
-    	}
+                    // 🔹 로그인 버튼 상태로 업데이트
+                    function updateToLoginButton(loginButton) {
+                        loginButton.textContent = 'Login';
+                        loginButton.setAttribute('href', '#login');
+                        loginButton.onclick = null;
+                    }
+				</script>
 
-    	// 로그아웃 처리
-    	function handleLogout() {
-        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
-            .then(() => {
-                alert('로그아웃되었습니다.');
-                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
-            })
-            .catch(error => console.error('Error:', error));
-    	}
-
-    	// 로그인 버튼 상태로 업데이트
-    	function updateToLoginButton(loginButton) {
-        loginButton.textContent = '로그인';
-        loginButton.setAttribute('href', '#login');
-        loginButton.onclick = null;
-    	}
-
-		</script>
 
 
 				<!-- Banner -->

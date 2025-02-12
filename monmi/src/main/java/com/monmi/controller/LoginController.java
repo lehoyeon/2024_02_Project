@@ -32,8 +32,10 @@ public class LoginController {
     public String processLogin(
             @RequestParam("monami_id") String monamiId,
             @RequestParam("monami_password") String monamiPassword,
+            @RequestHeader(value = "Referer", required = false) String referer, // 이전 페이지 정보 가져오기
             //main.html에서의 name = manami_id , name = manami_password 에서 입력한값을 전달.
-            HttpServletResponse response //응답 객체 (쿠키 설정을 위해 필요함...!)
+            HttpServletResponse response //응답 객체 (쿠키 설정을 위해 필요함...!)             RedirectAttributes redirectAttributes // ✅ 메시지 전달을 위해 추가
+
     ) {
         // LoginDto 생성 ( 컨트롤러에서 받은 데이터를 DTO로 변환)
         LoginDTO loginDto = new LoginDTO();
@@ -54,13 +56,16 @@ public class LoginController {
             cookie.setPath("/");        // 모든 경로에서 쿠키 접근 가능
             response.addCookie(cookie);
 
-
-            // 로그인 성공 시 메인 페이지로 이동
-            return "redirect:/main?success=true";
+            //리다이렉트할 때 success=true 추가
+            if (referer != null && referer.contains("?")) {
+                return "redirect:" + referer + "&success=true";
+            } else {
+                return "redirect:" + (referer != null ? referer + "?success=true" : "/");
+            }
         } else {
-            // 로그인 실패 시 에러 메시지와 함께 로그인 페이지로 이동
-            return "redirect:/main?error=true";
+            return "redirect:" + (referer != null ? referer + "?error=true" : "/main?error=true");
         }
+
     }
 
 
