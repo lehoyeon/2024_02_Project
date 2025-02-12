@@ -1,149 +1,334 @@
 <!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
 <head>
-    <title>공지사항 페이지</title>
+    <title>Forty by HTML5 UP</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="assets/css/notice.css">
+    <link rel="stylesheet" href="assets/css/notice.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
 </head>
 <body class="is-preload">
 
 <!-- Wrapper -->
+<div id="wrapper">
 
-<!-- Header -->
+    <!-- Header -->
+    <header id="header" class="alt">
+        <a href="main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+        <nav>
+            <a id="login-button" href="#login">login</a>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
 
-<!-- Menu -->
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="/main">메인페이지</a></li>
+            <li><a href="/production/production_process">제품 생산 공정</a></li>
+            <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+            <li><a href="/notice">공지사항</a></li>
+        </ul>
+        <ul class="actions stacked">
+            <li><a href="/accession" class="button primary join">회원가입</a></li>
+        </ul>
+    </nav>
+    <!-- login -->
+    <nav id="login">
+        <ul class="links">
+            <form action="/login" method="post"><!-- 서버로 post 요청 -->
+                <h4 class="login_logo"><strong>Forty by HTML5 UP</strong></h4>
+                <br>
+                <li>ID<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+                <li>PassWord<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+                <br>
+                <li><button >Login</button></li>
+                <br>
+            </form>
+        </ul>
+    </nav>
 
-<!-- Banner -->
 
-<!-- Main -->
-<div class="container">
-    <div class="box-wrapper">
-        <div class="header">
-            <div class="left-box">
-                <!-- 첫 번째 중요 공지 -->
-                <div class="pen_box1" th:if="${#lists.size(importantNotices) > 0}">
-                    <a th:href="@{/notice/{id}(id=${importantNotices[0].id})}">
-                        <img src="/images/pen1.png" alt="이미지1">
-                    </a>
-                    <p th:text="${importantNotices[0].title}"></p>
-                    <p th:text="${importantNotices[0].author}"></p>
-                </div>
 
-                <!-- 두 번째 중요 공지 -->
-                <div class="pen_box2" th:if="${#lists.size(importantNotices) > 1}">
-                    <a th:href="@{/notice/{id}(id=${importantNotices[1].id})}">
-                        <img src="/images/pen2.png" alt="이미지2">
-                    </a>
-                    <p th:text="${importantNotices[1].title}"></p>
-                    <p th:text="${importantNotices[1].author}"></p>
-                </div>
+    <!-- Main -->
+    <div id="main">
 
-                <!-- 세 번째 중요 공지 -->
-                <div class="pen_box3" th:if="${#lists.size(importantNotices) > 2}">
-                    <a th:href="@{/notice/{id}(id=${importantNotices[2].id})}">
-                        <img src="/images/pen3.png" alt="이미지3">
-                    </a>
-                    <p th:text="${importantNotices[2].title}"></p>
-                    <p th:text="${importantNotices[2].author}"></p>
-                </div>
 
-                <!-- 중요공지 3개 미만일 때 텍스트 출력 -->
-                <p th:if="${#lists.size(importantNotices) == 2}" class="missing-one">현재 중요한 공지가 1개가 부족합니다.</p>
-                <p th:if="${#lists.size(importantNotices) == 1}" class="missing-two">현재 중요한 공지가 2개가 부족합니다.</p>
-                <p th:if="${#lists.size(importantNotices) == 0}" class="missing-none">현재 중요한 공지가 없습니다.</p>
+        <!-- Two -->
+
+        <section id="two">
+            <div class="inner">
+                <section class="split">
+                    <section>
+                        <div class="contact-method1">
+                            <div class="pen_box" th:if="${#lists.size(importantNotices) > 0}">
+                                <a th:href="@{/notice/{id}(id=${importantNotices[0].id})}">
+                                    <img src="/images/pen1.png">
+                                </a>
+                                <p th:text="${importantNotices[0].title}"></p>
+                                <p th:text="${importantNotices[0].author}"></p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-method1">
+                            <div class="pen_box" th:if="${#lists.size(importantNotices) > 1}">
+                                <a th:href="@{/notice/{id}(id=${importantNotices[1].id})}">
+                                    <img src="/images/pen2.png">
+                                </a>
+                                <p th:text="${importantNotices[1].title}"></p>
+                                <p th:text="${importantNotices[1].author}"></p>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-method1">
+                            <div class="pen_box" th:if="${#lists.size(importantNotices) > 2}">
+                                <a th:href="@{/notice/{id}(id=${importantNotices[2].id})}">
+                                    <img src="/images/pen3.png">
+                                </a>
+                                <p th:text="${importantNotices[2].title}"></p>
+                                <p th:text="${importantNotices[2].author}"></p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
             </div>
+        </section>
+        <!-- 중요공지 3개 미만일 때 텍스트 출력 -->
+        <p th:if="${#lists.size(importantNotices) == 2}" class="missing-one">현재 중요 공지가 2개 있습니다.</p>
+        <p th:if="${#lists.size(importantNotices) == 1}" class="missing-two">현재 중요 공지가 1개 있습니다.</p>
+        <p th:if="${#lists.size(importantNotices) == 0}" class="missing-none">현재 중요한 공지가 없습니다.</p>
+    </div>
 
-        </div>
 
-        <!-- 새 공지사항 생성 버튼을 공지사항 목록 위로 이동 -->
-        <a href="/notice/create" class="create-btn">새 공지사항 생성</a>
-
-        <!-- 공지사항 목록 출력 -->
+    <!-- 공지사항 목록 출력 -->
+    <div class="notice-bar">
         <div class="notice-board">
+            <!-- 새 공지사항 생성 버튼을 공지사항 목록 위로 이동 -->
+            <div class="create-button">
+                <a href="/notice/create" class="crate">새 공지사항 생성</a>
+            </div>
             <!-- 스크롤 업 버튼 -->
             <div id="scroll-up" class="triangle"></div>
-
+            <!-- 공지사항 목록 출력 -->
             <div th:each="notice : ${regularNotices}">
-            <div class="notice-item">
-                <div class="notice-content">
-                    <div class="title-row">
-                        <a class="title" th:href="@{'/notice/' + ${notice.id}}" th:text="${notice.title}"></a>
-                        <span class="author-info">
+                <div class="notice-item" th:classappend="${notice.important ? ' important-notice' : ''}">
+                    <div class="notice-content">
+                        <div class="title-row">
+                            <a class="title" th:href="@{'/notice/' + ${notice.id}}" th:text="${notice.title}"></a>
+                            <!-- 중요공지 배지 표시 -->
+                            <span th:if="${notice.important}" class="important-badge">중요공지 사항</span>
+                        </div>
+                        <!-- 날짜와 작성자 정보 -->
+                        <div class="meta-row">
+                            <span class="date" th:text="${#temporals.format(notice.updatedAt != null ? notice.updatedAt : notice.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                            <span class="author-info">
                         <span th:text="${notice.author}"></span>
                         <span th:text="${notice.name}"></span>
                         <span th:text="${notice.position}"></span>
                     </span>
-                    </div>
-                    <div class="date-row">
-                        <span class="date" th:text="${#temporals.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
-                        <!-- 수정된 경우 '수정하였습니다' 표시 -->
-                        <span th:if="${notice.updatedAt != null}" class="modified-at">
-                        (수정하였습니다:
-                        <span th:text="${#temporals.format(notice.updatedAt, 'yyyy-MM-dd HH:mm')}"></span>)
-                    </span>
-                    </div>
-                        <!-- 중요공지 여부 확인 -->
-                        <span th:if="${notice.important}" class="important-badge">중요공지 사항</span>
-
+                        </div>
                         <div class="notice-actions">
-                            <a th:href="@{/notice/{id}/edit(id=${notice.id})}" class="edit-btn">수정</a>
-                            <a th:href="@{/notice/{id}/delete(id=${notice.id})}" class="delete-btn">삭제</a>
+                            <button class="edit-btn" th:onclick="'location.href=\'/notice/' + ${notice.id} + '/edit\''">수정</button>
+                            <button class="delete-btn" th:onclick="|if(confirm('정말 삭제하시겠습니까?')) { location.href='/notice/' + ${notice.id} + '/delete'; }|">삭제</button>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- 스크롤 다운 버튼 -->
             <div id="scroll-down" class="reverse-triangle"></div>
         </div>
 
     </div>
 </div>
+</div>
+    <!-- Contact -->
+    <section id="contact">
+        <div class="inner">
+            <section>
+                <form method="post" action="#">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div class="field half">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" />
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" class="primary" /></li>
+                        <li><input type="reset" value="Clear" /></li>
+                    </ul>
+                </form>
+            </section>
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-envelope"></span>
+                        <h3>Email</h3>
+                        <a href="#">information@untitled.tld</a>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-phone"></span>
+                        <h3>Phone</h3>
+                        <span>(000) 000-0000 x12387</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>Address</h3>
+                        <span>1234 Somewhere Road #5432<br />
+										Nashville, TN 00000<br />
+										United States of America</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
 
-<!-- Contact -->
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="icons">
+                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+    </footer>
 
+</div>
 
-<!-- Footer -->
-
-
-
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 <!-- 스크롤 버튼 기능 -->
 <script>
     // 상단 삼각형 클릭 시 위로 스크롤
-document.getElementById('scroll-up').addEventListener('click', function() {
-  document.querySelector('.notice-board').scrollBy({
-    top: -200, // 스크롤을 위로 200px 이동
-    behavior: 'smooth' // 부드럽게 스크롤
-  });
-});
+    document.getElementById('scroll-up').addEventListener('click', function() {
+        document.querySelector('.notice-board').scrollBy({
+            top: -200, // 스크롤을 위로 200px 이동
+            behavior: 'smooth' // 부드럽게 스크롤
+        });
+    });
 
-// 하단 역삼각형 클릭 시 아래로 스크롤
-document.getElementById('scroll-down').addEventListener('click', function() {
-  document.querySelector('.notice-board').scrollBy({
-    top: 200, // 스크롤을 아래로 200px 이동
-    behavior: 'smooth' // 부드럽게 스크롤
-  });
-});
+    // 하단 역삼각형 클릭 시 아래로 스크롤
+    document.getElementById('scroll-down').addEventListener('click', function() {
+        document.querySelector('.notice-board').scrollBy({
+            top: 200, // 스크롤을 아래로 200px 이동
+            behavior: 'smooth' // 부드럽게 스크롤
+        });
+    });
 
-// 더블클릭 시 맨 위로 이동
-document.getElementById('scroll-up').addEventListener('dblclick', function() {
-  document.querySelector('.notice-board').scrollTo({
-    top: 0,
-    behavior: 'smooth' // 부드럽게 스크롤
-  });
-});
+    // 더블클릭 시 맨 위로 이동
+    document.getElementById('scroll-up').addEventListener('dblclick', function() {
+        document.querySelector('.notice-board').scrollTo({
+            top: 0,
+            behavior: 'smooth' // 부드럽게 스크롤
+        });
+    });
 
-// 더블클릭 시 맨 아래로 이동
-document.getElementById('scroll-down').addEventListener('dblclick', function() {
-  document.querySelector('.notice-board').scrollTo({
-    top: document.querySelector('.notice-board').scrollHeight,
-    behavior: 'smooth' // 부드럽게 스크롤
-  });
-});
+    // 더블클릭 시 맨 아래로 이동
+    document.getElementById('scroll-down').addEventListener('dblclick', function() {
+        document.querySelector('.notice-board').scrollTo({
+            top: document.querySelector('.notice-board').scrollHeight,
+            behavior: 'smooth' // 부드럽게 스크롤
+        });
+    });
 </script>
+<!-- login -->
+<script>
+    window.onload = function () {
+    handleUrlParams(); 	// URL 파라미터 처리
+    checkLoginStatus(); // 로그인 상태 확인
+    };
 
+    // URL 파라미터 처리
+    function handleUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // 로그인 실패 처리
+    if (urlParams.has("error")) {
+        alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+        // URL에서 error 파라미터 제거
+        history.replaceState({}, null, window.location.pathname);
+    }
+    else if (urlParams.has("success")) { // 로그인 성공 처리
+        alert("어서오세요! 로그인에 성공하셨습니다.");
+        // URL에서 success 파라미터 제거
+        history.replaceState({}, null, window.location.pathname);
+        }
+    }
+
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+    const loginButton = document.getElementById('login-button');
+
+    // 로그인 상태 확인 API 호출
+    fetch('/check', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+            if (isLoggedIn) {
+                loginButton.textContent = 'Logout';
+                loginButton.removeAttribute('href'); // href 제거
+                loginButton.onclick = function () {
+                    handleLogout(); //  로그아웃 처리 호출
+                };
+            } else {
+                updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+        });
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+    fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+        .then(() => {
+            alert('로그아웃되었습니다.');
+            checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // 로그인 버튼 상태로 업데이트
+    function updateToLoginButton(loginButton) {
+    loginButton.textContent = 'Login';
+    loginButton.setAttribute('href', '#login');
+    loginButton.onclick = null;
+    }
+
+</script>
 </body>
 </html>
