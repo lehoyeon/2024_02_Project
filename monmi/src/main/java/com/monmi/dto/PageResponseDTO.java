@@ -9,12 +9,12 @@ import java.util.List;
 
 @Getter
 @ToString
-public class PageResponseDTO {
+public class PageResponseDTO<T> {
 
-    private List<CorrespondentMaterialDTO> dtoList;
+    private List<T> dtoList;
 
     @Builder
-    public PageResponseDTO(List<CorrespondentMaterialDTO> dtoList) {
+    public PageResponseDTO(List<T> dtoList) {
         this.dtoList = dtoList;
     }
 }
