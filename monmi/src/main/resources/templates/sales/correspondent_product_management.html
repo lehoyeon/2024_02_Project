@@ -210,7 +210,7 @@
 								<img src="/images/pic07.jpg" alt="" />
 							</span>
             <header class="major">
-                <h1>원자재 거래처 관리</h1>
+                <h1>제품 거래처 관리</h1>
             </header>
             <div class="content">
                 <p>이용자 환영인사<br />
@@ -229,22 +229,21 @@
                     <div class="card-body">
                         <div style="display: flex; gap: 2em;">
                             <header class="major">
-                                    <h3>
-                                        <span>검색 조건 설정</span>
-                                    </h3>
+                                <h3>
+                                    <span>검색 조건 설정</span>
+                                </h3>
                             </header>
-                            <h4 style="padding-top: 0.3em;">원자재 / <a href="/sales/correspondent_product_management" style="opacity: 0.6;">제품</a></h4>
+                            <h4 style="padding-top: 0.3em;"><a href="/sales/correspondent_material_management" style="opacity: 0.6;">원자재</a> / 제품</h4>
                         </div>
 
                         <!-- search condition-->
-                        <form action="/sales/correspondent_material_management" method="get">
+                        <form action="/sales/correspondent_product_management" method="get">
                             <div class="fields">
                                 <div class="input-group-prepend field30">
                                     <select class="form-select" name="type">
                                         <option value="">---</option>
                                         <option value="t" th:selected="${pageRequestDTO.type == 't'}">Tel</option>
                                         <option value="n" th:selected="${pageRequestDTO.type == 'n'}">거래처명</option>
-                                        <option value="m" th:selected="${pageRequestDTO.type == 'm'}">원자재</option>
                                         <option value="a" th:selected="${pageRequestDTO.type == 'a'}">주소</option>
                                         <option value="na" th:selected="${pageRequestDTO.type == 'na'}">거래처명 주소</option>
                                     </select>
@@ -279,22 +278,20 @@
                                     <!-- Table with stripped rows -->
                                     <table class="table datatable">
                                         <thead>
-                                            <tr>
-                                                <th data-sortable="true">거래처명</th>
-                                                <th>원자재</th>
-                                                <th>가격</th>
-                                                <th>주소</th>
-                                                <th>Tel</th>
-                                            </tr>
+                                        <tr>
+                                            <th data-sortable="true">거래처명</th>
+                                            <th>이번달 판매량</th>
+                                            <th>주소</th>
+                                            <th>Tel</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="dto : ${responseDTO.dtoList}" >
-                                                <td class="td-companyName">[[${dto.companyName}]]</td>
-                                                <td class="td-material">[[${dto.material}]]</td>
-                                                <td class="td-price">[[${dto.price}]]</td>
-                                                <td class="td-companyAddress">[[${dto.companyAddress}]]</td>
-                                                <td class="td-companyTel">[[${dto.companyTel}]]</td>
-                                            </tr>
+                                        <tr th:each="dto : ${responseDTO.dtoList}" >
+                                            <td class="td-companyName">[[${dto.companyName}]]</td>
+                                            <td class="td-productSellTotal">[[${dto.productSellTotal}]]</td>
+                                            <td class="td-companyAddress">[[${dto.companyAddress}]]</td>
+                                            <td class="td-companyTel">[[${dto.companyTel}]]</td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                     <!-- End Table with stripped rows -->
@@ -458,7 +455,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        self.location = '/sales/correspondent_material_management';
+        self.location = '/sales/correspondent_product_management';
     }, false);
 
     <!-- Edit Mode 버튼 클릭 처리 -->
@@ -512,28 +509,22 @@
                 <!-- td-Btns가 있을 경우 복원 작업 수행 -->
                 if (modifyDiv) {
                     let companyNameTd = tbodyTr.querySelector(".td-companyName");
-                    let materialTd = tbodyTr.querySelector(".td-material");
-                    let priceTd = tbodyTr.querySelector(".td-price");
+                    let productSellTotalTd = tbodyTr.querySelector(".td-productSellTotal");
                     let companyAddressTd = tbodyTr.querySelector(".td-companyAddress");
                     let companyTelTd = tbodyTr.querySelector(".td-companyTel");
 
                     // 기존 input을 찾아서 텍스트로 복원
                     let companyNameInput = companyNameTd.querySelector("input");
-                    let materialInput = materialTd.querySelector("select");
-                    let priceInput = priceTd.querySelector("input");
+                    let productSellTotalInput = productSellTotalTd.querySelector("input");
                     let companyAddressInput = companyAddressTd.querySelector("input");
                     let companyTelInput = companyTelTd.querySelector("input");
 
                     if (companyNameInput) {
                         companyNameInput.remove(); // input 제거
                     }
-                    if (materialInput) {
-                        materialTd.textContent = materialInput.originText;
-                        materialInput.remove();
-                    }
-                    if (priceInput) {
-                        priceTd.textContent = priceInput.originText;
-                        priceInput.remove();
+                    if (productSellTotalInput) {
+                        productSellTotalTd.textContent = productSellTotalInput.originText;
+                        productSellTotalInput.remove();
                     }
                     if (companyAddressInput) {
                         companyAddressTd.textContent = companyAddressInput.originText;
@@ -595,28 +586,22 @@
                         modifyTd.remove();  // .td-Btns를 갖고 있는 td만 삭제
 
                         let companyNameTd = tbodyTr.querySelector(".td-companyName");
-                        let materialTd = tbodyTr.querySelector(".td-material");
-                        let priceTd = tbodyTr.querySelector(".td-price");
+                        let productSellTotalTd = tbodyTr.querySelector(".td-productSellTotal");
                         let companyAddressTd = tbodyTr.querySelector(".td-companyAddress");
                         let companyTelTd = tbodyTr.querySelector(".td-companyTel");
 
                         // 각 셀에 있는 input 값을 원래 텍스트로 복원
                         let companyNameInput = companyNameTd.querySelector("input");
-                        let materialInput = materialTd.querySelector("input");
-                        let priceInput = priceTd.querySelector("input");
+                        let productSellTotalInput = productSellTotalTd.querySelector("input");
                         let companyAddressInput = companyAddressTd.querySelector("input");
                         let companyTelInput = companyTelTd.querySelector("input");
 
                         if (companyNameInput) {
                             companyNameInput.remove(); // input 제거
                         }
-                        if (materialInput) {
-                            materialTd.textContent = materialInput.originText;
-                            materialInput.remove();
-                        }
-                        if (priceInput) {
-                            priceTd.textContent = priceInput.originText;
-                            priceInput.remove();
+                        if (productSellTotalInput) {
+                            productSellTotalTd.textContent = productSellTotalInput.originText;
+                            productSellTotalInput.remove();
                         }
                         if (companyAddressInput) {
                             companyAddressTd.textContent = companyAddressInput.originText;
@@ -647,67 +632,50 @@
             let thisTr = e.target.closest("tr");
             let modifyDiv = thisTr.querySelector(".td-Btns");
             let companyNameTd = thisTr.querySelector(".td-companyName");
-            let materialTd = thisTr.querySelector(".td-material");
-            let priceTd = thisTr.querySelector(".td-price");
+            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
             let companyAddressTd = thisTr.querySelector(".td-companyAddress");
             let companyTelTd = thisTr.querySelector(".td-companyTel");
 
             let companyNameInput = document.createElement("input");
-            let materialInput = document.createElement("select");
-            let priceInput = document.createElement("input");
+            let productSellTotalInput = document.createElement("input");
             let companyAddressInput = document.createElement("input");
             let companyTelInput = document.createElement("input");
 
             companyNameInput.required = true;
-            materialInput.required = true;
-            priceInput.required = true;
+            productSellTotalInput.required = true;
             companyAddressInput.required = true;
             companyTelInput.required = true;
 
             companyNameInput.name="companyName";
-            materialInput.name="material";
-            priceInput.name="price";
+            productSellTotalInput.name="productSellTotal";
             companyAddressInput.name="companyAdress";
             companyTelInput.name="companyTel";
 
             companyNameInput.type = "text";
-            materialInput.type = "text";
-            priceInput.type = "number";
+            productSellTotalInput.type = "number";
             companyAddressInput.type = "text";
             companyTelInput.type = "text";
 
-            let input_material_list = [[${correspondentMaterialListDTO.dtoList}]];
-            input_material_list.forEach(material => {
-                let option = document.createElement("option");
-                option.setAttribute("value", material.materialName);
-                option.textContent = material.materialName;
-                materialInput.appendChild(option);
-            });
-
-            priceInput.style.height = "2.75em";
-            priceInput.min = "0";
+            productSellTotalInput.style.height = "2.75em";
+            productSellTotalInput.min = "0";
 
             companyNameInput.style.visibility = "hidden";
 
             companyNameInput.value = companyNameTd.textContent;
-            materialInput.value = materialTd.textContent;
-            priceInput.value = parseInt(priceTd.textContent);
+            productSellTotalInput.value = parseInt(productSellTotalTd.textContent);
             companyAddressInput.value = companyAddressTd.textContent;
             companyTelInput.value = companyTelTd.textContent;
 
-            materialInput.originText = materialTd.textContent;
-            priceInput.originText = priceTd.textContent;
+            productSellTotalInput.originText = productSellTotalTd.textContent;
             companyAddressInput.originText = companyAddressTd.textContent;
             companyTelInput.originText = companyTelTd.textContent;
 
-            materialTd.innerHTML = "";
-            priceTd.innerHTML = "";
+            productSellTotalTd.innerHTML = "";
             companyAddressTd.innerHTML = "";
             companyTelTd.innerHTML = "";
 
             companyNameTd.appendChild(companyNameInput);
-            materialTd.appendChild(materialInput);
-            priceTd.appendChild(priceInput);
+            productSellTotalTd.appendChild(productSellTotalInput);
             companyAddressTd.appendChild(companyAddressInput);
             companyTelTd.appendChild(companyTelInput);
 
@@ -741,30 +709,26 @@
             let thisTr = e.target.closest("tr");
 
             let companyNameTd = thisTr.querySelector(".td-companyName");
-            let materialTd = thisTr.querySelector(".td-material");
-            let priceTd = thisTr.querySelector(".td-price");
+            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
             let companyAddressTd = thisTr.querySelector(".td-companyAddress");
             let companyTelTd = thisTr.querySelector(".td-companyTel");
 
             let companyNameInput = companyNameTd.querySelector("input");
-            let materialInput = materialTd.querySelector("select");
-            let priceInput = priceTd.querySelector("input");
+            let productSellTotalInput = productSellTotalTd.querySelector("input");
             let companyAddressInput = companyAddressTd.querySelector("input");
             let companyTelInput = companyTelTd.querySelector("input");
 
             companyNameInput.name = "companyName";
-            materialInput.name = "material";
-            priceInput.name = "price";
+            productSellTotalInput.name = "productSellTotal";
             companyAddressInput.name = "companyAddress";
             companyTelInput.name = "companyTel";
 
             let form = document.createElement("form");
             form.method = "post";
-            form.action = "/sales/correspondent_material_management_modify";
+            form.action = "/sales/correspondent_product_management_modify";
 
             form.appendChild(companyNameInput);
-            form.appendChild(materialInput);
-            form.appendChild(priceInput);
+            form.appendChild(productSellTotalInput);
             form.appendChild(companyAddressInput);
             form.appendChild(companyTelInput);
             companyNameTd.appendChild(form);
@@ -776,25 +740,21 @@
             let modifyDiv = thisTr.querySelector(".td-Btns");
 
             let companyNameTd = thisTr.querySelector(".td-companyName");
-            let materialTd = thisTr.querySelector(".td-material");
-            let priceTd = thisTr.querySelector(".td-price");
+            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
             let companyAddressTd = thisTr.querySelector(".td-companyAddress");
             let companyTelTd = thisTr.querySelector(".td-companyTel");
 
             let companyNameInput = companyNameTd.querySelector("input");
-            let materialInput = materialTd.querySelector("select");
-            let priceInput = priceTd.querySelector("input");
+            let productSellTotalInput = productSellTotalTd.querySelector("input");
             let companyAddressInput = companyAddressTd.querySelector("input");
             let companyTelInput = companyTelTd.querySelector("input");
 
             companyNameInput.remove();
-            materialInput.remove();
-            priceInput.remove();
+            productSellTotalInput.remove();
             companyAddressInput.remove();
             companyTelInput.remove();
 
-            materialTd.textContent = materialInput.originText;
-            priceTd.textContent = priceInput.originText;
+            productSellTotalTd.textContent = productSellTotalInput.originText;
             companyAddressTd.textContent = companyAddressInput.originText;
             companyTelTd.textContent = companyTelInput.originText;
 
@@ -819,7 +779,7 @@
 
             let form = document.createElement("form");
             form.method = "post";
-            form.action = "/sales/correspondent_material_management_delete";
+            form.action = "/sales/correspondent_product_management_delete";
 
             form.appendChild(companyNameInput);
             companyNameTd.appendChild(form);
@@ -842,7 +802,7 @@
         let register_input_block = document.createElement("div");
         let register_input_form = document.createElement("form");
 
-        register_input_form.action = "/sales/correspondent_material_management_register";
+        register_input_form.action = "/sales/correspondent_product_management_register";
         register_input_form.method = "POST";
 
         register_input_block.classList.add("register-input-block");
@@ -851,73 +811,55 @@
         register_input_form.style.gap = "0.2em";
 
         let register_input_companyName = document.createElement("input");
-        let register_input_material = document.createElement("select");
-        let register_input_price = document.createElement("input");
+        let register_input_productSellTotal = document.createElement("input");
         let register_input_companyAddress = document.createElement("input");
         let register_input_companyTel = document.createElement("input");
 
         register_input_companyName.required = true;
-        register_input_material.required = true;
-        register_input_price.required = true;
+        register_input_productSellTotal.required = true;
         register_input_companyAddress.required = true;
         register_input_companyTel.required = true;
 
         register_input_companyName.name="companyName";
-        register_input_material.name = "material";
-        register_input_price.name = "price";
+        register_input_productSellTotal.name = "productSellTotal";
         register_input_companyAddress.name = "companyAddress";
         register_input_companyTel.name = "companyTel";
 
-        let input_material_list = [[${correspondentMaterialListDTO.dtoList}]];
-        input_material_list.forEach(material => {
-            let option = document.createElement("option");
-            option.setAttribute("value", material.materialName);
-            option.textContent = material.materialName;
-            register_input_material.appendChild(option);
-        });
-
         let register_input_label_companyName = document.createElement("label");
-        let register_input_label_material = document.createElement("label");
-        let register_input_label_price = document.createElement("label");
+        let register_input_label_productSellTotal = document.createElement("label");
         let register_input_label_companyAddress = document.createElement("label");
         let register_input_label_companyTel = document.createElement("label");
 
         register_input_label_companyName.textContent = "거래처명: ";
-        register_input_label_material.textContent = "원자재: ";
-        register_input_label_price.textContent = "가격: ";
+        register_input_label_productSellTotal.textContent = "이번달 판매량: ";
         register_input_label_companyAddress.textContent = "주소: ";
         register_input_label_companyTel.textContent = "Tel: ";
 
         register_input_label_companyName.setAttribute("for", "companyName");
-        register_input_label_material.setAttribute("for", "material");
-        register_input_label_price.setAttribute("for", "price");
+        register_input_label_productSellTotal.setAttribute("for", "productSellTotal");
         register_input_label_companyAddress.setAttribute("for", "companyAddress");
         register_input_label_companyTel.setAttribute("for", "companyTel");
 
         register_input_companyName.setAttribute("id", "companyName");
-        register_input_material.setAttribute("id", "material");
-        register_input_price.setAttribute("id", "price");
+        register_input_productSellTotal.setAttribute("id", "productSellTotal");
         register_input_companyAddress.setAttribute("id", "companyAddress");
         register_input_companyTel.setAttribute("id", "companyTel");
 
         register_input_companyName.setAttribute("type", "text");
-        register_input_material.setAttribute("type", "text");
-        register_input_price.setAttribute("type", "number");
+        register_input_productSellTotal.setAttribute("type", "number");
         register_input_companyAddress.setAttribute("type", "text");
         register_input_companyTel.setAttribute("type", "text");
 
-        register_input_price.style.height = "2.75em";
-        register_input_price.min = "0";
+        register_input_productSellTotal.style.height = "2.75em";
+        register_input_productSellTotal.min = "0";
 
         register_input_label_companyName.appendChild(register_input_companyName);
-        register_input_label_material.appendChild(register_input_material);
-        register_input_label_price.appendChild(register_input_price);
+        register_input_label_productSellTotal.appendChild(register_input_productSellTotal);
         register_input_label_companyAddress.appendChild(register_input_companyAddress);
         register_input_label_companyTel.appendChild(register_input_companyTel);
 
         register_input_form.appendChild(register_input_label_companyName);
-        register_input_form.appendChild(register_input_label_material);
-        register_input_form.appendChild(register_input_label_price);
+        register_input_form.appendChild(register_input_label_productSellTotal);
         register_input_form.appendChild(register_input_label_companyAddress);
         register_input_form.appendChild(register_input_label_companyTel);
 
@@ -958,9 +900,9 @@
                 isValid = false;
                 register_input_companyName.setAttribute("placeholder", errorMessages.push("거래처명을 입력해주세요."));
             }
-            if (!register_input_price.value) {
+            if (!register_input_productSellTotal.value) {
                 isValid = false;
-                errorMessages.push("가격을 입력해주세요.");
+                errorMessages.push("판매량을 입력해주세요.");
             }
             if (!register_input_companyAddress.value) {
                 isValid = false;
@@ -1011,7 +953,6 @@
         });
     });
 </script>
-
 
 </body>
 </html>
