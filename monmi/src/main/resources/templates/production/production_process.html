@@ -47,23 +47,23 @@
     <!-- Header -->
     <!-- Note: The "styleN" class below should match that of the banner element. -->
     <header id="header" class="alt style2">
-        <a href="/main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+        <a href="/main" class="logo"><strong>메인 페이지</strong></a>
         <nav>
-            <a href="#menu">Menu</a>
+            <a id="login-button" href="#login">로그인</a>
+            <a href="#menu">메뉴</a>
         </nav>
     </header>
 
     <!-- Menu -->
     <nav id="menu">
         <ul class="links">
-            <li><a href="/main.html">Home</a></li>
-            <li><a href="/landing.html">Landing</a></li>
-            <li><a href="/generic.html">Generic</a></li>
-            <li><a href="/elements.html">Elements</a></li>
+            <li><a href="/main">메인페이지</a></li>
+            <li><a href="/production/production_process">제품 생산 공정</a></li>
+            <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+            <li><a href="/notice">공지사항</a></li>
         </ul>
         <ul class="actions stacked">
-            <li><a href="#" class="button primary fit">Get Started</a></li>
-            <li><a href="#" class="button fit">Log In</a></li>
+            <li><a href="/accession" class="button primary join">회원가입</a></li>
         </ul>
     </nav>
 
@@ -83,7 +83,21 @@
             </div>
         </div>
     </section>
-
+    <!-- login -->
+    <nav id="login">
+        <ul class="links">
+            <form action="/login" method="post"><!-- 서버로 post 요청 -->
+                <h4 class="login_logo"><strong>Forty by HTML5 UP</strong></h4>
+                <br>
+                <li>ID<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+                <li>PassWord<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+                <br>
+                <li><button >Login</button></li>
+                <br>
+            </form>
+        </ul>
+    </nav>
     <!-- Main -->
     <div id="main">
 
@@ -394,6 +408,71 @@
 <script src="/assets/js/breakpoints.min.js"></script>
 <script src="/assets/js/util.js"></script>
 <script src="/assets/js/main.js"></script>
+<script>
+    window.onload = function () {
+    handleUrlParams(); 	// URL 파라미터 처리
+    checkLoginStatus(); // 로그인 상태 확인
+    };
 
+    // URL 파라미터 처리
+    function handleUrlParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // 로그인 실패 처리
+    if (urlParams.has("error")) {
+        alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+        // URL에서 error 파라미터 제거
+        history.replaceState({}, null, window.location.pathname);
+    }
+    else if (urlParams.has("success")) { // 로그인 성공 처리
+        alert("어서오세요! 로그인에 성공하셨습니다.");
+        // URL에서 success 파라미터 제거
+        history.replaceState({}, null, window.location.pathname);
+        }
+    }
+
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+    const loginButton = document.getElementById('login-button');
+
+    // 로그인 상태 확인 API 호출
+    fetch('/check', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+            if (isLoggedIn) {
+                loginButton.textContent = '로그아웃';
+                loginButton.removeAttribute('href'); // href 제거
+                loginButton.onclick = function () {
+                    handleLogout(); //  로그아웃 처리 호출
+                };
+            } else {
+                updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+        });
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+    fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+        .then(() => {
+            alert('로그아웃되었습니다.');
+            checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // 로그인 버튼 상태로 업데이트
+    function updateToLoginButton(loginButton) {
+    loginButton.textContent = '로그인';
+    loginButton.setAttribute('href', '#login');
+    loginButton.onclick = null;
+    }
+
+</script>
 </body>
 </html>

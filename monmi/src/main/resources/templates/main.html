@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Forty by HTML5 UP</title>
+		<title>메인 페이지</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -18,24 +18,24 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="/main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
-						<nav>
-							<a id="login-button" href="#login">login</a>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
+				<header id="header" class="alt style2">
+					<a href="/main" class="logo"><strong>메인 페이지</strong></a>
+					<nav>
+						<a id="login-button" href="#login">로그인</a>
+						<a href="#menu">메뉴</a>
+					</nav>
+				</header>
 
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
-							<li><a href="/main">Home</a></li>
-							<li><a href="landing.html">Landing</a></li>
-							<li><a href="generic.html">Generic</a></li>
-							<li><a href="elements.html">Elements</a></li>
+							<li><a href="/main">메인페이지</a></li>
+							<li><a href="/production/production_process">제품 생산 공정</a></li>
+							<li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+							<li><a href="/notice">공지사항</a></li>
 						</ul>
 						<ul class="actions stacked">
-							<li><a href="/accession" class="button primary join">accession</a></li>
+							<li><a href="/accession" class="button primary join">회원가입</a></li>
 						</ul>
 					</nav>
 
@@ -103,7 +103,7 @@
             .then(data => {
                 const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
                 if (isLoggedIn) {
-                    loginButton.textContent = 'Logout';
+                    loginButton.textContent = '로그아웃';
                     loginButton.removeAttribute('href'); // href 제거
                     loginButton.onclick = function () {
                         handleLogout(); //  로그아웃 처리 호출
@@ -130,7 +130,7 @@
 
     	// 로그인 버튼 상태로 업데이트
     	function updateToLoginButton(loginButton) {
-        loginButton.textContent = 'Login';
+        loginButton.textContent = '로그인';
         loginButton.setAttribute('href', '#login');
         loginButton.onclick = null;
     	}
@@ -142,13 +142,12 @@
 					<section id="banner" class="major">
 						<div class="inner">
 							<header class="major">
-								<h1>Hi, my name is Forty</h1>
+								<h1>반가워요 모나미입니다</h1>
 							</header>
 							<div class="content">
-								<p>A responsive site template designed by HTML5 UP<br />
-								and released under the Creative Commons.</p>
+								<p>4조 주식회사 모나미입니다. </p>
 								<ul class="actions">
-									<li><a href="#one" class="button next scrolly">Get Started</a></li>
+									<li><a href="#one" class="button next scrolly">지금 바로가기</a></li>
 								</ul>
 							</div>
 						</div>
@@ -173,8 +172,8 @@
 										<img src="images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">제품 생산 공정</a></h3>
-										<p>feugiat amet tempus</p>
+										<h3><a href="/production/production_process" class="link">제품 생산 공정</a></h3>
+										<p>PRODUCTION_PROCESS</p>
 									</header>
 								</article>
 								<article>
@@ -200,8 +199,8 @@
 										<img src="images/pic05.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">공지사항</a></h3>
-										<p>Ipsum dolor sit amet</p>
+										<h3><a href="/notice" class="link">공지사항</a></h3>
+										<p>NOTICE</p>
 									</header>
 								</article>
 								<article>
@@ -209,8 +208,8 @@
 										<img src="images/pic06.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">거래처 관리</a></h3>
-										<p>Feugiat amet tempus</p>
+										<h3><a href="/sales/correspondent_material_management" class="link">거래처 관리</a></h3>
+										<p>CORRESPONDENT_MATERIAL</p>
 									</header>
 								</article>
 							</section>

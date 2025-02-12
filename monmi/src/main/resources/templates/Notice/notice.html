@@ -19,11 +19,11 @@
 <div id="wrapper">
 
     <!-- Header -->
-    <header id="header" class="alt">
-        <a href="main" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+    <header id="header" class="alt style2">
+        <a href="/main" class="logo"><strong>메인 페이지</strong></a>
         <nav>
-            <a id="login-button" href="#login">login</a>
-            <a href="#menu">Menu</a>
+            <a id="login-button" href="#login">로그인</a>
+            <a href="#menu">메뉴</a>
         </nav>
     </header>
 
@@ -297,7 +297,7 @@
         .then(data => {
             const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
             if (isLoggedIn) {
-                loginButton.textContent = 'Logout';
+                loginButton.textContent = '로그아웃';
                 loginButton.removeAttribute('href'); // href 제거
                 loginButton.onclick = function () {
                     handleLogout(); //  로그아웃 처리 호출
@@ -324,7 +324,7 @@
 
     // 로그인 버튼 상태로 업데이트
     function updateToLoginButton(loginButton) {
-    loginButton.textContent = 'Login';
+    loginButton.textContent = '로그인';
     loginButton.setAttribute('href', '#login');
     loginButton.onclick = null;
     }
