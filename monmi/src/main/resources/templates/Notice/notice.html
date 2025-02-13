@@ -137,7 +137,7 @@
         <div class="notice-board">
             <!-- 새 공지사항 생성 버튼을 공지사항 목록 위로 이동 -->
             <div class="btq">
-                <a href="/notice/create" class="crate">새 공지사항 생성</a>
+                <a href="/notice/create" class="create disabled">새 공지사항 생성</a>
             </div>
             <!-- 스크롤 업 버튼 -->
             <div id="scroll-up" class="triangle"></div>
@@ -289,69 +289,101 @@
 <!-- login -->
 <script>
     window.onload = function () {
-    handleUrlParams(); 	// URL 파라미터 처리
-    checkLoginStatus(); // 로그인 상태 확인
+        handleUrlParams(); 	// URL 파라미터 처리
+        checkLoginStatus(); // 로그인 상태 확인
     };
 
     // URL 파라미터 처리
     function handleUrlParams() {
-    const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
 
-    // 로그인 실패 처리
-    if (urlParams.has("error")) {
-        alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
-        // URL에서 error 파라미터 제거
-        history.replaceState({}, null, window.location.pathname);
-    }
-    else if (urlParams.has("success")) { // 로그인 성공 처리
-        alert("어서오세요! 로그인에 성공하셨습니다.");
-        // URL에서 success 파라미터 제거
-        history.replaceState({}, null, window.location.pathname);
+        // 로그인 실패 처리
+        if (urlParams.has("error")) {
+            alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+            // URL에서 error 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
+        }
+        else if (urlParams.has("success")) { // 로그인 성공 처리
+            alert("어서오세요! 로그인에 성공하셨습니다.");
+            // URL에서 success 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
         }
     }
 
     // 로그인 상태 확인
     function checkLoginStatus() {
-    const loginButton = document.getElementById('login-button');
+        const loginButton = document.getElementById('login-button');
 
-    // 로그인 상태 확인 API 호출
-    fetch('/check', { credentials: 'include' })
-        .then(response => response.json())
-        .then(data => {
-            const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
-            if (isLoggedIn) {
-                loginButton.textContent = '로그아웃';
-                loginButton.removeAttribute('href'); // href 제거
-                loginButton.onclick = function () {
-                    handleLogout(); //  로그아웃 처리 호출
-                };
-            } else {
-                updateToLoginButton(loginButton); //  로그인 버튼으로 변경
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
-        });
+        // 로그인 상태 확인 API 호출
+        fetch('/check', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                if (isLoggedIn) {
+                    loginButton.textContent = '로그아웃';
+                    loginButton.removeAttribute('href'); // href 제거
+                    loginButton.onclick = function () {
+                        handleLogout(); // 로그아웃 처리 호출
+                    };
+                    updateButtonState(true); // 로그인 상태일 때 버튼 활성화
+                } else {
+                    updateButtonState(false); // 로그인 상태가 아니면 버튼 비활성화
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                updateButtonState(false); // 에러 발생 시에도 비활성화 처리
+            });
     }
 
     // 로그아웃 처리
     function handleLogout() {
-    fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
-        .then(() => {
-            alert('로그아웃되었습니다.');
-            checkLoginStatus(); 					   //로그아웃 후 상태 갱신
-        })
-        .catch(error => console.error('Error:', error));
+        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+            .then(() => {
+                alert('로그아웃되었습니다.');
+                checkLoginStatus(); 					   // 로그아웃 후 상태 갱신
+            })
+            .catch(error => console.error('Error:', error));
     }
+
+    // 수정/삭제 및 새 공지사항 생성 버튼 활성화/비활성화 처리
+    function updateButtonState(isLoggedIn) {
+
+    // 수정, 삭제 버튼 비활성화 처리
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        if (button) {
+            button.disabled = !isLoggedIn;  // 로그인 상태에 따라 비활성화 처리
+            button.classList.toggle('disabled', !isLoggedIn); // disabled 클래스 토글
+        }
+    });
+
+    // 삭제 버튼 비활성화 처리
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        if (button) {
+            button.disabled = !isLoggedIn;  // 로그인 상태에 따라 비활성화 처리
+            button.classList.toggle('disabled', !isLoggedIn); // disabled 클래스 토글
+        }
+    });
+    // 새 공지사항 생성 <a> 태그 비활성화 처리
+    const createButton = document.querySelector('.create'); // 새 공지사항 생성 <a> 태그
+    if (createButton) {
+        if (isLoggedIn) {
+            createButton.href = '/notice/create';  // 로그인 상태라면 정상적으로 링크 활성화
+            createButton.classList.remove('disabled'); // disabled 클래스 제거
+        } else {
+            createButton.removeAttribute('href');  // 로그인하지 않으면 링크를 제거하여 비활성화
+            createButton.classList.add('disabled'); // disabled 클래스 추가
+        }
+    }
+}
 
     // 로그인 버튼 상태로 업데이트
     function updateToLoginButton(loginButton) {
-    loginButton.textContent = '로그인';
-    loginButton.setAttribute('href', '#login');
-    loginButton.onclick = null;
+        loginButton.textContent = '로그인';
+        loginButton.setAttribute('href', '#login');
+        loginButton.onclick = null;
     }
-
 </script>
+
 </body>
 </html>

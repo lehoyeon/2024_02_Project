@@ -4267,6 +4267,14 @@ input, select, textarea {
 .create-crate:hover {
     background-color: #0056b3;
 }
+/* 비활성화 상태에서 글자 흐리게 */
+.disabled {
+    pointer-events: none;   /* 클릭 이벤트 비활성화 */
+    opacity: 0.5;           /* 글자를 흐리게 */
+    cursor: not-allowed;    /* 마우스를 금지 아이콘으로 변경 */
+    position: relative;     /* 툴팁 위치를 위한 상대 위치 설정 */
+}
+
 /* 스크롤바 스타일링 */
 .notice-board::-webkit-scrollbar {
   width: 12px; /* 스크롤바의 너비를 두껍게 */
