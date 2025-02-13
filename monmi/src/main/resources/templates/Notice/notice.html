@@ -6,12 +6,19 @@
 -->
 <html>
 <head>
-    <title>Forty by HTML5 UP</title>
+    <title>공지사항</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/notice.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<style>
+        .btq{
+    text-align: right;
+    color: orange;
+    background-color: #2a2f4a;
+}
 
+    </style>
 </head>
 <body class="is-preload">
 
@@ -55,7 +62,22 @@
             </form>
         </ul>
     </nav>
-
+    <!-- Banner -->
+    <!-- Note: The "styleN" class below should match that of the header element. -->
+    <section id="banner" class="style2">
+        <div class="inner">
+							<span class="image">
+								<img src="/images/pic07.jpg" alt="" />
+							</span>
+            <header class="major">
+                <h1>공지사항</h1>
+            </header>
+            <div class="content">
+                <p>공지사항 페이지입니다.<br />
+                    게시글을 확인해보세요~</p>
+            </div>
+        </div>
+    </section>
 
 
     <!-- Main -->
@@ -114,7 +136,7 @@
     <div class="notice-bar">
         <div class="notice-board">
             <!-- 새 공지사항 생성 버튼을 공지사항 목록 위로 이동 -->
-            <div class="create-button">
+            <div class="btq">
                 <a href="/notice/create" class="crate">새 공지사항 생성</a>
             </div>
             <!-- 스크롤 업 버튼 -->
