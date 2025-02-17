@@ -4316,7 +4316,36 @@ input, select, textarea {
     flex-direction: column;
     justify-content: flex-start;
 }
+.scroll-icon {
+  position: sticky;
+  top: 10px;          /* 원하는 위치 */
+  right: 20px;        /* 화면 오른쪽에 배치 */
+  font-size: 30px;    /* 아이콘 크기 */
+  cursor: pointer;   /* 클릭 가능하게 만들기 */
+  z-index: 3;         /* 다른 요소들 위에 표시 */
+  display: flex;
+  justify-content: right;
+}
+.scroll-icom {
+  position: sticky;
+  bottom: 10px;          /* 원하는 위치 */
+  right: 20px;        /* 화면 오른쪽에 배치 */
+  font-size: 30px;    /* 아이콘 크기 */
+  cursor: pointer;   /* 클릭 가능하게 만들기 */
+  z-index: 3;         /* 다른 요소들 위에 표시 */
+  display: flex;
+  justify-content: right;
+}
 
+.scroll-icon i {
+  color: black;  /* 아이콘 색상 */
+  transition: transform 0.3s ease; /* 클릭 시 애니메이션 효과 */
+}
+
+/* 아이콘 위로 마우스 올릴 때 */
+.scroll-icon:hover i {
+  transform: scale(1.1);  /* 마우스를 올리면 아이콘 크기 확대 */
+}
 /* 상단 삼각형 */
 .notice-board .triangle {
   position: sticky;
@@ -4350,8 +4379,8 @@ z-index: 3;
     flex-direction: column;
     margin-bottom: 20px;
     padding: 10px;
-    border-radius: 10px;
     background-color: #2a2f4a;
+    border-bottom: 5px solid white;
     width: 100%;
     height: 100%;
     min-height: 140px;
@@ -4371,6 +4400,7 @@ z-index: 3;
     font-size: 1.2em;
     font-weight: bold;
     flex-grow: 1; /* 제목이 중요공지 배지를 밀지 않도록 */
+    color: white;
 }
 
 /* 중요공지 배지 스타일 */
@@ -4408,7 +4438,7 @@ z-index: 3;
 /* 수정/삭제 버튼 */
 .notice-actions {
     position: absolute;
-    bottom: 0px;
+    bottom: 10px;
     right: 10px; /* 오른쪽에서 10px 간격 */
     display: flex;
     gap: 10px;
@@ -4417,14 +4447,10 @@ z-index: 3;
 .notice-actions .edit-btn,
 .notice-actions .delete-btn {
     font-size: 0.8em;
-    color: #007bff;
     text-decoration: none;
 }
 
-.notice-actions .edit-btn:hover,
-.notice-actions .delete-btn:hover {
-    text-decoration: underline;
-}
+
 section#contact {
     display: flex;
     justify-content: center;

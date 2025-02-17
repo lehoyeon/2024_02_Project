@@ -9,9 +9,12 @@
     <title>공지사항</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/notice.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-<style>
+    <link rel="stylesheet" href="/assets/css/notice.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    <!-- FontAwesome CDN 추가 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
         .btq{
     text-align: right;
     color: orange;
@@ -137,10 +140,12 @@
         <div class="notice-board">
             <!-- 새 공지사항 생성 버튼을 공지사항 목록 위로 이동 -->
             <div class="btq">
-                <a href="/notice/create" class="create disabled">새 공지사항 생성</a>
+                <a href="/notice/create" class="create disabled"> 새 공지사항 생성</a>
             </div>
             <!-- 스크롤 업 버튼 -->
-            <div id="scroll-up" class="triangle"></div>
+            <div id="scroll-up" class="scroll-icon">
+                <i class="fas fa-arrow-up"></i> <!-- FontAwesome 아이콘 -->
+            </div>
             <!-- 공지사항 목록 출력 -->
             <div th:each="notice : ${regularNotices}">
                 <div class="notice-item" th:classappend="${notice.important ? ' important-notice' : ''}">
@@ -167,7 +172,9 @@
                 </div>
             </div>
             <!-- 스크롤 다운 버튼 -->
-            <div id="scroll-down" class="reverse-triangle"></div>
+            <div id="scroll-down" class="scroll-icom">
+                <i class="fas fa-arrow-down"></i>
+            </div>
         </div>
 
     </div>

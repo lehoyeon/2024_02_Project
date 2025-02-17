@@ -39,6 +39,12 @@ public class MainController {
         log.info("Rendering sales_management.html...");
         return "sales_management";
     }
+    // 소개 컨트롤 잠깐 여기둠
+    @GetMapping("/introduction")
+    public String introduction() {
+        log.info("Rendering sales_management.html...");
+        return "/introduction";
+    }
 
 
 }
