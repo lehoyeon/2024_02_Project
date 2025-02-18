@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monmi.production.mapper.ProductionProcessMapper">
+    <update id="materialHoldingsRecentModify" parameterType="com.monmi.domain.Material">
+        update material_holdings set quantity = #{quantity} where holdings_date = #{holdingsDate} and material_id = #{materialId}
+    </update>
+
+    <insert id="materialHoldingsInsert" useGeneratedKeys="true" keyProperty="id" parameterType="com.monmi.domain.Material">
+        insert into
+            material_holdings (material_id, quantity, holdings_date)
+        values
+            (#{materialId}, #{quantity}, #{holdingsDate})
+    </insert>
+
+    <select id="getDailyProduction">
+        select ${part}_daily_production from monami_${part} where date(${part}_date) = #{Date}
+    </select>
+
+    <select id="getDailyAmount">
+        select ${part}_daily_amount from monami_${part} where date(${part}_date) = #{Date}
+    </select>
+
+    <select id="getTotalpenDailyAmount">
+        select totalpen_amount from monami_totalpen where date(totalpen_date) = #{Date}
+    </select>
+
+    <select id="getRecentPartDate">
+        select ${part}_date from monami_${part} order by ${part}_date desc limit 1
+    </select>
+
+    <select id="getRecentTotalpenDate">
+        select totalpen_date from monami_totalpen order by totalpen_date desc limit 1
+    </select>
+
+    <insert id="monamiPartInsert">
+        insert into
+            monami_${part} (${part}_date, ${part}_defective, ${part}_daily_amount, ${part}_daily_production)
+        values
+            (#{partDate}, #{partDefective}, #{partDailyAmount}, #{partDailyProduction})
+    </insert>
+
+    <update id="monamiPartModify">
+        update monami_${part}
+        set ${part}_defective = #{partDefective},
+            ${part}_daily_amount = #{partDailyAmount},
+            ${part}_daily_production = #{partDailyProduction},
+            ${part}_date = #{partDate}
+        where ${part}_date = (
+            select max(${part}_date) from monami_${part}
+        )
+    </update>
+
+    <insert id="monamiTotalpenInsert">
+        insert into
+            monami_totalpen (totalpen_date, totalpen_defective, totalpen_amount, totalpen_daily_production)
+        values
+            (#{totalpenDate}, #{totalpenDefective}, #{totalpenAmount}, #{totalpenDailyProduction})
+    </insert>
+
+    <update id="monamiTotalpenModify">
+        update monami_totalpen
+        set totalpen_defective = #{totalpenDefective},
+            totalpen_amount = #{totalpenAmount},
+            totalpen_daily_production = #{totalpenDailyProduction},
+            totalpen_date = #{totalpenDate}
+        where totalpen_date = (
+        select max(totalpen_date) from monami_totalpen
+        )
+    </update>
+
+    <select id="getMonamiAmountItemAmount">
+        select amount from monami_amount where product_name = #{productName}
+    </select>
+
+    <update id="monamiAmountItemModify">
+        update monami_amount
+        set amount = #{amount}
+        where product_name = #{productName}
+    </update>
+
+    <select id="getMaterialHoldingsHoldingsDate">
+        select holdings_date
+        from material_holdings
+        where material_id = #{materialId}
+        order by holdings_date DESC
+        limit 1
+    </select>
+
+    <select id="getMaterialHoldingsQuantity">
+        select quantity
+        from material_holdings
+        where material_id = #{materialId}
+        order by holdings_date DESC
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monmi.sales.mapper.CorrespondentProductMapper">
+    <insert id="correspondent_product_insert">
+        insert into
+            correspondent_product (company_name, product_sell_total, company_address, company_tel)
+        values
+            (#{companyName}, #{productSellTotal}, #{companyAddress}, #{companyTel})
+    </insert>
+
+    <delete id="correspondent_product_delete">
+        delete from correspondent_product where company_name = #{companyName}
+    </delete>
+
+    <update id="correspondent_product_modify">
+        update correspondent_product set product_sell_total = #{productSellTotal}, company_address = #{companyAddress}, company_tel = #{companyTel} where company_name = #{companyName}
+    </update>
+</mapper>

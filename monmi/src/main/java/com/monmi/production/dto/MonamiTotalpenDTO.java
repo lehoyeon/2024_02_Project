@@ -19,6 +19,9 @@ public class MonamiTotalpenDTO {
     private LocalDateTime totalpenDate;
 
     @NotEmpty
+    private int totalpenDefective;
+
+    @NotEmpty
     private int totalpenAmount;
 
     @NotEmpty

@@ -18,7 +18,7 @@ public class MaterialHoldingsDTO {
     private int id;
 
     @NotEmpty
-    private Material materialId;
+    private int materialId;
 
     @NotEmpty
     private int quantity;

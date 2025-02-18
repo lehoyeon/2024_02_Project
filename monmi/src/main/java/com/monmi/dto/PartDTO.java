@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MaterialDTO {
-    private int materialId;
+public class PartDTO {
+    private Long partId;
 
     @NotEmpty
-    private String materialName;
+    private String partName;
 }

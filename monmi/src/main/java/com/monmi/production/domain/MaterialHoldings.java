@@ -16,9 +16,8 @@ public class MaterialHoldings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
     @JoinColumn(name = "material_id", nullable = false)
-    private Material materialId;
+    private int materialId;
     @Column(nullable = false)
     private int quantity;
     @Column(name = "holdings_date", nullable = false)

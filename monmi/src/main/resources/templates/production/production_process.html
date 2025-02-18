@@ -164,12 +164,12 @@
 
                                 let today = new Date();
                                 let oneWeekAgo = new Date();
-                                oneWeekAgo.setDate(today.getDate() - 51);
+                                oneWeekAgo.setDate(today.getDate() - 7);
 
                                 let groupedData = {};
 
                                 materialHoldingsData.forEach(item => {
-                                    let materialId = item.materialId.materialId;
+                                    let materialId = item.materialId;
                                     let quantity = item.quantity;
                                     let date = new Date(item.holdingsDate);
 

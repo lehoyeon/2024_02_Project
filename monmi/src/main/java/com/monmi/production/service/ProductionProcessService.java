@@ -11,4 +11,5 @@ public interface ProductionProcessService {
     List<MonamiRubberDTO> get_Rubber_list();
     List<MonamiTotalpenDTO> get_Totalpen_list();
     int get_Totalpen_Amount();
+    void update_Recent_data();
 }

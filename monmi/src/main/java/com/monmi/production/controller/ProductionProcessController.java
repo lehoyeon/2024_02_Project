@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @Log4j2
 @RequiredArgsConstructor
@@ -18,6 +20,8 @@ public class ProductionProcessController {
 
     @GetMapping("/production_process")
     public void production_process(Model model) {
+        productionProcessService.update_Recent_data();
+
         model.addAttribute("MaterialHoldingsList", productionProcessService.get_material_holdings_list());
         model.addAttribute("monamiPenbodyList", productionProcessService.get_Penbody_list());
         model.addAttribute("monamiPenheadList", productionProcessService.get_Penhead_list());

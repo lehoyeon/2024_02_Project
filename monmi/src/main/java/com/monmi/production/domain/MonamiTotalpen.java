@@ -18,6 +18,8 @@ public class MonamiTotalpen {
     private int totalpenProductionId;
     @Column(name = "totalpen_date")
     private LocalDateTime totalpenDate;
+    @Column(name = "totalpen_defective")
+    private int totalpenDefective;
     @Column(name = "totalpen_amount")
     private int totalpenAmount;
     @Column(name = "totalpen_daily_production")
