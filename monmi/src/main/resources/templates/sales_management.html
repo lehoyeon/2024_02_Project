@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Generic - Forty by HTML5 UP</title>
+		<title>재무 페이지</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/management.css" />
@@ -45,11 +45,11 @@
                     <form action="/login" method="post"><!-- 서버로 post 요청 -->
                         <h4 class="login_logo"><strong>Monmi</strong></h4>
                         <br>
-                        <li>ID<input type="text" name="monami_id" required></li> 				<!--name이 모나미_아이디로 전송 -->
-                        <li>PassWord<input type="text" name="monami_password" required></li> 	<!--name이 모나미_비번으로 전송 -->
+                        <li>로그인<input type="text" name="monami_id" required></li> 				<!--name이 모나미_아이디로 전송 -->
+                        <li>비밀번호<input type="text" name="monami_password" required></li> 	<!--name이 모나미_비번으로 전송 -->
                         <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
                         <br>
-                        <li><button >Login</button></li>
+                        <li><button >로그인</button></li>
                         <br>
                     </form>
                 </ul>
@@ -98,7 +98,7 @@
                         .then(data => {
                             const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
                             if (isLoggedIn) {
-                                loginButton.textContent = 'Logout';
+                                loginButton.textContent = '로그아웃';
                                 loginButton.removeAttribute('href'); // href 제거
                                 loginButton.onclick = function () {
                                     handleLogout();
@@ -125,7 +125,7 @@
 
                 // 🔹 로그인 버튼 상태로 업데이트
                 function updateToLoginButton(loginButton) {
-                    loginButton.textContent = 'Login';
+                    loginButton.textContent = '로그인';
                     loginButton.setAttribute('href', '#login');
                     loginButton.onclick = null;
                 }
@@ -330,24 +330,22 @@
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-envelope"></span>
-                                                <h3>Email</h3>
-                                                <a href="#">information@untitled.tld</a>
+                                                <h3>이메일</h3>
+                                                <span>Monmi@gmail.com</span>
                                             </div>
                                         </section>
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-phone"></span>
-                                                <h3>Phone</h3>
-                                                <span>(000) 000-0000 x12387</span>
+                                                <h3>전화번호</h3>
+                                                <span>(031) 249-4678 </span>
                                             </div>
                                         </section>
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-home"></span>
-                                                <h3>Address</h3>
-                                                <span>1234 Somewhere Road #5432<br />
-                                                    Nashville, TN 00000<br />
-                                                    United States of America</span>
+                                                <h3>주소</h3>
+                                                <span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
                                             </div>
                                         </section>
                                     </section>
@@ -363,9 +361,6 @@
                                         <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
                                         <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
                                         <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-                                    </ul>
-                                    <ul class="copyright">
-                                        <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
                                     </ul>
                                 </div>
                             </footer>

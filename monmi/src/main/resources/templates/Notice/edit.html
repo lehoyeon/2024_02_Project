@@ -5,7 +5,26 @@
     <title>공지사항 수정 페이지</title>
 
     <link rel="stylesheet" href="/assets/css/notice_important.css" />
-    
+    <style>
+        /* 체크박스 오버라이드: 기본 체크박스 외형 복원 */
+        .notice-form input[type="checkbox"] {
+          -webkit-appearance: checkbox ;
+          -moz-appearance: checkbox ;
+          appearance: checkbox ;
+          width: 40px!important;
+          height: 40px ;
+          margin: 0;
+          vertical-align: middle;
+          border: 2px solid #888 ;
+          background-color: transparent ;
+        }
+
+        /* 체크된 상태 스타일 */
+        .notice-form input[type="checkbox"]:checked {
+          background-color: #007bff ;
+          border-color: #007bff ;
+        }
+    </style>
 </head>
 <body>
 <section class="notice-form-section">

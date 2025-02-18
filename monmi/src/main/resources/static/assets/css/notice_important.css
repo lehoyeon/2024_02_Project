@@ -3889,15 +3889,15 @@ input, select, textarea {
 
 /* notice-form 내 체크박스 스타일 */
 .notice-form input[type="checkbox"] {
-  display: inline-block !important;
-  width: 20px !important;
-  height: 20px !important;
+  display: inline-block ;
+  width: 20px ;
+  height: 20px ;
   margin: 0;
   vertical-align: middle;
 }
 
 /* 체크된 상태 스타일 */
 .notice-form input[type="checkbox"]:checked {
-  background-color: #007bff !important;
-  border-color: #007bff !important;
+  background-color: #007bff ;
+  border-color: #007bff ;
 }

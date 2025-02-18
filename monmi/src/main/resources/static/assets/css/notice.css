@@ -4451,18 +4451,7 @@ z-index: 3;
 }
 
 
-section#contact {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-footer#footer {
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: center;
-}
+
 .notice-bar {
     display: flex;
     justify-content: center;
@@ -4491,4 +4480,13 @@ p.missing-one, .missing-two, .missing-none {
     text-align: center;
     font-size: 30px;
     color: orange;
+}
+footer#footer {
+    justify-content: center;
+    padding-right: 33em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+section#contact {
+    justify-content: center;
 }
