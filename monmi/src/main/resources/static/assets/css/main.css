@@ -4260,3 +4260,6 @@ input, select, textarea {
     }
 
 
+article.custom-no-hover {
+    opacity: 50%;
+}
