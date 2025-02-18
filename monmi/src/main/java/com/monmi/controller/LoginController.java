@@ -2,6 +2,8 @@ package com.monmi.controller;
 
 import com.monmi.dto.LoginDTO;
 import com.monmi.service.LoginService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,27 +16,20 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/login")
-
+@RequiredArgsConstructor
 public class LoginController {
 
     //컨트롤러는 로그인 처리를 직접하지않고 LoginService에게 위임.
     //책임분리로 컨트롤러는 Post처리를 집중적으로 비지니스는 service가 위임.
     private final LoginService loginService;
 
-    @Autowired
-    // Autowired << 의존성 주입
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }
-
     @PostMapping
-    //Post 요청하게 하는 어노테이션
     public String processLogin(
             @RequestParam("monami_id") String monamiId,
             @RequestParam("monami_password") String monamiPassword,
             @RequestHeader(value = "Referer", required = false) String referer, // 이전 페이지 정보 가져오기
-            //main.html에서의 name = manami_id , name = manami_password 에서 입력한값을 전달.
-            HttpServletResponse response //응답 객체 (쿠키 설정을 위해 필요함...!)             RedirectAttributes redirectAttributes // ✅ 메시지 전달을 위해 추가
+            // main.html에서의 name = manami_id , name = manami_password 에서 입력한값을 전달.
+            HttpServletResponse response // 응답 객체 (쿠키 설정을 위해 필요함...!)
 
     ) {
         // LoginDto 생성 ( 컨트롤러에서 받은 데이터를 DTO로 변환)
@@ -65,10 +60,7 @@ public class LoginController {
         } else {
             return "redirect:" + (referer != null ? referer + "?error=true" : "/main?error=true");
         }
-
     }
-
-
 }
 
 

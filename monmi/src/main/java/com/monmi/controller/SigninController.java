@@ -1,8 +1,8 @@
 package com.monmi.controller;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +16,12 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/accession")
+@RequiredArgsConstructor
 public class SigninController {
 
     private final SigninService signinService;
 
-    public SigninController(SigninService signinService) {
-        this.signinService = signinService;
-    }
-    // ✅ 회원가입 페이지 이동
+    // 회원가입 페이지 이동
     @GetMapping("/")
     public String showPage() {
         return "accession"; // accession.jsp 반환

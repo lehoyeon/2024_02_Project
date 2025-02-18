@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,8 +26,4 @@ public class Login {
     private String monami_name;
     @Column
     private int dept_id;
-
-    //사용자 지정(일반 사용자,관리자) 지정을 위한 컬림(나중에 추가예정)
-    // @Column
-    // private String role;
 }

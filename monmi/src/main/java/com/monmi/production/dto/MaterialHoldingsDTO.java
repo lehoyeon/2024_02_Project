@@ -1,6 +1,5 @@
 package com.monmi.production.dto;
 
-import com.monmi.domain.Material;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

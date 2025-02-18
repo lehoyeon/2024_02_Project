@@ -1,6 +1,5 @@
 package com.monmi.production.controller;
 
-import com.monmi.production.dto.MaterialHoldingsDTO;
 import com.monmi.production.service.ProductionProcessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -8,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
 
 @Controller
 @Log4j2

@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>제품 거래처 관리</title>
@@ -90,448 +85,357 @@
 </head>
 <body class="is-preload">
 
-<!-- Wrapper -->
-<div id="wrapper">
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-    <!-- Header -->
-    <header id="header" class="alt style2">
-        <a href="/main" class="logo"><strong>Monmi</strong></a>
-        <nav>
-            <a id="login-button" href="#login">로그인</a>
-            <a href="#menu">메뉴</a>
+        <!-- Header -->
+        <header id="header" class="alt style2">
+            <a href="/main" class="logo"><strong>Monmi</strong></a>
+            <nav>
+                <a id="login-button" href="#login">로그인</a>
+                <a href="#menu">메뉴</a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="/main">메인페이지</a></li>
+                <li><a href="/production/production_process">제품 생산 공정</a></li>
+                <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+                <li><a href="/notice">공지사항</a></li>
+                <li><a href="/sales_management">재무</a></li>
+            </ul>
+            <ul class="actions stacked">
+                <li><a href="/accession" class="button primary join">회원가입</a></li>
+            </ul>
         </nav>
-    </header>
 
-    <!-- Menu -->
-    <nav id="menu">
-        <ul class="links">
-            <li><a href="/main">메인페이지</a></li>
-            <li><a href="/production/production_process">제품 생산 공정</a></li>
-            <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
-            <li><a href="/notice">공지사항</a></li>
-            <li><a href="/sales_management">재무</a></li>
-        </ul>
-        <ul class="actions stacked">
-            <li><a href="/accession" class="button primary join">회원가입</a></li>
-        </ul>
-    </nav>
+        <!-- login -->
+        <nav id="login">
+            <ul class="links">
+                <form action="/login" method="post"><!-- 서버로 post 요청 -->
+                    <h4 class="login_logo"><strong>Monmi</strong></h4>
+                    <br>
+                    <li>아이디<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+                    <li>비밀번호<input type="password" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                    <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+                    <br>
+                    <li><button >로그인</button></li>
+                    <br>
+                </form>
+            </ul>
+        </nav>
 
-    <!-- login -->
-    <nav id="login">
-        <ul class="links">
-            <form action="/login" method="post"><!-- 서버로 post 요청 -->
-                <h4 class="login_logo"><strong>Monmi</strong></h4>
-                <br>
-                <li>아이디<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
-                <li>비밀번호<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
-                <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
-                <br>
-                <li><button >로그인</button></li>
-                <br>
-            </form>
-        </ul>
-    </nav>
-    <!--accession -->
+        <!-- login -->
+        <script>
+            window.onload = function () {
+            handleUrlParams(); 	// URL 파라미터 처리
+            checkLoginStatus(); // 로그인 상태 확인
+            };
 
+            // URL 파라미터 처리
+            function handleUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
 
-
-    <!-- login -->
-    <script>
-        window.onload = function () {
-        handleUrlParams(); 	// URL 파라미터 처리
-        checkLoginStatus(); // 로그인 상태 확인
-        };
-
-        // URL 파라미터 처리
-        function handleUrlParams() {
-        const urlParams = new URLSearchParams(window.location.search);
-
-        // 로그인 실패 처리
-        if (urlParams.has("error")) {
-            alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
-            // URL에서 error 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
-        }
-        else if (urlParams.has("success")) { // 로그인 성공 처리
-            alert("어서오세요! 로그인에 성공하셨습니다.");
-            // URL에서 success 파라미터 제거
-            history.replaceState({}, null, window.location.pathname);
+            // 로그인 실패 처리
+            if (urlParams.has("error")) {
+                alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+                // URL에서 error 파라미터 제거
+                history.replaceState({}, null, window.location.pathname);
             }
-        }
-
-        // 로그인 상태 확인
-        function checkLoginStatus() {
-        const loginButton = document.getElementById('login-button');
-
-        // 로그인 상태 확인 API 호출
-        fetch('/check', { credentials: 'include' })
-            .then(response => response.json())
-            .then(data => {
-                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
-                if (isLoggedIn) {
-                    loginButton.textContent = '로그아웃';
-                    loginButton.removeAttribute('href'); // href 제거
-                    loginButton.onclick = function () {
-                        handleLogout(); //  로그아웃 처리 호출
-                    };
-                } else {
-                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+            else if (urlParams.has("success")) { // 로그인 성공 처리
+                alert("어서오세요! 로그인에 성공하셨습니다.");
+                // URL에서 success 파라미터 제거
+                history.replaceState({}, null, window.location.pathname);
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
-            });
-        }
+            }
 
-        // 로그아웃 처리
-        function handleLogout() {
-        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
-            .then(() => {
-                alert('로그아웃되었습니다.');
-                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
-            })
-            .catch(error => console.error('Error:', error));
-        }
+            // 로그인 상태 확인
+            function checkLoginStatus() {
+            const loginButton = document.getElementById('login-button');
 
-        // 로그인 버튼 상태로 업데이트
-        function updateToLoginButton(loginButton) {
-        loginButton.textContent = '로그인';
-        loginButton.setAttribute('href', '#login');
-        loginButton.onclick = null;
-        }
+            // 로그인 상태 확인 API 호출
+            fetch('/check', { credentials: 'include' })
+                .then(response => response.json())
+                .then(data => {
+                    const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                    if (isLoggedIn) {
+                        loginButton.textContent = '로그아웃';
+                        loginButton.removeAttribute('href'); // href 제거
+                        loginButton.onclick = function () {
+                            handleLogout(); //  로그아웃 처리 호출
+                        };
+                    } else {
+                        updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+                });
+            }
 
-    </script>
+            // 로그아웃 처리
+            function handleLogout() {
+            fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+                .then(() => {
+                    alert('로그아웃되었습니다.');
+                    checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+                })
+                .catch(error => console.error('Error:', error));
+            }
 
-    <!-- Banner -->
-    <!-- Note: The "styleN" class below should match that of the header element. -->
-    <section id="banner" class="style2">
-        <div class="inner">
-							<span class="image">
-								<img src="/images/pic07.jpg" alt="" />
-							</span>
-            <header class="major">
-                <h1>제품 거래처 관리</h1>
-            </header>
-            <div class="content">
-                <p>이용자 환영인사<br />
-                    오늘도 힘찬 하루 보내세요!</p>
-            </div>
-        </div>
-    </section>
+            // 로그인 버튼 상태로 업데이트
+            function updateToLoginButton(loginButton) {
+            loginButton.textContent = '로그인';
+            loginButton.setAttribute('href', '#login');
+            loginButton.onclick = null;
+            }
 
-    <!-- Main -->
-    <div id="main">
+        </script>
 
-        <!-- One -->
-        <section id="one">
+        <!-- Banner -->
+        <!-- Note: The "styleN" class below should match that of the header element. -->
+        <section id="banner" class="style2">
             <div class="inner">
-                <div class="card">
-                    <div class="card-body">
-                        <div style="display: flex; gap: 2em;">
-                            <header class="major">
-                                <h3>
-                                    <span>검색 조건 설정</span>
-                                </h3>
-                            </header>
-                            <h4 style="padding-top: 0.3em;"><a href="/sales/correspondent_material_management" style="opacity: 0.6;">원자재</a> / 제품</h4>
-                        </div>
-
-                        <!-- search condition-->
-                        <form action="/sales/correspondent_product_management" method="get">
-                            <div class="fields">
-                                <div class="input-group-prepend field30">
-                                    <select class="form-select" name="type">
-                                        <option value="">---</option>
-                                        <option value="t" th:selected="${pageRequestDTO.type == 't'}">Tel</option>
-                                        <option value="n" th:selected="${pageRequestDTO.type == 'n'}">거래처명</option>
-                                        <option value="a" th:selected="${pageRequestDTO.type == 'a'}">주소</option>
-                                        <option value="na" th:selected="${pageRequestDTO.type == 'na'}">거래처명 주소</option>
-                                    </select>
-                                </div>
-                                <div class="field70">
-                                    <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-                                </div>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="검색" class="primary" /></li>
-                                <li><input type="reset" value="초기화" class="clearBtn"/></li>
-                            </ul>
-                        </form><!-- End search condition -->
-                    </div>
+                <span class="image">
+                    <img src="/images/pic07.jpg" alt="" />
+                </span>
+                <header class="major">
+                    <h1>제품 거래처 관리</h1>
+                </header>
+                <div class="content">
+                    <p>환영합니다!<br />
+                        오늘도 힘찬 하루 보내세요!</p>
                 </div>
             </div>
         </section>
 
-        <!-- Two -->
-        <section id="two">
-            <div class="inner" style="padding: 1em 0 2em 0;">
-                <div class="list-edit-box">
-                    <button class="edit-mode-Btn">수정모드</button>
-                </div>
-                <section class="section">
-                    <div class="row">
-                        <div class="col-lg-12">
+        <!-- Main -->
+        <div id="main">
 
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <!-- Table with stripped rows -->
-                                    <table class="table datatable">
-                                        <thead>
-                                        <tr>
-                                            <th data-sortable="true">거래처명</th>
-                                            <th>이번달 판매량</th>
-                                            <th>주소</th>
-                                            <th>Tel</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="dto : ${responseDTO.dtoList}" >
-                                            <td class="td-companyName">[[${dto.companyName}]]</td>
-                                            <td class="td-productSellTotal">[[${dto.productSellTotal}]]</td>
-                                            <td class="td-companyAddress">[[${dto.companyAddress}]]</td>
-                                            <td class="td-companyTel">[[${dto.companyTel}]]</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- End Table with stripped rows -->
-
-                                </div>
+            <!-- One -->
+            <section id="one">
+                <div class="inner">
+                    <div class="card">
+                        <div class="card-body">
+                            <div style="display: flex; gap: 2em;">
+                                <header class="major">
+                                    <h3>
+                                        <span>검색 조건 설정</span>
+                                    </h3>
+                                </header>
+                                <h4 style="padding-top: 0.3em;"><a href="/sales/correspondent_material_management" style="opacity: 0.6;">원자재</a> / 제품</h4>
                             </div>
 
+                            <!-- search condition-->
+                            <form action="/sales/correspondent_product_management" method="get">
+                                <div class="fields">
+                                    <div class="input-group-prepend field30">
+                                        <select class="form-select" name="type">
+                                            <option value="">---</option>
+                                            <option value="t" th:selected="${pageRequestDTO.type == 't'}">Tel</option>
+                                            <option value="n" th:selected="${pageRequestDTO.type == 'n'}">거래처명</option>
+                                            <option value="a" th:selected="${pageRequestDTO.type == 'a'}">주소</option>
+                                            <option value="na" th:selected="${pageRequestDTO.type == 'na'}">거래처명 주소</option>
+                                        </select>
+                                    </div>
+                                    <div class="field70">
+                                        <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                                    </div>
+                                </div>
+                                <ul class="actions">
+                                    <li><input type="submit" value="검색" class="primary" /></li>
+                                    <li><input type="reset" value="초기화" class="clearBtn"/></li>
+                                </ul>
+                            </form><!-- End search condition -->
                         </div>
                     </div>
-                </section>
-            </div>
-        </section>
-    </div>
+                </div>
+            </section>
 
+            <!-- Two -->
+            <section id="two">
+                <div class="inner" style="padding: 1em 0 2em 0;">
+                    <div class="list-edit-box">
+                        <button class="edit-mode-Btn">수정모드</button>
+                    </div>
+                    <section class="section">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
 
-    <!-- Contact -->
-    <section id="contact">
-        <div class="inner">
-            <section class="split">
-                <section>
-                    <div class="contact-method">
-                        <span class="icon solid alt fa-envelope"></span>
-                        <h3>이메일</h3>
-                        <span>Monmi@gmail.com</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="contact-method">
-                        <span class="icon solid alt fa-phone"></span>
-                        <h3>전화번호</h3>
-                        <span>(031) 249-4678 </span>
-                    </div>
-                </section>
-                <section>
-                    <div class="contact-method">
-                        <span class="icon solid alt fa-home"></span>
-                        <h3>주소</h3>
-                        <span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
-                    </div>
-                </section>
+                                        <!-- Table with stripped rows -->
+                                        <table class="table datatable">
+                                            <thead>
+                                            <tr>
+                                                <th data-sortable="true">거래처명</th>
+                                                <th>이번달 판매량</th>
+                                                <th>주소</th>
+                                                <th>Tel</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="dto : ${responseDTO.dtoList}" >
+                                                <td class="td-companyName">[[${dto.companyName}]]</td>
+                                                <td class="td-productSellTotal">[[${dto.productSellTotal}]]</td>
+                                                <td class="td-companyAddress">[[${dto.companyAddress}]]</td>
+                                                <td class="td-companyTel">[[${dto.companyTel}]]</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- End Table with stripped rows -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </section>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="inner">
-            <ul class="icons">
-                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-            </ul>
+        <!-- Contact -->
+        <section id="contact">
+            <div class="inner">
+                <section class="split">
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon solid alt fa-envelope"></span>
+                            <h3>이메일</h3>
+                            <span>Monmi@gmail.com</span>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon solid alt fa-phone"></span>
+                            <h3>전화번호</h3>
+                            <span>(031) 249-4678 </span>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="contact-method">
+                            <span class="icon solid alt fa-home"></span>
+                            <h3>주소</h3>
+                            <span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
 
-        </div>
-    </footer>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <ul class="icons">
+                    <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                    <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
 
-</div>
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
 
-<!-- Scripts -->
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery.scrolly.min.js"></script>
-<script src="/assets/js/jquery.scrollex.min.js"></script>
-<script src="/assets/js/browser.min.js"></script>
-<script src="/assets/js/breakpoints.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<script src="/assets/js/main.js"></script>
+    <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="/assets/vendor/quill/quill.js"></script>
+    <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
 
-<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/chart.js/chart.umd.js"></script>
-<script src="/assets/vendor/echarts/echarts.min.js"></script>
-<script src="/assets/vendor/quill/quill.js"></script>
-<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="/assets/vendor/php-email-form/validate.js"></script>
+    <!-- DataTables CSS (필요하면 추가) -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 
-<!-- DataTables CSS (필요하면 추가) -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <!-- DataTables.js 및 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<!-- DataTables.js 및 jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script th:inline="javascript">
+        let editMode = 0;
 
-<script th:inline="javascript">
-    let editMode = 0;
+        let styleTag = document.querySelector("style");
 
-    let styleTag = document.querySelector("style");
-
-    <!-- 미디어쿼리 추가 (이동불가!)-->
-    styleTag.textContent += `
-        @media screen and (max-width: 640px) {
-            .register-input-block {
-                position: absolute;
-                top: -6em;
-                right: inherit;
-                font-size: 0.7em;
-                width: calc(100% - 5em);
-                z-index: 3;
-            }
-            .register-input-button {
-                position: absolute;
-                top: -5em;
-                right: inherit;
-                font-size: 0.5em;
-                width: 10em;
-                z-index: 4;
-                left: 34.5em;
-            }
-            .register-submit-button {
-                font-size: 0.5em;
-                width: 10em;
-            }
-            .register-cancel-button {
-                font-size: 0.5em;
-                width: 10em;
-            }
-            .register_buttons_box {
-                flex-direction: column;
-                justify-content: center;
-            }
-            .edit-mode-Btn {
-                width: 7em;
-                font-size: 0.7em;
-                letter-spacing: 0;
-                padding-left: 0.6em;
-            }
-        }
-    `;
-    <!-- 미디어 쿼리 끝-->
-
-    <!-- clear버튼 클릭 처리 -->
-    document.querySelector(".clearBtn").addEventListener("click", function (e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        self.location = '/sales/correspondent_product_management';
-    }, false);
-
-    <!-- Edit Mode 버튼 클릭 처리 -->
-    document.querySelector(".edit-mode-Btn").addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        <!-- 현재 Edit Mode가 아닐 때 -->
-        if(editMode === 0){
-
-            <!-- 버튼용 임시 col 추가 -->
-            let theadTr = document.querySelector("thead > tr");
-            let theadTh = document.createElement("th");
-            theadTh.className = "temporaryTh";
-            theadTr.appendChild(theadTh);
-
-
-            document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
-                let tbodyTd = document.createElement("td");
-                tbodyTd.className = "td-Btns";
-
-                let div = document.createElement("div");
-                div.className = "list-btns";
-
-                let modifyChoiceBtn = document.createElement("button");
-                modifyChoiceBtn.textContent = "수정";
-                modifyChoiceBtn.className = "modify-choice-Btn";
-
-                // 새로 생성한 <td> 안에 버튼을 포함한 <div> 추가
-                div.appendChild(modifyChoiceBtn);
-                tbodyTd.appendChild(div);
-
-                // 각 <tr>에 새 <td> 추가
-                tbodyTr.appendChild(tbodyTd);
-            });
-
-            let register_input_block = document.querySelector(".register-input-block");
-            if (register_input_block) {
-                register_input_block.remove();
-            }
-            document.querySelector(".register-input-button").style.display = "none";
-
-            this.textContent = "취소";
-            editMode = 1;
-        }
-        else{
-            <!-- tbody 내 모든 tr을 순회하여 텍스트 복원 -->
-            document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
-                let modifyDiv = tbodyTr.querySelector(".td-Btns");
-
-                <!-- td-Btns가 있을 경우 복원 작업 수행 -->
-                if (modifyDiv) {
-                    let companyNameTd = tbodyTr.querySelector(".td-companyName");
-                    let productSellTotalTd = tbodyTr.querySelector(".td-productSellTotal");
-                    let companyAddressTd = tbodyTr.querySelector(".td-companyAddress");
-                    let companyTelTd = tbodyTr.querySelector(".td-companyTel");
-
-                    // 기존 input을 찾아서 텍스트로 복원
-                    let companyNameInput = companyNameTd.querySelector("input");
-                    let productSellTotalInput = productSellTotalTd.querySelector("input");
-                    let companyAddressInput = companyAddressTd.querySelector("input");
-                    let companyTelInput = companyTelTd.querySelector("input");
-
-                    if (companyNameInput) {
-                        companyNameInput.remove(); // input 제거
-                    }
-                    if (productSellTotalInput) {
-                        productSellTotalTd.textContent = productSellTotalInput.originText;
-                        productSellTotalInput.remove();
-                    }
-                    if (companyAddressInput) {
-                        companyAddressTd.textContent = companyAddressInput.originText;
-                        companyAddressInput.remove();
-                    }
-                    if (companyTelInput) {
-                        companyTelTd.textContent = companyTelInput.originText;
-                        companyTelInput.remove();
-                    }
+        // ---------- 미디어쿼리 추가 (이동불가!)----------
+        styleTag.textContent += `
+            @media screen and (max-width: 640px) {
+                .register-input-block {
+                    position: absolute;
+                    top: -6em;
+                    right: inherit;
+                    font-size: 0.7em;
+                    width: calc(100% - 5em);
+                    z-index: 3;
                 }
-            });
+                .register-input-button {
+                    position: absolute;
+                    top: -5em;
+                    right: inherit;
+                    font-size: 0.5em;
+                    width: 10em;
+                    z-index: 4;
+                    left: 34.5em;
+                }
+                .register-submit-button {
+                    font-size: 0.5em;
+                    width: 10em;
+                }
+                .register-cancel-button {
+                    font-size: 0.5em;
+                    width: 10em;
+                }
+                .register_buttons_box {
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                .edit-mode-Btn {
+                    width: 7em;
+                    font-size: 0.7em;
+                    letter-spacing: 0;
+                    padding-left: 0.6em;
+                }
+            }
+        `;
+        //---------- 미디어 쿼리 끝----------
 
-            document.querySelectorAll(".td-Btns").forEach(tbodyTd => {
-                tbodyTd.remove();
-            });
-            document.querySelector(".temporaryTh").remove();
+        //---------- clear버튼 클릭 처리 ----------
+        document.querySelector(".clearBtn").addEventListener("click", function (e){
+            e.preventDefault();
+            e.stopPropagation();
 
-            document.querySelector(".register-input-button").style.display = "block";
+            self.location = '/sales/correspondent_product_management';
+        }, false);
 
-            this.textContent = "수정모드";
-            editMode = 0;
-        }
-    }, false);
+        //---------- Edit Mode 버튼 클릭 처리 ----------
+        document.querySelector(".edit-mode-Btn").addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-    document.addEventListener("click", function (e) {
-        if(editMode === 1){
-            if(e.target) {
+            //---------- 현재 Edit Mode가 아닐 때 ----------
+            if(editMode === 0){
+
+                //---------- 버튼용 임시 col 추가 ----------
+                let theadTr = document.querySelector("thead > tr");
+                let theadTh = document.createElement("th");
+                theadTh.className = "temporaryTh";
+                theadTr.appendChild(theadTh);
+
+
                 document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
-                    let modifyDiv = tbodyTr.querySelector(".td-Btns");
-
-                    if (!modifyDiv) {
-                        let tbodyTd = document.createElement("td");
+                    let tbodyTd = document.createElement("td");
                     tbodyTd.className = "td-Btns";
 
                     let div = document.createElement("div");
@@ -541,38 +445,41 @@
                     modifyChoiceBtn.textContent = "수정";
                     modifyChoiceBtn.className = "modify-choice-Btn";
 
-                    // 새로 생성한 <td> 안에 버튼을 포함한 <div> 추가
                     div.appendChild(modifyChoiceBtn);
                     tbodyTd.appendChild(div);
 
-                    // 각 <tr>에 새 <td> 추가
                     tbodyTr.appendChild(tbodyTd);
-                    }
                 });
+
+                let register_input_block = document.querySelector(".register-input-block");
+                if (register_input_block) {
+                    register_input_block.remove();
+                }
+                document.querySelector(".register-input-button").style.display = "none";
+
+                this.textContent = "취소";
+                editMode = 1;
             }
-        }
-        else {
-            if (e.target) {
+            else{
+                //---------- tbody 내 모든 tr을 순회하여 텍스트 복원 ----------
                 document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
-                    // 각 tr에서 .td-Btns가 있는 td만 삭제
-                    let modifyTd = tbodyTr.querySelector(".td-Btns");
+                    let modifyDiv = tbodyTr.querySelector(".td-Btns");
 
-                    if (modifyTd) {
-                        modifyTd.remove();  // .td-Btns를 갖고 있는 td만 삭제
-
+                    //---------- td-Btns가 있을 경우 복원 작업 수행 ----------
+                    if (modifyDiv) {
                         let companyNameTd = tbodyTr.querySelector(".td-companyName");
                         let productSellTotalTd = tbodyTr.querySelector(".td-productSellTotal");
                         let companyAddressTd = tbodyTr.querySelector(".td-companyAddress");
                         let companyTelTd = tbodyTr.querySelector(".td-companyTel");
 
-                        // 각 셀에 있는 input 값을 원래 텍스트로 복원
+                        // 기존 input을 찾아서 텍스트로 복원
                         let companyNameInput = companyNameTd.querySelector("input");
                         let productSellTotalInput = productSellTotalTd.querySelector("input");
                         let companyAddressInput = companyAddressTd.querySelector("input");
                         let companyTelInput = companyTelTd.querySelector("input");
 
                         if (companyNameInput) {
-                            companyNameInput.remove(); // input 제거
+                            companyNameInput.remove();
                         }
                         if (productSellTotalInput) {
                             productSellTotalTd.textContent = productSellTotalInput.originText;
@@ -586,347 +493,412 @@
                             companyTelTd.textContent = companyTelInput.originText;
                             companyTelInput.remove();
                         }
-
                     }
                 });
 
-                // temporaryTh 삭제 (필요한 경우)
-                if (document.querySelector(".temporaryTh")) {
-                    document.querySelector(".temporaryTh").remove();
+                document.querySelectorAll(".td-Btns").forEach(tbodyTd => {
+                    tbodyTd.remove();
+                });
+                document.querySelector(".temporaryTh").remove();
+
+                document.querySelector(".register-input-button").style.display = "block";
+
+                this.textContent = "수정모드";
+                editMode = 0;
+            }
+        }, false);
+
+        document.addEventListener("click", function (e) {
+            if(editMode === 1){
+                if(e.target) {
+                    document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
+                        let modifyDiv = tbodyTr.querySelector(".td-Btns");
+
+                        if (!modifyDiv) {
+                            let tbodyTd = document.createElement("td");
+                        tbodyTd.className = "td-Btns";
+
+                        let div = document.createElement("div");
+                        div.className = "list-btns";
+
+                        let modifyChoiceBtn = document.createElement("button");
+                        modifyChoiceBtn.textContent = "수정";
+                        modifyChoiceBtn.className = "modify-choice-Btn";
+
+                        div.appendChild(modifyChoiceBtn);
+                        tbodyTd.appendChild(div);
+
+                        tbodyTr.appendChild(tbodyTd);
+                        }
+                    });
                 }
             }
-        }
-    });
-
-    <!-- 추가된 modify 버튼 이벤트 처리 -->
-    document.querySelector("tbody").addEventListener("click", function (e) {
-
-        if (e.target && e.target.classList.contains("modify-choice-Btn")) {
-            e.preventDefault();
-
-            let thisTr = e.target.closest("tr");
-            let modifyDiv = thisTr.querySelector(".td-Btns");
-            let companyNameTd = thisTr.querySelector(".td-companyName");
-            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
-            let companyAddressTd = thisTr.querySelector(".td-companyAddress");
-            let companyTelTd = thisTr.querySelector(".td-companyTel");
-
-            let companyNameInput = document.createElement("input");
-            let productSellTotalInput = document.createElement("input");
-            let companyAddressInput = document.createElement("input");
-            let companyTelInput = document.createElement("input");
-
-            companyNameInput.required = true;
-            productSellTotalInput.required = true;
-            companyAddressInput.required = true;
-            companyTelInput.required = true;
-
-            companyNameInput.name="companyName";
-            productSellTotalInput.name="productSellTotal";
-            companyAddressInput.name="companyAdress";
-            companyTelInput.name="companyTel";
-
-            companyNameInput.type = "text";
-            productSellTotalInput.type = "number";
-            companyAddressInput.type = "text";
-            companyTelInput.type = "text";
-
-            productSellTotalInput.style.height = "2.75em";
-            productSellTotalInput.min = "0";
-
-            companyNameInput.style.visibility = "hidden";
-
-            companyNameInput.value = companyNameTd.textContent;
-            productSellTotalInput.value = parseInt(productSellTotalTd.textContent);
-            companyAddressInput.value = companyAddressTd.textContent;
-            companyTelInput.value = companyTelTd.textContent;
-
-            productSellTotalInput.originText = productSellTotalTd.textContent;
-            companyAddressInput.originText = companyAddressTd.textContent;
-            companyTelInput.originText = companyTelTd.textContent;
-
-            productSellTotalTd.innerHTML = "";
-            companyAddressTd.innerHTML = "";
-            companyTelTd.innerHTML = "";
-
-            companyNameTd.appendChild(companyNameInput);
-            productSellTotalTd.appendChild(productSellTotalInput);
-            companyAddressTd.appendChild(companyAddressInput);
-            companyTelTd.appendChild(companyTelInput);
-
-            <!-- 추가 버튼 3개 만들기 -->
-            let addBtnsDiv = document.createElement("div");
-            addBtnsDiv.className = "additional-buttons";
-            addBtnsDiv.style.display = "flex";
-            addBtnsDiv.style.gap = "0.1em";
-
-            let saveBtn = document.createElement("button");
-            saveBtn.textContent = "저장";
-            saveBtn.className = "modify-option-Btn modify-save-Btn";
-            addBtnsDiv.appendChild(saveBtn);
-
-            let deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "삭제";
-            deleteBtn.className = "modify-option-Btn modify-delete-Btn";
-            addBtnsDiv.appendChild(deleteBtn);
-
-            let cancelBtn = document.createElement("button");
-            cancelBtn.textContent = "취소";
-            cancelBtn.className = "modify-option-Btn modify-cancel-Btn";
-            addBtnsDiv.appendChild(cancelBtn);
-
-            // 기존 modify 버튼을 추가 버튼이 있는 div로 교체
-            modifyDiv.innerHTML = "";  // 기존 버튼 제거
-            modifyDiv.appendChild(addBtnsDiv);
-        }
-        else if(e.target && e.target.classList.contains("modify-save-Btn")) {
-            <!-- 세이브 버튼 클릭시 처리 -->
-            let thisTr = e.target.closest("tr");
-
-            let companyNameTd = thisTr.querySelector(".td-companyName");
-            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
-            let companyAddressTd = thisTr.querySelector(".td-companyAddress");
-            let companyTelTd = thisTr.querySelector(".td-companyTel");
-
-            let companyNameInput = companyNameTd.querySelector("input");
-            let productSellTotalInput = productSellTotalTd.querySelector("input");
-            let companyAddressInput = companyAddressTd.querySelector("input");
-            let companyTelInput = companyTelTd.querySelector("input");
-
-            companyNameInput.name = "companyName";
-            productSellTotalInput.name = "productSellTotal";
-            companyAddressInput.name = "companyAddress";
-            companyTelInput.name = "companyTel";
-
-            let form = document.createElement("form");
-            form.method = "post";
-            form.action = "/sales/correspondent_product_management_modify";
-
-            form.appendChild(companyNameInput);
-            form.appendChild(productSellTotalInput);
-            form.appendChild(companyAddressInput);
-            form.appendChild(companyTelInput);
-            companyNameTd.appendChild(form);
-            form.submit();
-        }
-        else if(e.target && e.target.classList.contains("modify-cancel-Btn")) {
-            <!-- cancel 버튼 클릭 시 처리 -->
-            let thisTr = e.target.closest("tr");
-            let modifyDiv = thisTr.querySelector(".td-Btns");
-
-            let companyNameTd = thisTr.querySelector(".td-companyName");
-            let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
-            let companyAddressTd = thisTr.querySelector(".td-companyAddress");
-            let companyTelTd = thisTr.querySelector(".td-companyTel");
-
-            let companyNameInput = companyNameTd.querySelector("input");
-            let productSellTotalInput = productSellTotalTd.querySelector("input");
-            let companyAddressInput = companyAddressTd.querySelector("input");
-            let companyTelInput = companyTelTd.querySelector("input");
-
-            companyNameInput.remove();
-            productSellTotalInput.remove();
-            companyAddressInput.remove();
-            companyTelInput.remove();
-
-            productSellTotalTd.textContent = productSellTotalInput.originText;
-            companyAddressTd.textContent = companyAddressInput.originText;
-            companyTelTd.textContent = companyTelInput.originText;
-
-            let addBtnsDiv = document.querySelector(".additional-buttons");
-
-            modifyDiv.innerHTML = "";
-
-            let modifyChoiceBtn = document.createElement("button");
-            modifyChoiceBtn.textContent = "수정";
-            modifyChoiceBtn.className = "modify-choice-Btn";
-
-            modifyDiv.appendChild(modifyChoiceBtn);
-        }
-        else if(e.target && e.target.classList.contains("modify-delete-Btn")) {
-            <!-- delete 버튼 클릭 시 처리 -->
-            let thisTr = e.target.closest("tr");
-            let companyNameTd = thisTr.querySelector(".td-companyName");
-
-            let companyNameInput = companyNameTd.querySelector("input");
-
-            companyNameInput.name = "companyName";
-
-            let form = document.createElement("form");
-            form.method = "post";
-            form.action = "/sales/correspondent_product_management_delete";
-
-            form.appendChild(companyNameInput);
-            companyNameTd.appendChild(form);
-            form.submit();
-        }
-    }, false);
-
-    // register버튼 추가 및 기능 추가
-    let datatable = document.querySelector(".datatable");
-    let register_button = document.createElement("button");
-    register_button.innerHTML="작성";
-
-    register_button.classList.add("register-input-button");
-
-    datatable.parentNode.insertBefore(register_button, datatable);
-
-    register_button.addEventListener("click", function() {
-
-
-        let register_input_block = document.createElement("div");
-        let register_input_form = document.createElement("form");
-
-        register_input_form.action = "/sales/correspondent_product_management_register";
-        register_input_form.method = "POST";
-
-        register_input_block.classList.add("register-input-block");
-
-        register_input_form.style.display = "flex";
-        register_input_form.style.gap = "0.2em";
-
-        let register_input_companyName = document.createElement("input");
-        let register_input_productSellTotal = document.createElement("input");
-        let register_input_companyAddress = document.createElement("input");
-        let register_input_companyTel = document.createElement("input");
-
-        register_input_companyName.required = true;
-        register_input_productSellTotal.required = true;
-        register_input_companyAddress.required = true;
-        register_input_companyTel.required = true;
-
-        register_input_companyName.name="companyName";
-        register_input_productSellTotal.name = "productSellTotal";
-        register_input_companyAddress.name = "companyAddress";
-        register_input_companyTel.name = "companyTel";
-
-        let register_input_label_companyName = document.createElement("label");
-        let register_input_label_productSellTotal = document.createElement("label");
-        let register_input_label_companyAddress = document.createElement("label");
-        let register_input_label_companyTel = document.createElement("label");
-
-        register_input_label_companyName.textContent = "거래처명: ";
-        register_input_label_productSellTotal.textContent = "이번달 판매량: ";
-        register_input_label_companyAddress.textContent = "주소: ";
-        register_input_label_companyTel.textContent = "Tel: ";
-
-        register_input_label_companyName.setAttribute("for", "companyName");
-        register_input_label_productSellTotal.setAttribute("for", "productSellTotal");
-        register_input_label_companyAddress.setAttribute("for", "companyAddress");
-        register_input_label_companyTel.setAttribute("for", "companyTel");
-
-        register_input_companyName.setAttribute("id", "companyName");
-        register_input_productSellTotal.setAttribute("id", "productSellTotal");
-        register_input_companyAddress.setAttribute("id", "companyAddress");
-        register_input_companyTel.setAttribute("id", "companyTel");
-
-        register_input_companyName.setAttribute("type", "text");
-        register_input_productSellTotal.setAttribute("type", "number");
-        register_input_companyAddress.setAttribute("type", "text");
-        register_input_companyTel.setAttribute("type", "text");
-
-        register_input_productSellTotal.style.height = "2.75em";
-        register_input_productSellTotal.min = "0";
-
-        register_input_label_companyName.appendChild(register_input_companyName);
-        register_input_label_productSellTotal.appendChild(register_input_productSellTotal);
-        register_input_label_companyAddress.appendChild(register_input_companyAddress);
-        register_input_label_companyTel.appendChild(register_input_companyTel);
-
-        register_input_form.appendChild(register_input_label_companyName);
-        register_input_form.appendChild(register_input_label_productSellTotal);
-        register_input_form.appendChild(register_input_label_companyAddress);
-        register_input_form.appendChild(register_input_label_companyTel);
-
-        let register_input_submit_button = document.createElement("button");
-        register_input_submit_button.textContent = "작성";
-        register_input_submit_button.className = "register-submit-button";
-        register_input_submit_button.marginTop = "0.5em";
-
-        let register_input_cancel_button = document.createElement("button");
-        register_input_cancel_button.textContent = "취소";
-        register_input_cancel_button.className = "register-cancel-button";
-        register_input_cancel_button.marginTop = "0.5em";
-
-        let register_buttons = document.createElement("div");
-        register_buttons.classList.add("register_buttons_box");
-        register_buttons.style.display = "flex";
-        register_buttons.style.gap = "1em";
-        register_buttons.style.alignItems = "center";
-        register_buttons.marginTop = "0.5em";
-        register_buttons.appendChild(register_input_submit_button);
-        register_buttons.appendChild(register_input_cancel_button);
-
-        register_input_form.appendChild(register_buttons);
-        register_input_block.appendChild(register_input_form);
-
-        register_button.parentNode.insertBefore(register_input_block, register_button);
-
-        register_button.style.display = "none";
-
-        register_input_submit_button.addEventListener("click", function(e) {
-            e.preventDefault(); // 기본 제출 동작 방지
-
-            // 입력 필드에 대해 유효성 검사
-            let isValid = true;
-            let errorMessages = [];
-
-            if (!register_input_companyName.value) {
-                isValid = false;
-                register_input_companyName.setAttribute("placeholder", errorMessages.push("거래처명을 입력해주세요."));
-            }
-            if (!register_input_productSellTotal.value) {
-                isValid = false;
-                errorMessages.push("판매량을 입력해주세요.");
-            }
-            if (!register_input_companyAddress.value) {
-                isValid = false;
-                errorMessages.push("주소를 입력해주세요.");
-            }
-            if (!register_input_companyTel.value) {
-                isValid = false;
-                errorMessages.push("전화번호를 입력해주세요.");
-            }
-
-            // 에러 메시지 출력
-            if (!isValid) {
-                // 예시로, 메시지를 div로 만들어서 화면에 띄운다
-                let errorMessageDiv = document.createElement("div");
-                errorMessageDiv.style.color = "red";
-                errorMessages.forEach(msg => {
-                    let message = document.createElement("p");
-                    message.textContent = msg;
-                    errorMessageDiv.appendChild(message);
-                });
-
-                // 이미 존재하는 form 위에 메시지를 삽입
-                register_input_form.insertBefore(errorMessageDiv, register_input_form.firstChild);
-            }
-
-            // 유효성 검사가 끝났으면 submit 처리
-            if (isValid) {
-                // 여기에 폼 제출 로직을 추가
-                register_input_form.submit();
+            else {
+                if (e.target) {
+                    document.querySelectorAll("tbody > tr").forEach(tbodyTr => {
+                        let modifyTd = tbodyTr.querySelector(".td-Btns");
+
+                        if (modifyTd) {
+                            modifyTd.remove();
+
+                            let companyNameTd = tbodyTr.querySelector(".td-companyName");
+                            let productSellTotalTd = tbodyTr.querySelector(".td-productSellTotal");
+                            let companyAddressTd = tbodyTr.querySelector(".td-companyAddress");
+                            let companyTelTd = tbodyTr.querySelector(".td-companyTel");
+
+                            // 각 셀에 있는 input 값을 원래 텍스트로 복원
+                            let companyNameInput = companyNameTd.querySelector("input");
+                            let productSellTotalInput = productSellTotalTd.querySelector("input");
+                            let companyAddressInput = companyAddressTd.querySelector("input");
+                            let companyTelInput = companyTelTd.querySelector("input");
+
+                            if (companyNameInput) {
+                                companyNameInput.remove();
+                            }
+                            if (productSellTotalInput) {
+                                productSellTotalTd.textContent = productSellTotalInput.originText;
+                                productSellTotalInput.remove();
+                            }
+                            if (companyAddressInput) {
+                                companyAddressTd.textContent = companyAddressInput.originText;
+                                companyAddressInput.remove();
+                            }
+                            if (companyTelInput) {
+                                companyTelTd.textContent = companyTelInput.originText;
+                                companyTelInput.remove();
+                            }
+
+                        }
+                    });
+
+                    if (document.querySelector(".temporaryTh")) {
+                        document.querySelector(".temporaryTh").remove();
+                    }
+                }
             }
         });
 
-        register_input_cancel_button.addEventListener("click", function(e) {
-            register_input_block.remove();
-            register_button.style.display = "block";
-            e.preventDefault();
+        //---------- 추가된 modify 버튼 이벤트 처리 ----------
+        document.querySelector("tbody").addEventListener("click", function (e) {
+
+            if (e.target && e.target.classList.contains("modify-choice-Btn")) {
+                e.preventDefault();
+
+                let thisTr = e.target.closest("tr");
+                let modifyDiv = thisTr.querySelector(".td-Btns");
+                let companyNameTd = thisTr.querySelector(".td-companyName");
+                let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
+                let companyAddressTd = thisTr.querySelector(".td-companyAddress");
+                let companyTelTd = thisTr.querySelector(".td-companyTel");
+
+                let companyNameInput = document.createElement("input");
+                let productSellTotalInput = document.createElement("input");
+                let companyAddressInput = document.createElement("input");
+                let companyTelInput = document.createElement("input");
+
+                companyNameInput.required = true;
+                productSellTotalInput.required = true;
+                companyAddressInput.required = true;
+                companyTelInput.required = true;
+
+                companyNameInput.name="companyName";
+                productSellTotalInput.name="productSellTotal";
+                companyAddressInput.name="companyAdress";
+                companyTelInput.name="companyTel";
+
+                companyNameInput.type = "text";
+                productSellTotalInput.type = "number";
+                companyAddressInput.type = "text";
+                companyTelInput.type = "text";
+
+                productSellTotalInput.style.height = "2.75em";
+                productSellTotalInput.min = "0";
+
+                companyNameInput.style.visibility = "hidden";
+
+                companyNameInput.value = companyNameTd.textContent;
+                productSellTotalInput.value = parseInt(productSellTotalTd.textContent);
+                companyAddressInput.value = companyAddressTd.textContent;
+                companyTelInput.value = companyTelTd.textContent;
+
+                productSellTotalInput.originText = productSellTotalTd.textContent;
+                companyAddressInput.originText = companyAddressTd.textContent;
+                companyTelInput.originText = companyTelTd.textContent;
+
+                productSellTotalTd.innerHTML = "";
+                companyAddressTd.innerHTML = "";
+                companyTelTd.innerHTML = "";
+
+                companyNameTd.appendChild(companyNameInput);
+                productSellTotalTd.appendChild(productSellTotalInput);
+                companyAddressTd.appendChild(companyAddressInput);
+                companyTelTd.appendChild(companyTelInput);
+
+                //---------- 추가 버튼 3개 만들기 ----------
+                let addBtnsDiv = document.createElement("div");
+                addBtnsDiv.className = "additional-buttons";
+                addBtnsDiv.style.display = "flex";
+                addBtnsDiv.style.gap = "0.1em";
+
+                let saveBtn = document.createElement("button");
+                saveBtn.textContent = "저장";
+                saveBtn.className = "modify-option-Btn modify-save-Btn";
+                addBtnsDiv.appendChild(saveBtn);
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "삭제";
+                deleteBtn.className = "modify-option-Btn modify-delete-Btn";
+                addBtnsDiv.appendChild(deleteBtn);
+
+                let cancelBtn = document.createElement("button");
+                cancelBtn.textContent = "취소";
+                cancelBtn.className = "modify-option-Btn modify-cancel-Btn";
+                addBtnsDiv.appendChild(cancelBtn);
+
+                modifyDiv.innerHTML = "";
+                modifyDiv.appendChild(addBtnsDiv);
+            }
+            else if(e.target && e.target.classList.contains("modify-save-Btn")) {
+                //---------- 세이브 버튼 클릭시 처리 ----------
+                let thisTr = e.target.closest("tr");
+
+                let companyNameTd = thisTr.querySelector(".td-companyName");
+                let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
+                let companyAddressTd = thisTr.querySelector(".td-companyAddress");
+                let companyTelTd = thisTr.querySelector(".td-companyTel");
+
+                let companyNameInput = companyNameTd.querySelector("input");
+                let productSellTotalInput = productSellTotalTd.querySelector("input");
+                let companyAddressInput = companyAddressTd.querySelector("input");
+                let companyTelInput = companyTelTd.querySelector("input");
+
+                companyNameInput.name = "companyName";
+                productSellTotalInput.name = "productSellTotal";
+                companyAddressInput.name = "companyAddress";
+                companyTelInput.name = "companyTel";
+
+                let form = document.createElement("form");
+                form.method = "post";
+                form.action = "/sales/correspondent_product_management_modify";
+
+                form.appendChild(companyNameInput);
+                form.appendChild(productSellTotalInput);
+                form.appendChild(companyAddressInput);
+                form.appendChild(companyTelInput);
+                companyNameTd.appendChild(form);
+                form.submit();
+            }
+            else if(e.target && e.target.classList.contains("modify-cancel-Btn")) {
+                //---------- cancel 버튼 클릭 시 처리 ----------
+                let thisTr = e.target.closest("tr");
+                let modifyDiv = thisTr.querySelector(".td-Btns");
+
+                let companyNameTd = thisTr.querySelector(".td-companyName");
+                let productSellTotalTd = thisTr.querySelector(".td-productSellTotal");
+                let companyAddressTd = thisTr.querySelector(".td-companyAddress");
+                let companyTelTd = thisTr.querySelector(".td-companyTel");
+
+                let companyNameInput = companyNameTd.querySelector("input");
+                let productSellTotalInput = productSellTotalTd.querySelector("input");
+                let companyAddressInput = companyAddressTd.querySelector("input");
+                let companyTelInput = companyTelTd.querySelector("input");
+
+                companyNameInput.remove();
+                productSellTotalInput.remove();
+                companyAddressInput.remove();
+                companyTelInput.remove();
+
+                productSellTotalTd.textContent = productSellTotalInput.originText;
+                companyAddressTd.textContent = companyAddressInput.originText;
+                companyTelTd.textContent = companyTelInput.originText;
+
+                let addBtnsDiv = document.querySelector(".additional-buttons");
+
+                modifyDiv.innerHTML = "";
+
+                let modifyChoiceBtn = document.createElement("button");
+                modifyChoiceBtn.textContent = "수정";
+                modifyChoiceBtn.className = "modify-choice-Btn";
+
+                modifyDiv.appendChild(modifyChoiceBtn);
+            }
+            else if(e.target && e.target.classList.contains("modify-delete-Btn")) {
+                //---------- delete 버튼 클릭 시 처리 ----------
+                let thisTr = e.target.closest("tr");
+                let companyNameTd = thisTr.querySelector(".td-companyName");
+
+                let companyNameInput = companyNameTd.querySelector("input");
+
+                companyNameInput.name = "companyName";
+
+                let form = document.createElement("form");
+                form.method = "post";
+                form.action = "/sales/correspondent_product_management_delete";
+
+                form.appendChild(companyNameInput);
+                companyNameTd.appendChild(form);
+                form.submit();
+            }
+        }, false);
+
+        //---------- register버튼 추가 및 기능 추가----------
+        let datatable = document.querySelector(".datatable");
+        let register_button = document.createElement("button");
+        register_button.innerHTML="작성";
+
+        register_button.classList.add("register-input-button");
+
+        datatable.parentNode.insertBefore(register_button, datatable);
+
+        register_button.addEventListener("click", function() {
+
+
+            let register_input_block = document.createElement("div");
+            let register_input_form = document.createElement("form");
+
+            register_input_form.action = "/sales/correspondent_product_management_register";
+            register_input_form.method = "POST";
+
+            register_input_block.classList.add("register-input-block");
+
+            register_input_form.style.display = "flex";
+            register_input_form.style.gap = "0.2em";
+
+            let register_input_companyName = document.createElement("input");
+            let register_input_productSellTotal = document.createElement("input");
+            let register_input_companyAddress = document.createElement("input");
+            let register_input_companyTel = document.createElement("input");
+
+            register_input_companyName.required = true;
+            register_input_productSellTotal.required = true;
+            register_input_companyAddress.required = true;
+            register_input_companyTel.required = true;
+
+            register_input_companyName.name="companyName";
+            register_input_productSellTotal.name = "productSellTotal";
+            register_input_companyAddress.name = "companyAddress";
+            register_input_companyTel.name = "companyTel";
+
+            let register_input_label_companyName = document.createElement("label");
+            let register_input_label_productSellTotal = document.createElement("label");
+            let register_input_label_companyAddress = document.createElement("label");
+            let register_input_label_companyTel = document.createElement("label");
+
+            register_input_label_companyName.textContent = "거래처명: ";
+            register_input_label_productSellTotal.textContent = "이번달 판매량: ";
+            register_input_label_companyAddress.textContent = "주소: ";
+            register_input_label_companyTel.textContent = "Tel: ";
+
+            register_input_label_companyName.setAttribute("for", "companyName");
+            register_input_label_productSellTotal.setAttribute("for", "productSellTotal");
+            register_input_label_companyAddress.setAttribute("for", "companyAddress");
+            register_input_label_companyTel.setAttribute("for", "companyTel");
+
+            register_input_companyName.setAttribute("id", "companyName");
+            register_input_productSellTotal.setAttribute("id", "productSellTotal");
+            register_input_companyAddress.setAttribute("id", "companyAddress");
+            register_input_companyTel.setAttribute("id", "companyTel");
+
+            register_input_companyName.setAttribute("type", "text");
+            register_input_productSellTotal.setAttribute("type", "number");
+            register_input_companyAddress.setAttribute("type", "text");
+            register_input_companyTel.setAttribute("type", "text");
+
+            register_input_productSellTotal.style.height = "2.75em";
+            register_input_productSellTotal.min = "0";
+
+            register_input_label_companyName.appendChild(register_input_companyName);
+            register_input_label_productSellTotal.appendChild(register_input_productSellTotal);
+            register_input_label_companyAddress.appendChild(register_input_companyAddress);
+            register_input_label_companyTel.appendChild(register_input_companyTel);
+
+            register_input_form.appendChild(register_input_label_companyName);
+            register_input_form.appendChild(register_input_label_productSellTotal);
+            register_input_form.appendChild(register_input_label_companyAddress);
+            register_input_form.appendChild(register_input_label_companyTel);
+
+            let register_input_submit_button = document.createElement("button");
+            register_input_submit_button.textContent = "작성";
+            register_input_submit_button.className = "register-submit-button";
+            register_input_submit_button.marginTop = "0.5em";
+
+            let register_input_cancel_button = document.createElement("button");
+            register_input_cancel_button.textContent = "취소";
+            register_input_cancel_button.className = "register-cancel-button";
+            register_input_cancel_button.marginTop = "0.5em";
+
+            let register_buttons = document.createElement("div");
+            register_buttons.classList.add("register_buttons_box");
+            register_buttons.style.display = "flex";
+            register_buttons.style.gap = "1em";
+            register_buttons.style.alignItems = "center";
+            register_buttons.marginTop = "0.5em";
+            register_buttons.appendChild(register_input_submit_button);
+            register_buttons.appendChild(register_input_cancel_button);
+
+            register_input_form.appendChild(register_buttons);
+            register_input_block.appendChild(register_input_form);
+
+            register_button.parentNode.insertBefore(register_input_block, register_button);
+
+            register_button.style.display = "none";
+
+            register_input_submit_button.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                let isValid = true;
+                let errorMessages = [];
+
+                if (!register_input_companyName.value) {
+                    isValid = false;
+                    register_input_companyName.setAttribute("placeholder", errorMessages.push("거래처명을 입력해주세요."));
+                }
+                if (!register_input_productSellTotal.value) {
+                    isValid = false;
+                    errorMessages.push("판매량을 입력해주세요.");
+                }
+                if (!register_input_companyAddress.value) {
+                    isValid = false;
+                    errorMessages.push("주소를 입력해주세요.");
+                }
+                if (!register_input_companyTel.value) {
+                    isValid = false;
+                    errorMessages.push("전화번호를 입력해주세요.");
+                }
+
+                if (!isValid) {
+                    let errorMessageDiv = document.createElement("div");
+                    errorMessageDiv.style.color = "red";
+                    errorMessages.forEach(msg => {
+                        let message = document.createElement("p");
+                        message.textContent = msg;
+                        errorMessageDiv.appendChild(message);
+                    });
+
+                    register_input_form.insertBefore(errorMessageDiv, register_input_form.firstChild);
+                }
+
+                if (isValid) {
+                    register_input_form.submit();
+                }
+            });
+
+            register_input_cancel_button.addEventListener("click", function(e) {
+                register_input_block.remove();
+                register_button.style.display = "block";
+                e.preventDefault();
+            });
+
         });
 
-    });
-
-
-    $(document).ready(function () {
-        $(".datatable").DataTable({
-            "order": [], // 기본 정렬 비활성화 (원하는 경우 변경 가능)
-            "paging": true, // 페이징 활성화
-            "searching": false, // 검색 기능 추가
-            "info": true // 정보 표시
+        $(document).ready(function () {
+            $(".datatable").DataTable({
+                "order": [], // 기본 정렬 비활성화 (원하는 경우 변경 가능)
+                "paging": true, // 페이징 활성화
+                "searching": false, // 검색 기능 추가
+                "info": true // 정보 표시
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

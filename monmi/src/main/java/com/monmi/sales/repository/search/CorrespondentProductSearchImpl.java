@@ -18,10 +18,8 @@ public class CorrespondentProductSearchImpl implements CorrespondentProductSearc
 
     @Override
     public Page<CorrespondentProduct> correspondent_product_search_all(String[] types, String keyword, Pageable pageable) {
-        // JPQL로 작성
         StringBuilder jpql = new StringBuilder("SELECT b FROM CorrespondentProduct b WHERE b.companyName IS NOT NULL");
 
-        // 동적 검색 조건 추가
         if ((types != null && types.length > 0) && keyword != null) {
             jpql.append(" AND (");
 
@@ -39,7 +37,6 @@ public class CorrespondentProductSearchImpl implements CorrespondentProductSearc
                         break;
                 }
 
-                // 각 조건 사이에 "OR" 추가
                 if (i < types.length - 1) {
                     jpql.append(" OR ");
                 }
@@ -48,19 +45,16 @@ public class CorrespondentProductSearchImpl implements CorrespondentProductSearc
         }
         jpql.append(" ORDER BY companyName ASC");
 
-        // JPQL로 쿼리 생성
         TypedQuery<CorrespondentProduct> query = entityManager.createQuery(jpql.toString(), CorrespondentProduct.class);
         TypedQuery<Long> countQuery = entityManager.createQuery(
                 jpql.toString().replace("SELECT b", "SELECT COUNT(b)"), Long.class
         );
 
-        // 파라미터 바인딩
         if ((types != null && types.length > 0) && keyword != null) {
             query.setParameter("keyword", "%" + keyword + "%");
             countQuery.setParameter("keyword", "%" + keyword + "%");
         }
 
-        // 결과 조회
         List<CorrespondentProduct> list = query.getResultList();
         long count = countQuery.getSingleResult();
 

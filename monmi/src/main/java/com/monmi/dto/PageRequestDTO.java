@@ -8,9 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 @Builder
 @Data
 @AllArgsConstructor
@@ -33,7 +30,6 @@ public class PageRequestDTO {
     }
 
     public Pageable getPageable(String... props) {   // aa, bb, cc, ...
-//        return PageRequest.of(this.page - 1, this.size, Sort.by(props).descending());
         return  PageRequest.of(this.page - 1, this.size, Sort.Direction.DESC, props);
     }
 

@@ -25,14 +25,4 @@ public class CorrespondentMaterial {
     private String companyAddress;
     @Column(nullable = false)
     private int price;
-
-//    public void change_correspondent_material(String companyTel, String material, String companyAddress) {
-//        this.companyTel = companyTel;
-//        this.material = material;
-//        this.companyAddress = companyAddress;
-//    }
-//
-//    public void change_material_price(int price) {
-//        this.price = price;
-//    }
 }

@@ -5,8 +5,6 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import javax.crypto.SecretKey;
 
-
-
 public class JwtUtil {
     private static final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); // 비밀 키
 
@@ -38,7 +36,4 @@ public class JwtUtil {
             return false; // 유효하지 않은 토큰
         }
     }
-
-
-
 }

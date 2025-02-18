@@ -52,7 +52,6 @@ public class CorrespondentController {
 
             return "redirect:/sales/correspondent_material_management";
         }
-
         correspondentMaterialService.correspondent_material_register(correspondentMaterialDTO);
 
         return "redirect:/sales/correspondent_material_management";
@@ -63,7 +62,6 @@ public class CorrespondentController {
             @RequestParam String companyName,
             RedirectAttributes redirectAttributes
     ) {
-
         correspondentMaterialService.correspondent_material_delete(companyName);
 
         return "redirect:/sales/correspondent_material_management";
@@ -82,7 +80,6 @@ public class CorrespondentController {
 
             return "redirect:/sales/correspondent_material_management";
         }
-
         correspondentMaterialService.correspondent_material_modify(correspondentMaterialDTO);
 
         return "redirect:/sales/correspondent_material_management";
@@ -110,7 +107,6 @@ public class CorrespondentController {
 
             return "redirect:/sales/correspondent_product_management";
         }
-
         correspondentProductService.correspondent_product_register(correspondentProductDTO);
 
         return "redirect:/sales/correspondent_product_management";
@@ -121,7 +117,6 @@ public class CorrespondentController {
             @RequestParam String companyName,
             RedirectAttributes redirectAttributes
     ) {
-
         correspondentProductService.correspondent_product_delete(companyName);
 
         return "redirect:/sales/correspondent_product_management";
@@ -140,7 +135,6 @@ public class CorrespondentController {
 
             return "redirect:/sales/correspondent_product_management";
         }
-
         correspondentProductService.correspondent_product_modify(correspondentProductDTO);
 
         return "redirect:/sales/correspondent_product_management";

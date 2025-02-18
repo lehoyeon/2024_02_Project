@@ -24,9 +24,7 @@ public class FinancialSummary {
     private LocalDate recordDate;
 
     // Getter & Setter 추가
-    public Long getSummaryId() { return summaryId; }
     public Integer getTotalRevenue() { return totalRevenue; }
-    public Integer getTotalCost() { return totalCost; }
     public Integer getNetProfit() { return netProfit; }
     public LocalDate getRecordDate() { return recordDate; }
 

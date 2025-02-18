@@ -1,6 +1,5 @@
 package com.monmi.production.domain;
 
-import com.monmi.domain.Material;
 import lombok.*;
 
 import javax.persistence.*;

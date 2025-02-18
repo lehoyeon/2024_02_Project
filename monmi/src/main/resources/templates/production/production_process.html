@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
     <title>제품 생산 공정</title>
@@ -116,6 +111,7 @@
                 <li><a href="/accession" class="button primary join">회원가입</a></li>
             </ul>
         </nav>
+
         <!-- Banner -->
         <!-- Note: The "styleN" class below should match that of the header element. -->
         <section id="banner" class="style2">
@@ -140,7 +136,7 @@
                     <h4 class="login_logo"><strong>Monmi</strong></h4>
                     <br>
                     <li>아이디<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
-                    <li>비밀번호<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                    <li>비밀번호<input type="password" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
                     <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
                     <br>
                     <li><button >로그인</button></li>
@@ -250,7 +246,6 @@
                                 });
                             </script>
                             <!-- End Column Chart -->
-
                         </div>
                     </section>
 
@@ -488,7 +483,6 @@
                                         현재 생산량: <span id="currentProduction_totalpen"></span><br>
                                         목표 생산량: <span id="targetProduction_totalpen"></span><br>
                                         불량품 비율: <span id="defectiveRate_totalpen"></span><br>
-
                                     </div>
 
                                     <!-- Area Chart -->
@@ -626,7 +620,6 @@
                                         <header class="major">
                                             <h3>생산품 현황</h3>
                                         </header>
-
                                     </div>
 
                                     <!-- Radial Bar Chart -->
@@ -798,162 +791,157 @@
         </div>
     </footer>
 
-</div>
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
 
-<!-- Scripts -->
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/jquery.scrolly.min.js"></script>
-<script src="/assets/js/jquery.scrollex.min.js"></script>
-<script src="/assets/js/browser.min.js"></script>
-<script src="/assets/js/breakpoints.min.js"></script>
-<script src="/assets/js/util.js"></script>
-<script src="/assets/js/main.js"></script>
+    <script>
+        window.onload = function () {
+        handleUrlParams(); 	// URL 파라미터 처리
+        checkLoginStatus(); // 로그인 상태 확인
+        };
 
-<script>
-    window.onload = function () {
-    handleUrlParams(); 	// URL 파라미터 처리
-    checkLoginStatus(); // 로그인 상태 확인
-    };
+        // URL 파라미터 처리
+        function handleUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
 
-    // URL 파라미터 처리
-    function handleUrlParams() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    // 로그인 실패 처리
-    if (urlParams.has("error")) {
-        alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
-        // URL에서 error 파라미터 제거
-        history.replaceState({}, null, window.location.pathname);
-    }
-    else if (urlParams.has("success")) { // 로그인 성공 처리
-        alert("어서오세요! 로그인에 성공하셨습니다.");
-        // URL에서 success 파라미터 제거
-        history.replaceState({}, null, window.location.pathname);
+        // 로그인 실패 처리
+        if (urlParams.has("error")) {
+            alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+            // URL에서 error 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
         }
-    }
-
-    // 로그인 상태 확인
-    function checkLoginStatus() {
-    const loginButton = document.getElementById('login-button');
-
-    // 로그인 상태 확인 API 호출
-    fetch('/check', { credentials: 'include' })
-        .then(response => response.json())
-        .then(data => {
-            const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
-            if (isLoggedIn) {
-                loginButton.textContent = '로그아웃';
-                loginButton.removeAttribute('href'); // href 제거
-                loginButton.onclick = function () {
-                    handleLogout(); //  로그아웃 처리 호출
-                };
-            } else {
-                updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+        else if (urlParams.has("success")) { // 로그인 성공 처리
+            alert("어서오세요! 로그인에 성공하셨습니다.");
+            // URL에서 success 파라미터 제거
+            history.replaceState({}, null, window.location.pathname);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+        }
+
+        // 로그인 상태 확인
+        function checkLoginStatus() {
+        const loginButton = document.getElementById('login-button');
+
+        // 로그인 상태 확인 API 호출
+        fetch('/check', { credentials: 'include' })
+            .then(response => response.json())
+            .then(data => {
+                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                if (isLoggedIn) {
+                    loginButton.textContent = '로그아웃';
+                    loginButton.removeAttribute('href'); // href 제거
+                    loginButton.onclick = function () {
+                        handleLogout(); //  로그아웃 처리 호출
+                    };
+                } else {
+                    updateToLoginButton(loginButton); //  로그인 버튼으로 변경
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                updateToLoginButton(loginButton); // 에러 발생 시에도 로그인 버튼으로 변경
+            });
+        }
+
+        // 로그아웃 처리
+        function handleLogout() {
+        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+            .then(() => {
+                alert('로그아웃되었습니다.');
+                checkLoginStatus(); 					   //로그아웃 후 상태 갱신
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // 로그인 버튼 상태로 업데이트
+        function updateToLoginButton(loginButton) {
+        loginButton.textContent = '로그인';
+        loginButton.setAttribute('href', '#login');
+        loginButton.onclick = null;
+        }
+
+    </script>
+
+    <script th:inline="javascript">
+        let process_page_now = 1;
+
+        let part_content = document.querySelector(".part-content");
+        let product_content = document.querySelector(".product-content");
+        let work_rate_content = document.querySelector(".work-rate-content");
+
+        document.querySelector(".process-page-left").addEventListener("click", function (e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            if(process_page_now === 1) {
+                process_page_now = 3;
+                part_content.style.display = "none";
+
+                work_rate_content.style.display = "flex";
+
+                window.radialBarChart.destroy();
+                createRadialBarChart();
+            }
+            else if(process_page_now === 2) {
+                process_page_now = 1;
+                product_content.style.display = "none";
+
+                part_content.style.display = "flex";
+
+                window.lineChart.destroy();
+                createLineChart();
+            }
+            else if(process_page_now === 3) {
+                process_page_now = 2;
+                work_rate_content.style.display = "none";
+
+                product_content.style.display = "flex";
+
+                window.areaChart.destroy();
+                createAreaChart();
+            }
         });
-    }
 
-    // 로그아웃 처리
-    function handleLogout() {
-    fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
-        .then(() => {
-            alert('로그아웃되었습니다.');
-            checkLoginStatus(); 					   //로그아웃 후 상태 갱신
-        })
-        .catch(error => console.error('Error:', error));
-    }
+        document.querySelector(".process-page-right").addEventListener("click", function (e){
+            e.preventDefault();
+            e.stopPropagation();
 
-    // 로그인 버튼 상태로 업데이트
-    function updateToLoginButton(loginButton) {
-    loginButton.textContent = '로그인';
-    loginButton.setAttribute('href', '#login');
-    loginButton.onclick = null;
-    }
+            if(process_page_now === 1) {
+                process_page_now = 2;
 
-</script>
+                part_content.style.display = "none";
 
-<script th:inline="javascript">
-    let process_page_now = 1;
+                product_content.style.display = "flex";
 
-    let part_content = document.querySelector(".part-content");
-    let product_content = document.querySelector(".product-content");
-    let work_rate_content = document.querySelector(".work-rate-content");
+                window.areaChart.destroy();
+                createAreaChart();
+            }
+            else if(process_page_now === 2) {
+                process_page_now = 3;
 
-    document.querySelector(".process-page-left").addEventListener("click", function (e){
-        e.preventDefault();
-        e.stopPropagation();
+                product_content.style.display = "none";
 
-        if(process_page_now === 1) {
-            process_page_now = 3;
-            part_content.style.display = "none";
+                work_rate_content.style.display = "flex";
 
-            work_rate_content.style.display = "flex";
+                window.radialBarChart.destroy();
+                createRadialBarChart();
+            }
+            else if(process_page_now === 3) {
+                process_page_now = 1;
 
-            window.radialBarChart.destroy();
-            createRadialBarChart();
-        }
-        else if(process_page_now === 2) {
-            process_page_now = 1;
-            product_content.style.display = "none";
+                work_rate_content.style.display = "none";
 
-            part_content.style.display = "flex";
+                part_content.style.display = "flex";
 
-            window.lineChart.destroy();
-            createLineChart();
-        }
-        else if(process_page_now === 3) {
-            process_page_now = 2;
-            work_rate_content.style.display = "none";
-
-            product_content.style.display = "flex";
-
-            window.areaChart.destroy();
-            createAreaChart();
-        }
-    });
-
-    document.querySelector(".process-page-right").addEventListener("click", function (e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        if(process_page_now === 1) {
-            process_page_now = 2;
-
-            part_content.style.display = "none";
-
-            product_content.style.display = "flex";
-
-            window.areaChart.destroy();
-            createAreaChart();
-        }
-        else if(process_page_now === 2) {
-            process_page_now = 3;
-
-            product_content.style.display = "none";
-
-            work_rate_content.style.display = "flex";
-
-            window.radialBarChart.destroy();
-            createRadialBarChart();
-        }
-        else if(process_page_now === 3) {
-            process_page_now = 1;
-
-            work_rate_content.style.display = "none";
-
-            part_content.style.display = "flex";
-
-            window.lineChart.destroy();
-            createLineChart();
-        }
-    });
-
-
-</script>
-
+                window.lineChart.destroy();
+                createLineChart();
+            }
+        });
+    </script>
 </body>
 </html>

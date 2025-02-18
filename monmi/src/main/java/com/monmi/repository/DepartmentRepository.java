@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
-    // JPQL 또는 Native SQL로 쿼리 작성
-
     List<Department> findAll();
 
     // CEO를 보여주지 않아야할때 사용.

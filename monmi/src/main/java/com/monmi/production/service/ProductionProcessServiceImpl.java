@@ -102,9 +102,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                     if (random.nextInt(100) < 5) {  // 5% 확률
                         int change = random.nextInt(10) * 10;  // 0~9 사이의 값을 곱해서 0~90 사이의 값을 생성
                         if (random.nextBoolean()) {
-                            daily_production += change;  // 10의 배수를 더함
+                            daily_production += change;
                         } else {
-                            daily_production -= change;  // 10의 배수를 뺌
+                            daily_production -= change;
                         }
                     }
 
@@ -112,9 +112,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                     int partDailyProduction = daily_production;
                     int partDailyAmount = daily_production;
                     if (random.nextBoolean()) {
-                        partDailyAmount += (((int) (partDailyProduction * 0.2)) + 1);  // 10의 배수를 더함
+                        partDailyAmount += (((int) (partDailyProduction * 0.2)) + 1);
                     } else {
-                        partDailyAmount -= (((int) (partDailyProduction * 0.2)) + 1);  // 10의 배수를 뺌
+                        partDailyAmount -= (((int) (partDailyProduction * 0.2)) + 1);
                     }
                     int partDefective = (((int) (partDailyAmount * 0.05)) + 1);
                     productionProcessMapper.monamiPartInsert(part, partDate, partDefective, partDailyAmount, partDailyProduction);
@@ -126,9 +126,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 if (random.nextInt(100) < 5) {  // 5% 확률
                     int change = random.nextInt(10) * 10;  // 0~9 사이의 값을 곱해서 0~90 사이의 값을 생성
                     if (random.nextBoolean()) {
-                        daily_production += change;  // 10의 배수를 더함
+                        daily_production += change;
                     } else {
-                        daily_production -= change;  // 10의 배수를 뺌
+                        daily_production -= change;
                     }
                 }
 
@@ -136,9 +136,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 int partDailyAmount = ((int) ((partDailyProduction / 1440.0) * (dateTime_now.getMinute() + (dateTime_now.getHour() * 60))));
                 int amountError = ((int) (partDailyAmount * 0.2)) + 1;
                 if (random.nextBoolean()) {
-                    partDailyProduction += amountError;  // 10의 배수를 더함
+                    partDailyProduction += amountError;
                 } else {
-                    partDailyProduction -= amountError;  // 10의 배수를 뺌
+                    partDailyProduction -= amountError;
                 }
                 int partDefective = (((int) (partDailyAmount * 0.05)) + 1);
                 productionProcessMapper.monamiPartInsert(part, dateTime_now, partDefective, partDailyAmount, partDailyProduction);
@@ -153,9 +153,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 int partDailyAmount_plus = ((int) ((partDailyProduction / 1440) * minutesBetween));
                 int amountError = ((int) (partDailyAmount_plus * 0.2)) + 1;
                 if (random.nextBoolean()) {
-                    partDailyAmount_plus += amountError;  // 10의 배수를 더함
+                    partDailyAmount_plus += amountError;
                 } else {
-                    partDailyAmount_plus -= amountError;  // 10의 배수를 뺌
+                    partDailyAmount_plus -= amountError;
                 }
                 int partDailyAmount = productionProcessMapper.getDailyAmount(part, recent_part_date.toLocalDate()) + partDailyAmount_plus;
                 int partDefective = (((int) (partDailyAmount_plus * 0.05)) + 1);
@@ -172,9 +172,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 int partDailyAmount = ((int) ((partDailyProduction / 1440) * dateTime_now.getMinute()));
                 int amountError = ((int) (partDailyAmount * 0.2)) + 1;
                 if (random.nextBoolean()) {
-                    partDailyProduction += amountError;  // 10의 배수를 더함
+                    partDailyProduction += amountError;
                 } else {
-                    partDailyProduction -= amountError;  // 10의 배수를 뺌
+                    partDailyProduction -= amountError;
                 }
                 int partDefective = (((int) (partDailyAmount * 0.05)) + 1);
                 productionProcessMapper.monamiPartInsert(part, dateTime_now, partDefective, partDailyAmount, partDailyProduction);
@@ -193,9 +193,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 if (random.nextInt(100) < 5) {  // 5% 확률
                     int change = random.nextInt(10) * 10;
                     if (random.nextBoolean()) {
-                        daily_production += change;  // 10의 배수를 더함
+                        daily_production += change;
                     } else {
-                        daily_production -= change;  // 10의 배수를 뺌
+                        daily_production -= change;
                     }
                 }
 
@@ -203,9 +203,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
                 int totalpenDailyProduction = daily_production;
                 int totalpenDailyAmount = daily_production;
                 if (random.nextBoolean()) {
-                    totalpenDailyAmount += (((int) (totalpenDailyProduction * 0.2)) + 1);  // 10의 배수를 더함
+                    totalpenDailyAmount += (((int) (totalpenDailyProduction * 0.2)) + 1);
                 } else {
-                    totalpenDailyAmount -= (((int) (totalpenDailyProduction * 0.2)) + 1);  // 10의 배수를 뺌
+                    totalpenDailyAmount -= (((int) (totalpenDailyProduction * 0.2)) + 1);
                 }
                 int totalpenDefective = (((int) (totalpenDailyAmount * 0.05)) + 1);
                 productionProcessMapper.monamiTotalpenInsert(totalpenDate, totalpenDefective, totalpenDailyAmount, totalpenDailyProduction);
@@ -217,9 +217,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             if (random.nextInt(100) < 5) {  // 5% 확률
                 int change = random.nextInt(10) * 10;  // 0~9 사이의 값을 곱해서 0~90 사이의 값을 생성
                 if (random.nextBoolean()) {
-                    daily_production += change;  // 10의 배수를 더함
+                    daily_production += change;
                 } else {
-                    daily_production -= change;  // 10의 배수를 뺌
+                    daily_production -= change;
                 }
             }
 
@@ -227,9 +227,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             int totalpenDailyAmount = ((int) ((totalpenDailyProduction / 144) * (dateTime_now.getMinute() + (dateTime_now.getHour() * 60)))) / 10;
             int amountError = ((int) (totalpenDailyAmount * 0.2)) + 1;
             if (random.nextBoolean()) {
-                totalpenDailyProduction += amountError;  // 10의 배수를 더함
+                totalpenDailyProduction += amountError;
             } else {
-                totalpenDailyProduction -= amountError;  // 10의 배수를 뺌
+                totalpenDailyProduction -= amountError;
             }
             int totalpenDefective = (((int) (totalpenDailyAmount * 0.05)) + 1);
             productionProcessMapper.monamiTotalpenInsert(dateTime_now, totalpenDefective, totalpenDailyAmount, totalpenDailyProduction);
@@ -244,9 +244,9 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             int totalpenDailyAmount_plus = ((int) ((totalpenDailyProduction / 1440) * minutesBetween));
             int amountError = ((int) (totalpenDailyAmount_plus * 0.2)) + 1;
             if (random.nextBoolean()) {
-                totalpenDailyAmount_plus += amountError;  // 10의 배수를 더함
+                totalpenDailyAmount_plus += amountError;
             } else {
-                totalpenDailyAmount_plus -= amountError;  // 10의 배수를 뺌
+                totalpenDailyAmount_plus -= amountError;
             }
             int totalpenDefective = (((int) (totalpenDailyAmount_plus * 0.05)) + 1);
             int totalpenDailyAmount = productionProcessMapper.getTotalpenDailyAmount(recent_total_date.toLocalDate()) + totalpenDailyAmount_plus;
@@ -257,14 +257,13 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
         } else if (recent_total_date == null) {
             Random random = new Random();
 
-
             int totalpenDailyProduction = 750;
             int totalpenDailyAmount = ((int) ((totalpenDailyProduction / 1440) * (dateTime_now.getMinute() + (dateTime_now.getHour() * 60))));
             int amountError = ((int) (totalpenDailyAmount * 0.2)) + 1;
             if (random.nextBoolean()) {
-                totalpenDailyProduction += amountError;  // 10의 배수를 더함
+                totalpenDailyProduction += amountError;
             } else {
-                totalpenDailyProduction -= amountError;  // 10의 배수를 뺌
+                totalpenDailyProduction -= amountError;
             }
             int totalDefective = (((int) (totalpenDailyAmount * 0.05)) + 1);
             productionProcessMapper.monamiTotalpenInsert(dateTime_now, totalDefective, totalpenDailyAmount, totalpenDailyProduction);

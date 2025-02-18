@@ -40,7 +40,6 @@ public class LoginServiceImpl implements LoginService {
         login.setMonami_id(loginDto.getMonami_id());
         login.setMonami_password(loginDto.getMonami_password()); // 필요시 암호화 추가
 
-
         //login.setRole("USER"); // 주석처리: 역활설정 domain(vo)에서 role 참조
 
         // DB에 저장

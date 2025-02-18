@@ -4338,8 +4338,9 @@ input, select, textarea {
 }
 
 .scroll-icon i {
-  color: black;  /* 아이콘 색상 */
+  color: white;  /* 아이콘 색상 */
   transition: transform 0.3s ease; /* 클릭 시 애니메이션 효과 */
+  margin-top: 1em;
 }
 
 /* 아이콘 위로 마우스 올릴 때 */
@@ -4381,7 +4382,7 @@ z-index: 3;
     padding: 10px;
     background-color: #2a2f4a;
     border-bottom: 5px solid white;
-    width: 100%;
+    width: 97%;
     height: 100%;
     min-height: 140px;
     position: relative;
@@ -4408,7 +4409,7 @@ z-index: 3;
     font-size: 0.9em;
     font-weight: bold;
     color: white;
-    background-color: red;
+    background-color: #8ea9e8;
     padding: 5px;
     border-radius: 5px;
 }
@@ -4473,9 +4474,6 @@ z-index: 3;
      object-fit: cover;  /* 이미지를 박스에 맞게 잘라서 채움 */
      border-radius: 10px;
 }
-span.important-badge {
-background-color: orange;
-}
 p.missing-one, .missing-two, .missing-none {
     text-align: center;
     font-size: 30px;
@@ -4489,4 +4487,7 @@ footer#footer {
 }
 section#contact {
     justify-content: center;
+}
+i.fas.fa-arrow-down {
+    color: white;
 }
