@@ -212,7 +212,7 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             }
 
             int daily_production = productionProcessMapper.getDailyProduction("totalpen", recent_total_date.toLocalDate());
-            System.out.println(daily_production);
+            System.out.println("daily: " + daily_production);
             Random random = new Random();
             if (random.nextInt(100) < 5) {  // 5% 확률
                 int change = random.nextInt(10) * 10;  // 0~9 사이의 값을 곱해서 0~90 사이의 값을 생성
@@ -224,7 +224,7 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             }
 
             int totalpenDailyProduction = daily_production;
-            int totalpenDailyAmount = ((int) ((totalpenDailyProduction / 1440) * dateTime_now.getMinute()));
+            int totalpenDailyAmount = ((int) ((totalpenDailyProduction / 144) * (dateTime_now.getMinute() + (dateTime_now.getHour() * 60)))) / 10;
             int amountError = ((int) (totalpenDailyAmount * 0.2)) + 1;
             if (random.nextBoolean()) {
                 totalpenDailyProduction += amountError;  // 10의 배수를 더함
@@ -233,7 +233,7 @@ public class ProductionProcessServiceImpl implements ProductionProcessService{
             }
             int totalpenDefective = (((int) (totalpenDailyAmount * 0.05)) + 1);
             productionProcessMapper.monamiTotalpenInsert(dateTime_now, totalpenDefective, totalpenDailyAmount, totalpenDailyProduction);
-
+            System.out.println(totalpenDailyAmount);
             int amount_now = productionProcessMapper.getMonamiAmountItemAmount("totalpen") + totalpenDailyAmount;
             productionProcessMapper.monamiAmountItemModify("totalpen", amount_now);
         } else if (recent_total_date != null && recent_total_date.toLocalDate().isEqual(date_now)) {

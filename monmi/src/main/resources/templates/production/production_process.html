@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
     <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         #banner {
             height: 25vh;
@@ -74,6 +75,14 @@
 
         .content-information-box {
             height: 33em;
+            width: 8em;
+        }
+
+        .process-page-button > i:hover {
+            background-color: inset 0 0 0 2px #9bf1ff;
+            color: #9bf1ff;
+            cursor: pointer;
+            border: none;
         }
 
 
@@ -81,614 +90,670 @@
 </head>
 <body class="is-preload">
 
-<!-- Wrapper -->
-<div id="wrapper">
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-    <!-- Header -->
-    <!-- Note: The "styleN" class below should match that of the banner element. -->
-    <header id="header" class="alt style2">
-        <a href="/main" class="logo"><strong>Monmi</strong></a>
-        <nav>
-            <a id="login-button" href="#login">로그인</a>
-            <a href="#menu">메뉴</a>
+        <!-- Header -->
+        <!-- Note: The "styleN" class below should match that of the banner element. -->
+        <header id="header" class="alt style2">
+            <a href="/main" class="logo"><strong>메인 페이지</strong></a>
+            <nav>
+                <a id="login-button" href="#login">로그인</a>
+                <a href="#menu">메뉴</a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="/main">Monmi</a></li>
+                <li><a href="/production/production_process">제품 생산 공정</a></li>
+                <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+                <li><a href="/notice">공지사항</a></li>
+                <li><a href="/sales_management">재무?</a></li>
+            </ul>
+            <ul class="actions stacked">
+                <li><a href="/accession" class="button primary join">회원가입</a></li>
+            </ul>
         </nav>
-    </header>
-
-    <!-- Menu -->
-    <nav id="menu">
-        <ul class="links">
-            <li><a href="/main">메인페이지</a></li>
-            <li><a href="/production/production_process">제품 생산 공정</a></li>
-            <li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
-            <li><a href="/notice">공지사항</a></li>
-            <li><a href="/sales_management">재무</a></li>
-        </ul>
-        <ul class="actions stacked">
-            <li><a href="/accession" class="button primary join">회원가입</a></li>
-        </ul>
-    </nav>
-    <!-- Banner -->
-    <!-- Note: The "styleN" class below should match that of the header element. -->
-    <section id="banner" class="style2">
-        <div class="inner">
-							<span class="image">
-								<img src="/images/pic07.jpg" alt="" />
-							</span>
-            <header class="major">
-                <h1>제품 생산 공정</h1>
-            </header>
-            <div class="content">
-                <p>이용자 환영인사<br />
-                    오늘도 힘찬 하루 보내세요!</p>
+        <!-- Banner -->
+        <!-- Note: The "styleN" class below should match that of the header element. -->
+        <section id="banner" class="style2">
+            <div class="inner">
+                                <span class="image">
+                                    <img src="/images/pic07.jpg" alt="" />
+                                </span>
+                <header class="major">
+                    <h1>제품 생산 공정</h1>
+                </header>
+                <div class="content">
+                    <p>이용자 환영인사<br />
+                        오늘도 힘찬 하루 보내세요!</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- login -->
-    <nav id="login">
-        <ul class="links">
-            <form action="/login" method="post"><!-- 서버로 post 요청 -->
-                <h4 class="login_logo"><strong>Monmi</strong></h4>
-                <br>
-                <li>아이디<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
-                <li>비밀번호<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
-                <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
-                <br>
-                <li><button >로그인</button></li>
-                <br>
-            </form>
-        </ul>
-    </nav>
+        <!-- login -->
+        <nav id="login">
+            <ul class="links">
+                <form action="/login" method="post"><!-- 서버로 post 요청 -->
+                    <h4 class="login_logo"><strong>Forty by HTML5 UP</strong></h4>
+                    <br>
+                    <li>ID<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+                    <li>PassWord<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+                    <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+                    <br>
+                    <li><button >Login</button></li>
+                    <br>
+                </form>
+            </ul>
+        </nav>
 
-    <!-- Main -->
-    <div id="main">
+        <!-- Main -->
+        <div id="main">
 
-        <!-- One -->
-        <section id="contect">
-            <div class="inner dived-content-box" style="margin-left: 1em;">
-                <section class="content-left">
-                    <div class="process-content">
-                        <div class="inner">
-                            <header class="major">
-                                <h3>원자재 현황</h3>
-                            </header>
-                        </div>
+            <!-- One -->
+            <section id="contect">
+                <div class="inner dived-content-box" style="margin-left: 1em;">
+                    <section class="content-left">
+                        <div class="process-content">
+                            <div class="inner">
+                                <header class="major">
+                                    <h3>원자재 현황</h3>
+                                </header>
+                            </div>
 
-                        <!-- Column Chart -->
-                        <div id="columnChart"></div>
+                            <!-- Column Chart -->
+                            <div id="columnChart"></div>
 
-                        <script th:inline="javascript">
-                            let materialHoldingsData = /*[[${MaterialHoldingsList}]]*/ [];
+                            <script th:inline="javascript">
+                                let materialHoldingsData = /*[[${MaterialHoldingsList}]]*/ [];
 
-                            document.addEventListener("DOMContentLoaded", () => {
+                                document.addEventListener("DOMContentLoaded", () => {
 
-                                let today = new Date();
-                                let oneWeekAgo = new Date();
-                                oneWeekAgo.setDate(today.getDate() - 7);
+                                    let today = new Date();
+                                    let oneWeekAgo = new Date();
+                                    oneWeekAgo.setDate(today.getDate() - 7);
 
-                                let groupedData = {};
+                                    let groupedData = {};
 
-                                materialHoldingsData.forEach(item => {
-                                    let materialId = item.materialId;
-                                    let quantity = item.quantity;
-                                    let date = new Date(item.holdingsDate);
+                                    materialHoldingsData.forEach(item => {
+                                        let materialId = item.materialId;
+                                        let quantity = item.quantity;
+                                        let date = new Date(item.holdingsDate);
 
-                                    if (date >= oneWeekAgo && date <= today) {
-                                        if (!groupedData[materialId]) {
-                                            groupedData[materialId] = {
-                                                name: `Material ${materialId}`,
-                                                data: []
-                                            };
+                                        if (date >= oneWeekAgo && date <= today) {
+                                            if (!groupedData[materialId]) {
+                                                groupedData[materialId] = {
+                                                    name: `Material ${materialId}`,
+                                                    data: []
+                                                };
+                                            }
+
+                                            groupedData[materialId].data.push({ date: date, quantity: quantity });
                                         }
+                                    });
 
-                                        groupedData[materialId].data.push({ date: date, quantity: quantity });
-                                    }
+                                    let seriesData = Object.values(groupedData).map(item => ({
+                                        name: (item.name === 'Material 1') ? '금속' :
+                                                (item.name === 'Material 2') ? '플라스틱' :
+                                                (item.name === 'Material 3') ? '고무' :
+                                                item.name,
+                                        data: item.data.map(d => d.quantity)
+                                    }));
+
+                                    let categoriesData = materialHoldingsData
+                                        .map(item => new Date(item.holdingsDate).toLocaleDateString())
+                                        .filter((date, index, self) => {
+                                            let dateObj = new Date(date);
+                                            return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
+                                        });
+
+                                    new ApexCharts(document.querySelector("#columnChart"), {
+                                        series: seriesData,
+                                        chart: {
+                                            type: 'bar',
+                                            height: 350
+                                        },
+                                        xaxis: {
+                                            categories: categoriesData,
+                                            labels: { style: { colors: "#ffffff" } }
+                                        },
+                                        yaxis: {
+                                            labels: { style: { colors: "#ffffff" } },
+                                            title: {
+                                                text: '수량',
+                                                style: { color: "#ffffff" }
+                                            }
+                                        },
+                                        fill: {
+                                            opacity: 1
+                                        },
+                                        dataLabels: {
+                                            enabled: false
+                                        },
+                                        toolbar: {
+                                            show: true,
+                                            tools: {
+                                                download: true,
+                                            },
+                                        },
+                                        tooltip: {
+                                            theme: "dark",
+                                            y: {
+                                                formatter: function(val) {
+                                                    return val + " g";
+                                                }
+                                            }
+                                        }
+                                    }).render();
                                 });
+                            </script>
+                            <!-- End Column Chart -->
 
-                                let seriesData = Object.values(groupedData).map(item => ({
-                                    name: item.name,
-                                    data: item.data.map(d => d.quantity)
-                                }));
+                        </div>
+                    </section>
 
-                                let categoriesData = materialHoldingsData
-                                    .map(item => new Date(item.holdingsDate).toLocaleDateString())
-                                    .filter((date, index, self) => {
-                                        let dateObj = new Date(date);
-                                        return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
-                                    });
-
-                                new ApexCharts(document.querySelector("#columnChart"), {
-                                    series: seriesData,
-                                    chart: {
-                                        type: 'bar',
-                                        height: 350
-                                    },
-                                    xaxis: {
-                                        categories: categoriesData,
-                                        labels: { style: { colors: "#ffffff" } }
-                                    },
-                                    yaxis: {
-                                        labels: { style: { colors: "#ffffff" } },
-                                        title: {
-                                            text: 'Quantity',
-                                            style: { color: "#ffffff" }
-                                        }
-                                    },
-                                    fill: {
-                                        opacity: 1
-                                    },
-                                    dataLabels: {
-                                        enabled: false
-                                    },
-                                    tooltip: {
-                                        theme: "dark",
-                                        y: {
-                                            formatter: function(val) {
-                                                return val + " units";
-                                            }
-                                        }
-                                    }
-                                }).render();
-                            });
-                        </script>
-                        <!-- End Column Chart -->
-
-                    </div>
-                </section>
-
-                <section class="content-right">
-                    <div class="process-content">
-                        <div class="process-page-box">
-                            <button class="process-page-button process-page-left">왼</button>
-                            <!-- 부품 데이터 -->
-                            <div class="dived-content-box part-content">
-                                <div class="content-information-box">
-                                    <header class="major">
-                                        <h3>생산품 현황</h3>
-                                    </header>
-                                    <button class="line-chart-change">전환</button><br>
-                                    현재 생산량<br>
-                                    목표 생산량<br>
-                                    불량품 비율<br>
-                                    일일 생산량<br>
-
+                    <section class="content-right">
+                        <div class="process-content">
+                            <div class="process-page-box">
+                                <div class="icon process-page-button process-page-left">
+                                    <i class="bi bi-caret-left-square" style="font-size: 3em;"></i>
+                                    <div class="label">caret-left-square</div>
                                 </div>
+                                <!-- 부품 데이터 -->
+                                <div class="dived-content-box part-content">
+                                    <div class="content-information-box">
+                                        <header class="major">
+                                            <h3>생산품 현황</h3>
+                                        </header>
+                                        <strong>펜 손잡이</strong><br>
+                                        현재 생산량: <span id="currentProduction_penbody"></span><br>
+                                        목표 생산량: <span id="targetProduction_penbody"></span><br>
+                                        불량품 비율: <span id="defectiveRate_penbody"></span><br>
+                                        <br>
+                                        <strong>펜뚜껑</strong><br>
+                                        현재 생산량: <span id="currentProduction_penhead"></span><br>
+                                        목표 생산량: <span id="targetProduction_penhead"></span><br>
+                                        불량품 비율: <span id="defectiveRate_penhead"></span><br>
+                                        <br>
+                                        <strong>고무</strong><br>
+                                        현재 생산량: <span id="currentProduction_rubber"></span><br>
+                                        목표 생산량: <span id="targetProduction_rubber"></span><br>
+                                        불량품 비율: <span id="defectiveRate_rubber"></span><br>
 
-                                <!-- Line Chart -->
-                                <div id="lineChart"></div>
+                                    </div>
 
-                                <script th:inline="javascript">
-                                    let monamipenbodyList = /*[[${monamiPenbodyList}]]*/ [];
-                                    let monamipenheadList = /*[[${monamiPenheadList}]]*/ [];
-                                    let monamirubberList = /*[[${monamiRubberList}]]*/ [];
+                                    <!-- Line Chart -->
+                                    <div id="lineChart"></div>
 
-                                    function createLineChart() {
+                                    <script th:inline="javascript">
+                                        let monamipenbodyList = /*[[${monamiPenbodyList}]]*/ [];
+                                        let monamipenheadList = /*[[${monamiPenheadList}]]*/ [];
+                                        let monamirubberList = /*[[${monamiRubberList}]]*/ [];
+
                                         let today = new Date();
-                                        let oneWeekAgo = new Date();
-                                        oneWeekAgo.setDate(today.getDate() - 7);
 
-                                        let groupedData = {};
+                                        function isSameDate(date1, date2) {
+                                            return date1.getFullYear() === date2.getFullYear() &&
+                                                   date1.getMonth() === date2.getMonth() &&
+                                                   date1.getDate() === date2.getDate();
+                                        }
 
-                                        monamipenbodyList.forEach(item => {
-                                            let penbody_daily_amount = item.penbodyDailyAmount;
-                                            let date = new Date(item.penbodyDate);
+                                        function getTodayData(list, itemType) {
+                                            return list.filter(item => {
+                                                let itemDate;
 
-                                            if (date >= oneWeekAgo && date <= today) {
-                                                if (!groupedData['penbody']) {
-                                                    groupedData['penbody'] = {
-                                                        name: 'penbody',
-                                                        data: []
-                                                    };
+                                                if (itemType === 'penbody') {
+                                                    itemDate = new Date(item.penbodyDate.replace('_date', ''));
+                                                } else if (itemType === 'penhead') {
+                                                    itemDate = new Date(item.penheadDate.replace('_date', ''));
+                                                } else if (itemType === 'rubber') {
+                                                    itemDate = new Date(item.rubberDate.replace('_date', ''));
                                                 }
 
-                                                groupedData['penbody'].data.push({ date: date, daily_amount: penbody_daily_amount });
-                                            }
-                                        });
+                                                return isSameDate(itemDate, today);
+                                            });
+                                        }
 
-                                        monamipenheadList.forEach(item => {
-                                            let penhead_daily_amount = item.penheadDailyAmount;
-                                            let date = new Date(item.penheadDate);
+                                        let todayPenbody = getTodayData(monamipenbodyList, 'penbody')[0];
+                                        let todayPenhead = getTodayData(monamipenheadList, 'penhead')[0];
+                                        let todayRubber = getTodayData(monamirubberList, 'rubber')[0];
 
-                                            if (date >= oneWeekAgo && date <= today) {
-                                                // part별로 그룹화
-                                                if (!groupedData['penhead']) {
-                                                    groupedData['penhead'] = {
-                                                        name: 'penhead',
-                                                        data: []
-                                                    };
+                                        console.log(todayPenbody[0]);
+                                        console.log(todayPenhead[0]);
+                                        console.log(todayRubber[0]);
+
+                                        let DailyAmount_penbody = todayPenbody.penbodyDailyAmount;
+                                        let DailyProduction_penbody = todayPenbody.penbodyDailyProduction;
+                                        let DailyDefective_penbody = todayPenbody.penbodyDefective;
+
+                                        let DailyAmount_penhead = todayPenhead.penheadDailyAmount;
+                                        let DailyProduction_penhead = todayPenhead.penheadDailyProduction;
+                                        let DailyDefective_penhead = todayPenhead.penheadDefective;
+
+                                        let DailyAmount_rubber = todayRubber.rubberDailyAmount;
+                                        let DailyProduction_rubber = todayRubber.rubberDailyProduction;
+                                        let DailyDefective_rubber = todayRubber.rubberDefective;
+
+                                        document.getElementById("currentProduction_penbody").textContent = DailyAmount_penbody;
+                                        document.getElementById("targetProduction_penbody").textContent = DailyProduction_penbody;
+                                        document.getElementById("defectiveRate_penbody").textContent = ((DailyDefective_penbody / DailyAmount_penbody) * 100).toFixed(2);
+
+                                        document.getElementById("currentProduction_penhead").textContent = DailyAmount_penhead;
+                                        document.getElementById("targetProduction_penhead").textContent = DailyProduction_penhead;
+                                        document.getElementById("defectiveRate_penhead").textContent = ((DailyDefective_penhead / DailyAmount_penhead) * 100).toFixed(2);
+
+                                        document.getElementById("currentProduction_rubber").textContent = DailyAmount_rubber;
+                                        document.getElementById("targetProduction_rubber").textContent = DailyProduction_rubber;
+                                        document.getElementById("defectiveRate_rubber").textContent = ((DailyDefective_rubber / DailyAmount_rubber) * 100).toFixed(2);
+
+
+                                        function createLineChart() {
+                                            let today = new Date();
+                                            let oneWeekAgo = new Date();
+                                            oneWeekAgo.setDate(today.getDate() - 7);
+
+                                            let groupedData = {};
+
+                                            monamipenbodyList.forEach(item => {
+                                                let penbody_daily_amount = item.penbodyDailyAmount;
+                                                let date = new Date(item.penbodyDate);
+
+                                                if (date >= oneWeekAgo && date <= today) {
+                                                    if (!groupedData['penbody']) {
+                                                        groupedData['penbody'] = {
+                                                            name: '펜손잡이',
+                                                            data: []
+                                                        };
+                                                    }
+
+                                                    groupedData['penbody'].data.push({ date: date, daily_amount: penbody_daily_amount });
                                                 }
-
-                                                groupedData['penhead'].data.push({ date: date, daily_amount: penhead_daily_amount });
-                                            }
-                                        });
-
-                                        monamirubberList.forEach(item => {
-                                            let rubber_daily_amount = item.rubberDailyAmount;
-                                            let date = new Date(item.rubberDate);
-
-                                            if (date >= oneWeekAgo && date <= today) {
-                                                if (!groupedData['rubber']) {
-                                                    groupedData['rubber'] = {
-                                                        name: 'rubber',
-                                                        data: []
-                                                    };
-                                                }
-
-                                                groupedData['rubber'].data.push({ date: date, daily_amount: rubber_daily_amount });
-                                            }
-                                        });
-
-                                        let seriesData = Object.values(groupedData).map(item => ({
-                                            name: item.name,
-                                            data: item.data.map(d => d.daily_amount)
-                                        }));
-
-                                        let categoriesData = monamipenbodyList
-                                            .map(item => new Date(item.penbodyDate).toLocaleDateString())
-                                            .filter((date, index, self) => {
-                                                let dateObj = new Date(date);
-                                                return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
                                             });
 
-                                        window.lineChart = new ApexCharts(document.querySelector("#lineChart"), {
-                                            series: seriesData,
-                                            chart: {
-                                                height: 500,
-                                                width: 400,
-                                                type: 'line',
-                                                zoom: {
-                                                    enabled: false
+                                            monamipenheadList.forEach(item => {
+                                                let penhead_daily_amount = item.penheadDailyAmount;
+                                                let date = new Date(item.penheadDate);
+
+                                                if (date >= oneWeekAgo && date <= today) {
+                                                    // part별로 그룹화
+                                                    if (!groupedData['penhead']) {
+                                                        groupedData['penhead'] = {
+                                                            name: '펜뚜껑',
+                                                            data: []
+                                                        };
+                                                    }
+
+                                                    groupedData['penhead'].data.push({ date: date, daily_amount: penhead_daily_amount });
                                                 }
-                                            },
-                                            dataLabels: {
-                                                enabled: false
-                                            },
-                                            stroke: {
-                                                curve: 'straight'
-                                            },
-                                            grid: {
-                                                row: {
-                                                    colors: ['#f3f3f3', 'transparent'],
-                                                    opacity: 0.5
-                                                },
-                                            },
-                                            xaxis: {
-                                                categories: categoriesData,
-                                                labels: { style: { colors: "#ffffff" } },
-                                                title: { style: { colors: "#ffffff" } }
-                                            },
-                                            yaxis: {
-                                                labels: { style: { colors: "#ffffff" } },
-                                                title: { style: { colors: "#ffffff" } }
-                                            },
-                                            legend: {
-                                                labels: { colors: "#ffffff" }
-                                            },
-                                            tooltip: {
-                                                theme: "dark",
-                                                style: {
-                                                    colors: ["#ffffff"]
-                                                }
-                                            }
-                                        });
-                                        window.lineChart.render();
-                                    }
-
-                                    document.addEventListener("DOMContentLoaded", () => {
-                                        createLineChart();
-                                    });
-
-                                </script>
-                                <!-- End Line Chart -->
-                            </div>
-
-                            <!-- 제조품 데이터-->
-                            <div class="dived-content-box product-content">
-                                <div class="content-information-box">
-                                    <header class="major">
-                                        <h3>생산품 현황</h3>
-                                    </header>
-                                    <button class="line-chart-change">전환</button><br>
-                                    현재 생산량<br>
-                                    목표 생산량<br>
-                                    불량품 비율<br>
-                                    일일 생산량<br>
-
-                                </div>
-
-                                <!-- Area Chart -->
-                                <div id="areaChart"></div>
-
-                                <script th:inline="javascript">
-                                    let monamitotalpenList = /*[[${monamiTotalpenList}]]*/ [];
-                                    let monamitotalpenAmount = [[${monamiTotalpenAmount}]];
-
-                                    function createAreaChart() {
-                                        let today = new Date();
-                                        let oneWeekAgo = new Date();
-                                        oneWeekAgo.setDate(today.getDate() - 7);
-
-                                        let groupedData = {};
-
-                                        monamitotalpenList.forEach(item => {
-                                            let totalpen_amount = item.totalpenAmount;
-                                            let date = new Date(item.totalpenDate);
-
-                                            if (date >= oneWeekAgo && date <= today) {
-                                                if (!groupedData['totalpen']) {
-                                                    groupedData['totalpen'] = {
-                                                        name: 'totalpen',
-                                                        data: []
-                                                    };
-                                                }
-
-                                                groupedData['totalpen'].data.push({ date: date, daily_amount: totalpen_amount });
-                                            }
-                                        });
-
-                                        let seriesData = Object.values(groupedData).map(item => ({
-                                            name: item.name,
-                                            data: item.data.map(d => d.daily_amount)
-                                        }));
-
-                                        let categoriesData = monamitotalpenList
-                                            .map(item => new Date(item.totalpenDate).toLocaleDateString())
-                                            .filter((date, index, self) => {
-                                                let dateObj = new Date(date);
-                                                return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
                                             });
 
-                                        window.areaChart = new ApexCharts(document.querySelector("#areaChart"), {
-                                            series: seriesData,
-                                            chart: {
-                                                type: 'area',
-                                                height: 350,
-                                                zoom: {
+                                            monamirubberList.forEach(item => {
+                                                let rubber_daily_amount = item.rubberDailyAmount;
+                                                let date = new Date(item.rubberDate);
+
+                                                if (date >= oneWeekAgo && date <= today) {
+                                                    if (!groupedData['rubber']) {
+                                                        groupedData['rubber'] = {
+                                                            name: '고무',
+                                                            data: []
+                                                        };
+                                                    }
+
+                                                    groupedData['rubber'].data.push({ date: date, daily_amount: rubber_daily_amount });
+                                                }
+                                            });
+
+                                            let seriesData = Object.values(groupedData).map(item => ({
+                                                name: (item.name == 'penbody') ? '펜손잡이' :
+                                                (item.name === 'penhead') ? '펜뚜껑' :
+                                                (item.name === 'rubber') ? '고무' :
+                                                (item.name === 'titalpen') ? '펜' :
+                                                item.name,
+                                                data: item.data.map(d => d.daily_amount)
+                                            }));
+
+                                            let categoriesData = monamipenbodyList
+                                                .map(item => new Date(item.penbodyDate).toLocaleDateString())
+                                                .filter((date, index, self) => {
+                                                    let dateObj = new Date(date);
+                                                    return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
+                                                });
+
+                                            window.lineChart = new ApexCharts(document.querySelector("#lineChart"), {
+                                                series: seriesData,
+                                                chart: {
+                                                    height: 500,
+                                                    width: 400,
+                                                    type: 'line',
+                                                    zoom: {
+                                                        enabled: false
+                                                    }
+                                                },
+                                                dataLabels: {
                                                     enabled: false
                                                 },
-                                                foreColor: '#ffffff'
-                                            },
-                                            dataLabels: {
-                                                enabled: false
-                                            },
-                                            stroke: {
-                                                curve: 'straight'
-                                            },
-                                            subtitle: {
-                                                text: 'Price Movements',
-                                                align: 'left',
-                                                style: { color: '#ffffff' }
-                                            },
-                                            labels: categoriesData,
-                                            xaxis: {
-                                                type: 'datetime',
-                                                labels: { style: { color: '#ffffff' } },
-                                                title: { style: { color: '#ffffff' } }
-                                            },
-                                            yaxis: {
-                                                opposite: true,
-                                                labels: { style: { color: '#ffffff' } },
-                                                title: { style: { color: '#ffffff' } }
-                                            },
-                                            legend: {
-                                                horizontalAlign: 'left',
-                                                labels: { style: { color: '#ffffff' } }
-                                            },
-                                            tooltip: {
-                                                theme: "dark",
-                                                style: {
-                                                    colors: ["#ffffff"]
-                                                }
-                                            }
-                                        });
-
-                                        window.areaChart.render();
-                                    };
-
-                                    document.addEventListener("DOMContentLoaded", () => {
-                                        createAreaChart();
-                                    });
-                                </script>
-                                <!-- End Area Chart -->
-                            </div>
-
-                            <!-- 작업률 데이터 -->
-                            <div class="dived-content-box work-rate-content">
-                                <div class="content-information-box">
-                                    <header class="major">
-                                        <h3>생산품 현황</h3>
-                                    </header>
-                                    <button class="line-chart-change">전환</button><br>
-                                    현재 생산량<br>
-                                    목표 생산량<br>
-                                    불량품 비율<br>
-                                    일일 생산량<br>
-
-                                </div>
-
-                                <!-- Radial Bar Chart -->
-                                <div id="radialBarChart"></div>
-
-                                <script th:inline="javascript">
-                                    function createRadialBarChart() {
-                                        let today = new Date();
-                                        today.setHours(0, 0, 0, 0);
-
-                                        let todayData_penbody = monamipenbodyList.filter(item => {
-                                            let itemDate = new Date(item.penbodyDate);
-                                            itemDate.setHours(0, 0, 0, 0);
-                                            return itemDate.getTime() === today.getTime();
-                                        });
-                                        let todayAmounts_penbody = todayData_penbody.map(item => item.penbodyDailyAmount);
-                                        let todayAmount_penbody = todayAmounts_penbody.length > 0 ? todayAmounts_penbody[0] : null;
-                                        let todayDailyProductions_penbody = todayData_penbody.map(item => item.penbodyDailyProduction);
-                                        let todayDailyProduction_penbody = todayDailyProductions_penbody.length > 0 ? todayDailyProductions_penbody[0] : null;
-
-                                        penbody_work_rate = Math.floor((todayAmount_penbody / todayDailyProduction_penbody) * 100);
-                                        if (penbody_work_rate > 100) penbody_work_rate = 100;
-
-                                        let todayData_penhead = monamipenheadList.filter(item => {
-                                            let itemDate = new Date(item.penheadDate);
-                                            itemDate.setHours(0, 0, 0, 0);
-                                            return itemDate.getTime() === today.getTime();
-                                        });
-                                        let todayAmounts_penhead = todayData_penhead.map(item => item.penheadDailyAmount);
-                                        let todayAmount_penhead = todayAmounts_penhead.length > 0 ? todayAmounts_penhead[0] : null;
-                                        let todayDailyProductions_penhead = todayData_penhead.map(item => item.penheadDailyProduction);
-                                        let todayDailyProduction_penhead = todayDailyProductions_penhead.length > 0 ? todayDailyProductions_penhead[0] : null;
-
-                                        penhead_work_rate = Math.floor((todayAmount_penhead / todayDailyProduction_penhead) * 100);
-                                        if (penhead_work_rate > 100) penhead_work_rate = 100;
-
-                                        let todayData_rubber = monamirubberList.filter(item => {
-                                            let itemDate = new Date(item.rubberDate);
-                                            itemDate.setHours(0, 0, 0, 0);
-                                            return itemDate.getTime() === today.getTime();
-                                        });
-                                        let todayAmounts_rubber = todayData_rubber.map(item => item.rubberDailyAmount);
-                                        let todayAmount_rubber = todayAmounts_rubber.length > 0 ? todayAmounts_rubber[0] : null;
-                                        let todayDailyProductions_rubber = todayData_rubber.map(item => item.rubberDailyProduction);
-                                        let todayDailyProduction_rubber = todayDailyProductions_rubber.length > 0 ? todayDailyProductions_rubber[0] : null;
-
-                                        rubber_work_rate = Math.floor((todayAmount_rubber / todayDailyProduction_rubber) * 100);
-                                        if (rubber_work_rate > 100) rubber_work_rate = 100;
-
-                                        let todayData_totalpen = monamitotalpenList.filter(item => {
-                                            let itemDate = new Date(item.totalpenDate);
-                                            itemDate.setHours(0, 0, 0, 0);
-                                            return itemDate.getTime() === today.getTime();
-                                        });
-                                        let todayAmounts_totalpen = todayData_totalpen.map(item => item.totalpenAmount);
-                                        let todayAmount_totalpen = todayAmounts_totalpen.length > 0 ? todayAmounts_totalpen[0] : null;
-                                        let todayDailyProductions_totalpen = todayData_totalpen.map(item => item.totalpenDailyProduction);
-                                        let todayDailyProduction_totalpen = todayDailyProductions_totalpen.length > 0 ? todayDailyProductions_totalpen[0] : null;
-
-                                        totalpen_work_rate = Math.floor((todayAmount_totalpen / todayDailyProduction_totalpen) * 100);
-                                        if (totalpen_work_rate > 100) totalpen_work_rate = 100;
-
-                                        window.radialBarChart = new ApexCharts(document.querySelector("#radialBarChart"), {
-                                            series: [penbody_work_rate, penhead_work_rate, rubber_work_rate, totalpen_work_rate],
-                                            chart: {
-                                                height: 350,
-                                                type: 'radialBar',
+                                                stroke: {
+                                                    curve: 'straight'
+                                                },
+                                                grid: {
+                                                    row: {
+                                                        colors: ['#f3f3f3', 'transparent'],
+                                                        opacity: 0.5
+                                                    },
+                                                },
+                                                xaxis: {
+                                                    categories: categoriesData,
+                                                    labels: { style: { colors: "#ffffff" } },
+                                                    title: { style: { colors: "#ffffff" } }
+                                                },
+                                                yaxis: {
+                                                    labels: { style: { colors: "#ffffff" } },
+                                                    title: { style: { colors: "#ffffff" } }
+                                                },
+                                                legend: {
+                                                    labels: { colors: "#ffffff" }
+                                                },
                                                 toolbar: {
-                                                    show: true
+                                                    show: true,
+                                                    tools: {
+                                                        download: true,
+                                                    },
+                                                },
+                                                tooltip: {
+                                                    theme: "dark",
+                                                    style: {
+                                                        colors: ["#ffffff"]
+                                                    }
                                                 }
-                                            },
-                                            plotOptions: {
-                                                radialBar: {
-                                                    dataLabels: {
-                                                        name: {
-                                                            fontSize: '22px',
-                                                            color: '#ffffff'
-                                                        },
-                                                        value: {
-                                                            fontSize: '16px',
-                                                            color: '#ffffff'
-                                                        },
-                                                        total: {
-                                                            show: true,
-                                                            label: 'Total',
-                                                            color: '#ffffff',
-                                                            formatter: function(w) {
-                                                                return monamitotalpenAmount;
-                                                            }
-                                                        },
-                                                        tooltip: {
-                                                            theme: "dark",
-                                                            style: {
-                                                                colors: ["#ffffff"]
+                                            });
+                                            window.lineChart.render();
+                                        }
+
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                            createLineChart();
+                                        });
+
+                                    </script>
+                                    <!-- End Line Chart -->
+                                </div>
+
+                                <!-- 제조품 데이터-->
+                                <div class="dived-content-box product-content">
+                                    <div class="content-information-box">
+                                        <header class="major">
+                                            <h3>생산품 현황</h3>
+                                        </header>
+                                        현재 생산량: <span id="currentProduction_totalpen"></span><br>
+                                        목표 생산량: <span id="targetProduction_totalpen"></span><br>
+                                        불량품 비율: <span id="defectiveRate_totalpen"></span><br>
+
+                                    </div>
+
+                                    <!-- Area Chart -->
+                                    <div id="areaChart"></div>
+
+                                    <script th:inline="javascript">
+                                        let monamitotalpenList = /*[[${monamiTotalpenList}]]*/ [];
+                                        let monamitotalpenAmount = [[${monamiTotalpenAmount}]];
+
+                                        function getTodayData_total(list, itemType) {
+                                            return list.filter(item => {
+                                                let itemDate;
+
+                                                if (itemType === 'totalpen') {
+                                                    itemDate = new Date(item.totalpenDate.replace('_date', ''));
+                                                }
+
+                                                return isSameDate(itemDate, today);
+                                            });
+                                        }
+
+                                        let todayTotalpen = getTodayData_total(monamitotalpenList, 'totalpen')[0];
+
+                                        console.log(todayTotalpen[0]);
+
+                                        let DailyAmount_totalpen = todayTotalpen.totalpenAmount;
+                                        let DailyProduction_totalpen = todayTotalpen.totalpenDailyProduction;
+                                        let DailyDefective_totalpen = todayTotalpen.totalpenDefective;
+
+                                        document.getElementById("currentProduction_totalpen").textContent = DailyAmount_totalpen;
+                                        document.getElementById("targetProduction_totalpen").textContent = DailyProduction_totalpen;
+                                        document.getElementById("defectiveRate_totalpen").textContent = ((DailyDefective_totalpen / DailyAmount_totalpen) * 100).toFixed(2);
+
+                                        function createAreaChart() {
+                                            let today = new Date();
+                                            let oneWeekAgo = new Date();
+                                            oneWeekAgo.setDate(today.getDate() - 7);
+
+                                            let groupedData = {};
+
+                                            monamitotalpenList.forEach(item => {
+                                                let totalpen_amount = item.totalpenAmount;
+                                                let date = new Date(item.totalpenDate);
+
+                                                if (date >= oneWeekAgo && date <= today) {
+                                                    if (!groupedData['totalpen']) {
+                                                        groupedData['totalpen'] = {
+                                                            name: '펜',
+                                                            data: []
+                                                        };
+                                                    }
+
+                                                    groupedData['totalpen'].data.push({ date: date, daily_amount: totalpen_amount });
+                                                }
+                                            });
+                                            let seriesData = Object.values(groupedData).map(item => ({
+                                                name: (item.name === 'penbody') ? '펜손잡이' :
+                                                (item.name === 'penhead') ? '펜뚜껑' :
+                                                (item.name === 'rubber') ? '고무' :
+                                                (item.name === 'titalpen') ? '펜' :
+                                                item.name,
+                                                data: item.data.map(d => d.daily_amount)
+                                            }));
+
+                                            let categoriesData = monamitotalpenList
+                                                .map(item => new Date(item.totalpenDate).toLocaleDateString())
+                                                .filter((date, index, self) => {
+                                                    let dateObj = new Date(date);
+                                                    return dateObj >= oneWeekAgo && dateObj <= today && self.indexOf(date) === index;
+                                                });
+
+                                            window.areaChart = new ApexCharts(document.querySelector("#areaChart"), {
+                                                series: seriesData,
+                                                chart: {
+                                                    type: 'area',
+                                                    height: 350,
+                                                    zoom: {
+                                                        enabled: false
+                                                    },
+                                                    foreColor: '#ffffff'
+                                                },
+                                                dataLabels: {
+                                                    enabled: false
+                                                },
+                                                stroke: {
+                                                    curve: 'straight'
+                                                },
+                                                subtitle: {
+                                                    text: '펜 일일 생산량',
+                                                    align: 'left',
+                                                    style: { color: '#ffffff' }
+                                                },
+                                                labels: categoriesData,
+                                                xaxis: {
+                                                    type: 'datetime',
+                                                    labels: { style: { color: '#ffffff' } },
+                                                    title: { style: { color: '#ffffff' } }
+                                                },
+                                                yaxis: {
+                                                    opposite: true,
+                                                    labels: { style: { color: '#ffffff' } },
+                                                    title: { style: { color: '#ffffff' } }
+                                                },
+                                                legend: {
+                                                    horizontalAlign: 'left',
+                                                    labels: { style: { color: '#ffffff' } }
+                                                },
+                                                toolbar: {
+                                                    show: true,
+                                                    tools: {
+                                                        download: true,
+                                                    },
+                                                },
+                                                tooltip: {
+                                                    theme: "dark",
+                                                    style: {
+                                                        colors: ["#ffffff"]
+                                                    }
+                                                }
+                                            });
+
+                                            window.areaChart.render();
+                                        };
+
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                            createAreaChart();
+                                        });
+                                    </script>
+                                    <!-- End Area Chart -->
+                                </div>
+
+                                <!-- 작업률 데이터 -->
+                                <div class="dived-content-box work-rate-content">
+                                    <div class="content-information-box">
+                                        <header class="major">
+                                            <h3>생산품 현황</h3>
+                                        </header>
+
+                                    </div>
+
+                                    <!-- Radial Bar Chart -->
+                                    <div id="radialBarChart"></div>
+
+                                    <script th:inline="javascript">
+                                        function createRadialBarChart() {
+                                            let today = new Date();
+                                            today.setHours(0, 0, 0, 0);
+
+                                            let todayData_penbody = monamipenbodyList.filter(item => {
+                                                let itemDate = new Date(item.penbodyDate);
+                                                itemDate.setHours(0, 0, 0, 0);
+                                                return itemDate.getTime() === today.getTime();
+                                            });
+                                            let todayAmounts_penbody = todayData_penbody.map(item => item.penbodyDailyAmount);
+                                            let todayAmount_penbody = todayAmounts_penbody.length > 0 ? todayAmounts_penbody[0] : null;
+                                            let todayDailyProductions_penbody = todayData_penbody.map(item => item.penbodyDailyProduction);
+                                            let todayDailyProduction_penbody = todayDailyProductions_penbody.length > 0 ? todayDailyProductions_penbody[0] : null;
+
+                                            penbody_work_rate = Math.floor((todayAmount_penbody / todayDailyProduction_penbody) * 100);
+                                            if (penbody_work_rate > 100) penbody_work_rate = 100;
+
+                                            let todayData_penhead = monamipenheadList.filter(item => {
+                                                let itemDate = new Date(item.penheadDate);
+                                                itemDate.setHours(0, 0, 0, 0);
+                                                return itemDate.getTime() === today.getTime();
+                                            });
+                                            let todayAmounts_penhead = todayData_penhead.map(item => item.penheadDailyAmount);
+                                            let todayAmount_penhead = todayAmounts_penhead.length > 0 ? todayAmounts_penhead[0] : null;
+                                            let todayDailyProductions_penhead = todayData_penhead.map(item => item.penheadDailyProduction);
+                                            let todayDailyProduction_penhead = todayDailyProductions_penhead.length > 0 ? todayDailyProductions_penhead[0] : null;
+
+                                            penhead_work_rate = Math.floor((todayAmount_penhead / todayDailyProduction_penhead) * 100);
+                                            if (penhead_work_rate > 100) penhead_work_rate = 100;
+
+                                            let todayData_rubber = monamirubberList.filter(item => {
+                                                let itemDate = new Date(item.rubberDate);
+                                                itemDate.setHours(0, 0, 0, 0);
+                                                return itemDate.getTime() === today.getTime();
+                                            });
+                                            let todayAmounts_rubber = todayData_rubber.map(item => item.rubberDailyAmount);
+                                            let todayAmount_rubber = todayAmounts_rubber.length > 0 ? todayAmounts_rubber[0] : null;
+                                            let todayDailyProductions_rubber = todayData_rubber.map(item => item.rubberDailyProduction);
+                                            let todayDailyProduction_rubber = todayDailyProductions_rubber.length > 0 ? todayDailyProductions_rubber[0] : null;
+
+                                            rubber_work_rate = Math.floor((todayAmount_rubber / todayDailyProduction_rubber) * 100);
+                                            if (rubber_work_rate > 100) rubber_work_rate = 100;
+
+                                            let todayData_totalpen = monamitotalpenList.filter(item => {
+                                                let itemDate = new Date(item.totalpenDate);
+                                                itemDate.setHours(0, 0, 0, 0);
+                                                return itemDate.getTime() === today.getTime();
+                                            });
+                                            let todayAmounts_totalpen = todayData_totalpen.map(item => item.totalpenAmount);
+                                            let todayAmount_totalpen = todayAmounts_totalpen.length > 0 ? todayAmounts_totalpen[0] : null;
+                                            let todayDailyProductions_totalpen = todayData_totalpen.map(item => item.totalpenDailyProduction);
+                                            let todayDailyProduction_totalpen = todayDailyProductions_totalpen.length > 0 ? todayDailyProductions_totalpen[0] : null;
+
+                                            totalpen_work_rate = Math.floor((todayAmount_totalpen / todayDailyProduction_totalpen) * 100);
+                                            if (totalpen_work_rate > 100) totalpen_work_rate = 100;
+
+                                            window.radialBarChart = new ApexCharts(document.querySelector("#radialBarChart"), {
+                                                series: [penbody_work_rate, penhead_work_rate, rubber_work_rate, totalpen_work_rate],
+                                                chart: {
+                                                    height: 350,
+                                                    type: 'radialBar',
+                                                    toolbar: {
+                                                        show: true
+                                                    }
+                                                },
+                                                plotOptions: {
+                                                    radialBar: {
+                                                        dataLabels: {
+                                                            name: {
+                                                                fontSize: '22px',
+                                                                color: '#ffffff'
+                                                            },
+                                                            value: {
+                                                                fontSize: '16px',
+                                                                color: '#ffffff'
+                                                            },
+                                                            total: {
+                                                                show: true,
+                                                                label: '현재 펜 보유량',
+                                                                color: '#ffffff',
+                                                                formatter: function(w) {
+                                                                    return monamitotalpenAmount;
+                                                                }
+                                                            },
+                                                            toolbar: {
+                                                                show: true,
+                                                                tools: {
+                                                                    download: true,
+                                                                },
+                                                            },
+                                                            tooltip: {
+                                                                theme: "dark",
+                                                                style: {
+                                                                    colors: ["#ffffff"]
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
-                                            },
-                                            labels: ['Penbody', 'Penhead', 'Rubber', 'Pen'],
+                                                },
+                                                labels: ['펜손잡이', '펜뚜껑', '고무', '펜'],
+                                            });
+
+                                            window.radialBarChart.render();
+                                        };
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                            createRadialBarChart();
                                         });
-
-                                        window.radialBarChart.render();
-                                    };
-                                    document.addEventListener("DOMContentLoaded", () => {
-                                        createRadialBarChart();
-                                    });
-                                </script>
-                                <!-- End Radial Bar Chart -->
+                                    </script>
+                                    <!-- End Radial Bar Chart -->
+                                </div>
+                                <div class="icon process-page-button process-page-right">
+                                    <i class="bi bi-caret-right-square" style="font-size: 3em;"></i>
+                                    <div class="label">caret-right-square</div>
+                                </div>
                             </div>
-                            <button class="process-page-button process-page-right">오</button>
+
                         </div>
-
-                    </div>
-                </section>
-            </div>
-        </section>
-    </div>
-    </section>
-
-        <!-- Two -->
-        <section id="two" class="spotlights">
-            <section>
-                <a href="/generic.html" class="image">
-                    <img src="/images/pic08.jpg" alt="" data-position="center center" />
-                </a>
-                <div class="content">
-                    <div class="inner">
-                        <header class="major">
-                            <h3>Orci maecenas</h3>
-                        </header>
-                        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-                        <ul class="actions">
-                            <li><a href="/generic.html" class="button">Learn more</a></li>
-                        </ul>
-                    </div>
+                    </section>
                 </div>
             </section>
-            <section>
-                <a href="/generic.html" class="image">
-                    <img src="/images/pic09.jpg" alt="" data-position="top center" />
-                </a>
-                <div class="content">
-                    <div class="inner">
-                        <header class="major">
-                            <h3>Rhoncus magna</h3>
-                        </header>
-                        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-                        <ul class="actions">
-                            <li><a href="generic.html" class="button">Learn more</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <a href="/generic.html" class="image">
-                    <img src="/images/pic10.jpg" alt="" data-position="25% 25%" />
-                </a>
-                <div class="content">
-                    <div class="inner">
-                        <header class="major">
-                            <h3>Sed nunc ligula</h3>
-                        </header>
-                        <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis magna sed nunc rhoncus condimentum sem. In efficitur ligula tate urna. Maecenas massa sed magna lacinia magna pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis tempus.</p>
-                        <ul class="actions">
-                            <li><a href="/generic.html" class="button">Learn more</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <!-- Three -->
-        <section id="three">
-            <div class="inner">
-                <header class="major">
-                    <h2>Massa libero</h2>
-                </header>
-                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet pharetra et feugiat tempus.</p>
-                <ul class="actions">
-                    <li><a href="generic.html" class="button next">Get Started</a></li>
-                </ul>
-            </div>
-        </section>
-
+        </div>
     </div>
 
     <!-- Contact -->
@@ -698,22 +763,24 @@
                 <section>
                     <div class="contact-method">
                         <span class="icon solid alt fa-envelope"></span>
-                        <h3>이메일</h3>
-                        <span>Monmi@gmail.com</span>
+                        <h3>Email</h3>
+                        <a href="#">information@untitled.tld</a>
                     </div>
                 </section>
                 <section>
                     <div class="contact-method">
                         <span class="icon solid alt fa-phone"></span>
-                        <h3>전화번호</h3>
-                        <span>(031) 249-4678 </span>
+                        <h3>Phone</h3>
+                        <span>(000) 000-0000 x12387</span>
                     </div>
                 </section>
                 <section>
                     <div class="contact-method">
                         <span class="icon solid alt fa-home"></span>
-                        <h3>주소</h3>
-                        <span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
+                        <h3>Address</h3>
+                        <span>1234 Somewhere Road #5432<br />
+										Nashville, TN 00000<br />
+										United States of America</span>
                     </div>
                 </section>
             </section>
@@ -729,6 +796,9 @@
                 <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
                 <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+            </ul>
+            <ul class="copyright">
+                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
             </ul>
         </div>
     </footer>
