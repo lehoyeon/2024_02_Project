@@ -4,6 +4,8 @@ import com.monmi.domain.FinancialSummary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,4 +20,7 @@ public interface FinancialSummaryRepository extends JpaRepository<FinancialSumma
     // 🔹 차트를 위한 모든 데이터 조회 메서드 (페이징 없이 전체 데이터)
     List<FinancialSummary> findByRecordDateBetween(LocalDate startDate, LocalDate endDate);
 
+    // 특정 월 데이터 조회 메서드 추가
+    @Query("SELECT f FROM FinancialSummary f WHERE YEAR(f.recordDate) = :year AND MONTH(f.recordDate) = :month")
+    Page<FinancialSummary> findByMonth(@Param("year") int year, @Param("month") int month, Pageable pageable);
 }

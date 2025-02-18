@@ -4340,19 +4340,34 @@ input, select, textarea {
     }
     /* 차트안 메뉴 색상변경 */
     .apexcharts-menu {
-        background: rgba(255, 255, 255, 0.8) !important; /* ✅ 메뉴 배경을 하얀색 으로 변경 */
-        color: white !important; /* ✅ 글자 색을 흰색에서 검은색으로 변경 */
+        background: rgba(255, 255, 255, 0.8) !important;
+        color: white !important;
         font-size: 14px !important;
         border-radius: 5px;
     }
 
     .apexcharts-menu-item {
-        color: #000 !important; /* ✅ 메뉴 항목 글자 색 검정색 */
+        color: #000 !important;
         font-weight: bold;
     }
 
     .apexcharts-menu-item:hover {
-        background: rgba(255, 255, 255, 0.2) !important; /* ✅ 마우스 오버 시 색상 변경 */
+        background: rgba(255, 255, 255, 0.2) !important;
     }
+
+    /*월 선택 드롭다운 css*/
+    .dropdown-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    #monthSelect {
+        width: 200px;
+        height: 50px;
+        padding: 5px;
+    }
+
 
 

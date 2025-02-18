@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>재무 페이지</title>
+		<title>Generic - Forty by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/management.css" />
@@ -45,11 +45,11 @@
                     <form action="/login" method="post"><!-- 서버로 post 요청 -->
                         <h4 class="login_logo"><strong>Monmi</strong></h4>
                         <br>
-                        <li>로그인<input type="text" name="monami_id" required></li> 				<!--name이 모나미_아이디로 전송 -->
-                        <li>비밀번호<input type="text" name="monami_password" required></li> 	<!--name이 모나미_비번으로 전송 -->
+                        <li>ID<input type="text" name="monami_id" required></li> 				<!--name이 모나미_아이디로 전송 -->
+                        <li>PassWord<input type="text" name="monami_password" required></li> 	<!--name이 모나미_비번으로 전송 -->
                         <!-- required = 사용자가 빈값으로 제출하는거 방지 -->
                         <br>
-                        <li><button >로그인</button></li>
+                        <li><button >Login</button></li>
                         <br>
                     </form>
                 </ul>
@@ -89,17 +89,17 @@
                     }
                 }
 
-                // 🔹 로그인 상태 확인 및 버튼 변경
+
                 function checkLoginStatus() {
                     const loginButton = document.getElementById('login-button');
 
-                    fetch('/check', { credentials: 'include' }) // 서버에서 로그인 상태 확인 요청
+                    fetch('/check', { credentials: 'include' })
                         .then(response => response.json())
                         .then(data => {
-                            const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                            const isLoggedIn = data.isLoggedIn;
                             if (isLoggedIn) {
-                                loginButton.textContent = '로그아웃';
-                                loginButton.removeAttribute('href'); // href 제거
+                                loginButton.textContent = 'Logout';
+                                loginButton.removeAttribute('href');
                                 loginButton.onclick = function () {
                                     handleLogout();
                                 };
@@ -113,7 +113,7 @@
                         });
                 }
 
-                // 🔹 로그아웃 처리
+
                 function handleLogout() {
                     fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
                         .then(() => {
@@ -123,9 +123,9 @@
                         .catch(error => console.error('Error:', error));
                 }
 
-                // 🔹 로그인 버튼 상태로 업데이트
+
                 function updateToLoginButton(loginButton) {
-                    loginButton.textContent = '로그인';
+                    loginButton.textContent = 'Login';
                     loginButton.setAttribute('href', '#login');
                     loginButton.onclick = null;
                 }
@@ -161,7 +161,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- 📌 JSON 데이터를 HTML 속성(data-json)에 저장 -->
+
                                 <p id="monthlyRevenueData" th:attr="data-json=${monthlyRevenue}"></p>
                                 <p id="monthlyProfitData" th:attr="data-json=${monthlyProfit}"></p>
 
@@ -171,7 +171,7 @@
 
 
                                 <script>
-                                    // 🔹 영어 월을 한글로 변환하는 함수
+                                    // 월로 변환
                                     function convertToKoreanMonth(englishMonth) {
                                     const monthMap = {
                                         "JANUARY": "1월",
@@ -193,11 +193,10 @@
 
 
                                     document.addEventListener("DOMContentLoaded", () => {
-                                        // ✅ HTML 속성에서 데이터 읽기
+
                                         const monthlyRevenueJson = document.getElementById("monthlyRevenueData").getAttribute("data-json");
                                         const monthlyProfitJson = document.getElementById("monthlyProfitData").getAttribute("data-json");
 
-                                        // ✅ JSON 문자열을 JavaScript 객체로 변환
                                         let fixedRevenueJson = monthlyRevenueJson.replace(/=/g, ':').replace(/(\w+):/g, '"$1":');
                                         let fixedProfitJson = monthlyProfitJson.replace(/=/g, ':').replace(/(\w+):/g, '"$1":');
 
@@ -208,7 +207,7 @@
                                         const revenues = Object.values(monthlyRevenue);
                                         const profits = Object.values(monthlyProfit)
 
-                                        // ✅ 기존 Area Chart 수정 (순매출 데이터)
+                                        // (순매출 데이터)
                                         new ApexCharts(document.querySelector("#areaChart"), {
                                         series: [{
                                             name: "순매출",
@@ -222,30 +221,30 @@
                                         dataLabels: { enabled: false },
                                         stroke: { curve: 'smooth' },
                                         subtitle: { text: '', align: 'left' },
-                                        labels: months, // ✅ X축을 월별로 설정
+                                        labels: months,
                                         xaxis: {
                                             type: 'category'
                                         },
                                         yaxis: {
                                             opposite: true,
-                                            labels: {  // ✅ Y축에도 원화 기호 추가
+                                            labels: {
                                                 formatter: function(val) {
                                                     return " " + val.toLocaleString();
                                                 }
                                             }
                                         },
                                         legend: { horizontalAlign: 'left' },
-                                        tooltip: {  // ✅ 툴팁에서 `$`가 아닌 `₩`이 표시되도록 수정
+                                        tooltip: {
                                             y: {
                                                 formatter: function(val) {
-                                                    return val.toLocaleString() + " 원";  // ✅ 원화 기호로 확실하게 설정
+                                                    return val.toLocaleString() + " 원";
                                                 }
                                             }
                                         }
                                     }).render();
 
 
-                                        // ✅ 기존 Column Chart 수정 (순이익 데이터)
+                                        // (순이익 데이터)
                                         new ApexCharts(document.querySelector("#columnChart"), {
                                             series: [{
                                                 name: "순이익",
@@ -267,7 +266,7 @@
                                             xaxis: { categories: months },
                                             yaxis: {
                                                 title: { text: ' ' },
-                                                opposite: true,  // ✅ Y축 레이블을 오른쪽으로 이동
+                                                opposite: true,
                                                 labels: {
                                                     formatter: function(val) {
                                                         return " " + val.toLocaleString();
@@ -287,36 +286,109 @@
                                 </script>
                             </div>
 
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                // 새로고침 후 스크롤 위치 복원
+                                if (sessionStorage.getItem("scrollPosition") !== null) {
+                                    window.scrollTo(0, sessionStorage.getItem("scrollPosition"));
+                                    sessionStorage.removeItem("scrollPosition");
+                                }
+
+                                // 드롭다운 값 유지
+                                let storedMonth = sessionStorage.getItem("selectedMonth");
+                                if (storedMonth) {
+                                    document.getElementById("monthSelect").value = storedMonth;
+                                    sessionStorage.removeItem("selectedMonth");  //복원 후 삭제 (다음 변경을 위해)
+                                }
+                                });
+                            </script>
+
+
 
 
                             <h1>재무 데이터</h1>
 
+                            <!--월 선택 드롭다운 -->
+                            <div class="dropdown-container">
+                                <select id="monthSelect" onchange="changeMonth()">
+                                    <option value="" th:selected="${selectedMonth == null || selectedMonth == ''}">전체</option>
+                                    <option value="01" th:selected="${selectedMonth == '01'}">1월</option>
+                                    <option value="02" th:selected="${selectedMonth == '02'}">2월</option>
+                                    <option value="03" th:selected="${selectedMonth == '03'}">3월</option>
+                                    <option value="04" th:selected="${selectedMonth == '04'}">4월</option>
+                                    <option value="05" th:selected="${selectedMonth == '05'}">5월</option>
+                                    <option value="06" th:selected="${selectedMonth == '06'}">6월</option>
+                                    <option value="07" th:selected="${selectedMonth == '07'}">7월</option>
+                                    <option value="08" th:selected="${selectedMonth == '08'}">8월</option>
+                                    <option value="09" th:selected="${selectedMonth == '09'}">9월</option>
+                                    <option value="10" th:selected="${selectedMonth == '10'}">10월</option>
+                                    <option value="11" th:selected="${selectedMonth == '11'}">11월</option>
+                                    <option value="12" th:selected="${selectedMonth == '12'}">12월</option>
+                                </select>
+                            </div>
+
+
+                            <br>
+
+
+                            <!-- 재무 데이터 테이블 -->
                             <table>
                                 <thead>
                                 <tr>
                                     <th>총 매출</th>
                                     <th>총 원가</th>
                                     <th>순 이익</th>
-                                    <th>날 짜</th>
+                                    <th>날짜</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- 🔹 DB에서 가져온 데이터를 반복문으로 출력 -->
-                                <tbody>
-                                    <tr th:each="data : ${financialData}">
-                                        <td th:text="${#numbers.formatInteger(data.totalRevenue, 3, 'COMMA')}"></td>
-                                        <td th:text="${#numbers.formatInteger(data.totalCost, 3, 'COMMA')}"></td>
-                                        <td th:text="${#numbers.formatInteger(data.netProfit, 3, 'COMMA')}"></td>
-                                        <td th:text="${#temporals.format(data.recordDate, 'yyyy-MM-dd')}"></td>
-                                    </tr>
+                                <tr th:each="data : ${financialData}">
+                                    <td th:text="${#numbers.formatInteger(data.totalRevenue, 3, 'COMMA')}"></td>
+                                    <td th:text="${#numbers.formatInteger(data.totalCost, 3, 'COMMA')}"></td>
+                                    <td th:text="${#numbers.formatInteger(data.netProfit, 3, 'COMMA')}"></td>
+                                    <td th:text="${#temporals.format(data.recordDate, 'yyyy-MM-dd')}"></td>
+                                </tr>
                                 </tbody>
                             </table>
-                            <!-- 페이지네이션 UI -->
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                // 새로고침 후 스크롤 위치 복원
+                                if (sessionStorage.getItem("scrollPosition") !== null) {
+                                window.scrollTo(0, sessionStorage.getItem("scrollPosition"));
+                                sessionStorage.removeItem("scrollPosition");  // 복원 후 삭제
+                                }
+                                });
+
+                                function saveScrollAndNavigate(linkElement) {
+                                sessionStorage.setItem("scrollPosition", window.scrollY);  // 현재 스크롤 위치 저장
+                                window.location.href = linkElement.href;  // 원래 페이지네이션 URL로 이동
+                                }
+                            </script>
+
+                            <!-- 페이지네이션 유지 -->
                             <div class="pagination">
-                                <a th:if="${currentPage > 0}" th:href="@{/sales_management(page=${currentPage - 1})}">« 이전</a>
+                                <a th:if="${currentPage > 0}"
+                                   th:href="@{/sales_management(page=${currentPage - 1}, month=${selectedMonth})}"
+                                   onclick="saveScrollAndNavigate(this); return false;">« 이전</a>
+
                                 <span th:text="'현재 ' + (${currentPage + 1}) + '페이지 / 총 ' + ${totalPages} + '페이지'"></span>
-                                <a th:if="${currentPage + 1 < totalPages}" th:href="@{/sales_management(page=${currentPage + 1})}">다음 »</a>
+
+                                <a th:if="${currentPage + 1 < totalPages}"
+                                   th:href="@{/sales_management(page=${currentPage + 1}, month=${selectedMonth})}"
+                                   onclick="saveScrollAndNavigate(this); return false;">다음 »</a>
                             </div>
+
+
+
+
+                            <script>
+                                function changeMonth() {
+                                let selectedMonth = document.getElementById("monthSelect").value;
+                                sessionStorage.setItem("selectedMonth", selectedMonth);  // ✅ 선택한 월 저장
+                                window.location.href = `/sales_management?month=${selectedMonth}`;
+                                }
+                            </script>
                         </div>
                 </section>
 
@@ -330,22 +402,24 @@
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-envelope"></span>
-                                                <h3>이메일</h3>
-                                                <span>Monmi@gmail.com</span>
+                                                <h3>Email</h3>
+                                                <a href="#">information@untitled.tld</a>
                                             </div>
                                         </section>
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-phone"></span>
-                                                <h3>전화번호</h3>
-                                                <span>(031) 249-4678 </span>
+                                                <h3>Phone</h3>
+                                                <span>(000) 000-0000 x12387</span>
                                             </div>
                                         </section>
                                         <section>
                                             <div class="contact-method">
                                                 <span class="icon solid alt fa-home"></span>
-                                                <h3>주소</h3>
-                                                <span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
+                                                <h3>Address</h3>
+                                                <span>1234 Somewhere Road #5432<br />
+                                                    Nashville, TN 00000<br />
+                                                    United States of America</span>
                                             </div>
                                         </section>
                                     </section>
@@ -361,6 +435,9 @@
                                         <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
                                         <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
                                         <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                                    </ul>
+                                    <ul class="copyright">
+                                        <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
                                     </ul>
                                 </div>
                             </footer>
