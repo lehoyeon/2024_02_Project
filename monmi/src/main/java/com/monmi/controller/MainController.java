@@ -34,11 +34,6 @@ public class MainController {
         return "landing"; // resources/templates/landing.html 렌더링
     }
 
-    @GetMapping("/sales_management")
-    public String sales_management() {
-        log.info("Rendering sales_management.html...");
-        return "sales_management";
-    }
     // 소개 컨트롤 잠깐 여기둠
     @GetMapping("/introduction")
     public String introduction() {
