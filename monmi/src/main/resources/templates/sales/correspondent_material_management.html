@@ -268,7 +268,7 @@
         <section id="two">
             <div class="inner" style="padding: 1em 0 2em 0;">
                 <div class="list-edit-box">
-                    <button class="edit-mode-Btn">Edit Mode</button>
+                    <button class="edit-mode-Btn">수정모드</button>
                 </div>
                 <section class="section">
                     <div class="row">
@@ -314,28 +314,7 @@
     <!-- Contact -->
     <section id="contact">
         <div class="inner">
-            <section>
-                <form method="post" action="#">
-                    <div class="fields">
-                        <div class="field half">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" id="name" />
-                        </div>
-                        <div class="field half">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" />
-                        </div>
-                        <div class="field">
-                            <label for="message">Message</label>
-                            <textarea name="message" id="message" rows="6"></textarea>
-                        </div>
-                    </div>
-                    <ul class="actions">
-                        <li><input type="submit" value="Send Message" class="primary" /></li>
-                        <li><input type="reset" value="Clear" /></li>
-                    </ul>
-                </form>
-            </section>
+
             <section class="split">
                 <section>
                     <div class="contact-method">
@@ -485,7 +464,7 @@
                 div.className = "list-btns";
 
                 let modifyChoiceBtn = document.createElement("button");
-                modifyChoiceBtn.textContent = "modify";
+                modifyChoiceBtn.textContent = "수정";
                 modifyChoiceBtn.className = "modify-choice-Btn";
 
                 // 새로 생성한 <td> 안에 버튼을 포함한 <div> 추가
@@ -502,7 +481,7 @@
             }
             document.querySelector(".register-input-button").style.display = "none";
 
-            this.textContent = "Cancel";
+            this.textContent = "취소";
             editMode = 1;
         }
         else{
@@ -554,7 +533,7 @@
 
             document.querySelector(".register-input-button").style.display = "block";
 
-            this.textContent = "EDIT MODE";
+            this.textContent = "수정모드";
             editMode = 0;
         }
     }, false);
@@ -573,7 +552,7 @@
                     div.className = "list-btns";
 
                     let modifyChoiceBtn = document.createElement("button");
-                    modifyChoiceBtn.textContent = "modify";
+                    modifyChoiceBtn.textContent = "수정";
                     modifyChoiceBtn.className = "modify-choice-Btn";
 
                     // 새로 생성한 <td> 안에 버튼을 포함한 <div> 추가
@@ -719,17 +698,17 @@
             addBtnsDiv.style.gap = "0.1em";
 
             let saveBtn = document.createElement("button");
-            saveBtn.textContent = "Save";
+            saveBtn.textContent = "저장";
             saveBtn.className = "modify-option-Btn modify-save-Btn";
             addBtnsDiv.appendChild(saveBtn);
 
             let deleteBtn = document.createElement("button");
-            deleteBtn.textContent = "Delete";
+            deleteBtn.textContent = "삭제";
             deleteBtn.className = "modify-option-Btn modify-delete-Btn";
             addBtnsDiv.appendChild(deleteBtn);
 
             let cancelBtn = document.createElement("button");
-            cancelBtn.textContent = "Cancel";
+            cancelBtn.textContent = "취소";
             cancelBtn.className = "modify-option-Btn modify-cancel-Btn";
             addBtnsDiv.appendChild(cancelBtn);
 
@@ -804,7 +783,7 @@
             modifyDiv.innerHTML = "";
 
             let modifyChoiceBtn = document.createElement("button");
-            modifyChoiceBtn.textContent = "modify";
+            modifyChoiceBtn.textContent = "수정";
             modifyChoiceBtn.className = "modify-choice-Btn";
 
             modifyDiv.appendChild(modifyChoiceBtn);
@@ -831,7 +810,7 @@
     // register버튼 추가 및 기능 추가
     let datatable = document.querySelector(".datatable");
     let register_button = document.createElement("button");
-    register_button.innerHTML="register";
+    register_button.innerHTML="작성";
 
     register_button.classList.add("register-input-button");
 
@@ -923,12 +902,12 @@
         register_input_form.appendChild(register_input_label_companyTel);
 
         let register_input_submit_button = document.createElement("button");
-        register_input_submit_button.textContent = "submit";
+        register_input_submit_button.textContent = "작성";
         register_input_submit_button.className = "register-submit-button";
         register_input_submit_button.marginTop = "0.5em";
 
         let register_input_cancel_button = document.createElement("button");
-        register_input_cancel_button.textContent = "cancel";
+        register_input_cancel_button.textContent = "취소";
         register_input_cancel_button.className = "register-cancel-button";
         register_input_cancel_button.marginTop = "0.5em";
 
