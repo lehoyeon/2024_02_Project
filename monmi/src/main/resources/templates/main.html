@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>메인 페이지</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* 새 클래스명에 맞춰 스타일 추가 */
+            .custom-no-hover .image img {
+                opacity: 1; /* 처음부터 이미지가 진하게 보이도록 */
+                transition: none; /* 호버 효과 제거 */
+            }
+
+            .custom-no-hover .major h3, .custom-no-hover .major p {
+                /* 원하는 텍스트 스타일 추가 */
+            }
+
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<header id="header" class="alt style2">
+					<a href="/main" class="logo"><strong>Monmi</strong></a>
+					<nav>
+						<a id="login-button" href="#login">로그인</a>
+						<a href="#menu">메뉴</a>
+					</nav>
+				</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="/main">메인페이지</a></li>
+							<li><a href="/production/production_process">제품 생산 공정</a></li>
+							<li><a href="/sales/correspondent_material_management">거래처 관리</a></li>
+							<li><a href="/notice">공지사항</a></li>
+							<li><a href="/sales_management">재무</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="/accession" class="button primary join">회원가입</a></li>
+						</ul>
+					</nav>
+
+				<!-- login -->
+					<nav id="login">
+						<ul class="links">
+							<form action="/login" method="post"><!-- 서버로 post 요청 -->
+								<h4 class="login_logo"><strong>Monmi</strong></h4>
+								<br>
+								<li>아이디<input type="text" name="monami_id" required></li> <!--name이 모나미_아이디로 전송 -->
+								<li>비밀번호<input type="text" name="monami_password" required></li> <!--name이 모나미_비번으로 전송 -->
+								<!-- required = 사용자가 빈값으로 제출하는거 방지 -->
+								<br>
+								<li><button >로그인</button></li>
+								<br>
+							</form>
+						</ul>
+					</nav>
+				<!--accession -->
+
+		<!--회원가입 로그인시 signincontroller에서 회원가입 환영메세지 보내기. -->
+		<script th:inline="javascript">
+			var message = [[${#strings.defaultString(message, 'null')}]];
+			if (message !== "null") {
+				alert(message);
+			}
+		</script>
+
+
+
+			<!-- login -->
+				<script>
+
+					document.addEventListener("DOMContentLoaded", function () {
+                        handleUrlParams(); 	// URL 파라미터 처리 (로그인 성공/실패 메시지)
+                        checkLoginStatus(); // 로그인 상태 확인
+                    });
+
+                    function handleUrlParams() {
+						const urlParams = new URLSearchParams(window.location.search);
+
+						if (urlParams.has("error")) {
+							alert("로그인에 실패했습니다. 아이디와 비밀번호를 확인하세요.");
+							history.replaceState({}, null, window.location.pathname);
+						}
+						else if (urlParams.has("success")) {
+							alert("어서오세요! 로그인에 성공하셨습니다.");
+							history.replaceState({}, null, window.location.pathname);
+						}
+					}
+
+                    // 🔹 로그인 상태 확인 및 버튼 변경
+                    function checkLoginStatus() {
+                        const loginButton = document.getElementById('login-button');
+
+                        fetch('/check', { credentials: 'include' }) // 서버에서 로그인 상태 확인 요청
+                            .then(response => response.json())
+                            .then(data => {
+                                const isLoggedIn = data.isLoggedIn; // JSON에서 로그인 상태 가져오기
+                                if (isLoggedIn) {
+                                    loginButton.textContent = '로그아웃';
+                                    loginButton.removeAttribute('href'); // href 제거
+                                    loginButton.onclick = function () {
+                                        handleLogout();
+                                    };
+                                } else {
+                                    updateToLoginButton(loginButton);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                updateToLoginButton(loginButton);
+                            });
+                    }
+
+                    // 🔹 로그아웃 처리
+                    function handleLogout() {
+                        fetch('/logout', { credentials: 'include' }) // 로그아웃 요청
+                            .then(() => {
+                                alert('로그아웃되었습니다.');
+                                window.location.reload(); // 로그아웃 후 페이지 새로고침하여 반영
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
+
+                    // 🔹 로그인 버튼 상태로 업데이트
+                    function updateToLoginButton(loginButton) {
+                        loginButton.textContent = '로그인';
+                        loginButton.setAttribute('href', '#login');
+                        loginButton.onclick = null;
+                    }
+				</script>
+
+
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h1>환영합니다 Monmi입니다</h1>
+							</header>
+							<div class="content">
+								<p>4조 주식회사 Monmi입니다. </p>
+								<ul class="actions">
+									<li><a href="#one" class="button next scrolly">지금 바로가기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one" class="tiles">
+								<article>
+									<header class="major">
+										<h3><a href="/introduction" class="link">소개</a></h3>
+										<p>INTRODUCTION</p>
+									</header>
+								</article>
+								<article>
+									<header class="major">
+										<h3><a href="/production/production_process" class="link">제품 생산 공정</a></h3>
+										<p>PRODUCTION_PROCESS</p>
+									</header>
+								</article>
+								<article class="custom-no-hover">
+									<span class="image">
+										<img src="/images/introduction.jpg"/>
+									</span>
+									<header class="major">
+										<h3>반갑습니다</h3>
+										<p>MONMI입니다</p>
+									</header>
+								</article>
+								<article>
+									<header class="major">
+										<h3><a href="/sales_management" class="link">재무</a></h3>
+										<p>SALES_MANAGEMENT</p>
+									</header>
+								</article>
+								<article>
+									<header class="major">
+										<h3><a href="/notice" class="link">공지사항</a></h3>
+										<p>NOTICE</p>
+									</header>
+								</article>
+								<article>
+									<header class="major">
+										<h3><a href="/sales/correspondent_material_management" class="link">거래처 관리</a></h3>
+										<p>CORRESPONDENT_MATERIAL</p>
+									</header>
+								</article>
+							</section>
+					</div>
+				<!-- Contact -->
+				<section id="contact">
+					<div class="inner">
+						<section class="split">
+							<section>
+								<div class="contact-method">
+									<span class="icon solid alt fa-envelope"></span>
+									<h3>이메일</h3>
+									<span>Monmi@gmail.com</span>
+								</div>
+							</section>
+							<section>
+								<div class="contact-method">
+									<span class="icon solid alt fa-phone"></span>
+									<h3>전화번호</h3>
+									<span>(031) 249-4678 </span>
+								</div>
+							</section>
+							<section>
+								<div class="contact-method">
+									<span class="icon solid alt fa-home"></span>
+									<h3>주소</h3>
+									<span>경기도 수원시 팔달구 권광로 187, 4층<br/>Monmi</span>
+								</div>
+							</section>
+						</section>
+					</div>
+				</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
